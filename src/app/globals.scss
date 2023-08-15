@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+   background-color: #170f23;
+   color: white;
+   font-size: 14px;
+
+   // .swiper-slide {
+   //    // width: 100% !important;
+   //    display: inline-block !important;
+   //    height: 300px;
+   //    background-color: red;
+   // }
+}
+*::-webkit-scrollbar {
+   width: 0;
+}
