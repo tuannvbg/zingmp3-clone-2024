@@ -21,7 +21,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <body className={inter.className}>
                <div className='flex'>
                   <LeftSideBar />
-                  <div className='flex-1'>
+                  {/* LeftSideBar + RightSideBar = 450px */}
+                  <div className='w-[calc(100vw-450px)]'>
                      <Header />
                      {children}
                   </div>

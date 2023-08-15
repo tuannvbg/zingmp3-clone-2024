@@ -81,7 +81,7 @@ const links: {
 
 export default function LeftSideBar() {
    return (
-      <div className='w-[200px] flex-shrink-0 min-h-screen bg-white bg-opacity-5'>
+      <div className='w-full max-w-[200px] min-h-screen bg-white bg-opacity-5'>
          <div className='py-4 pl-7'>
             <Link href={'/'} className='inline-block'>
                <Image
