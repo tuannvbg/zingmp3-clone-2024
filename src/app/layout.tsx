@@ -7,6 +7,8 @@ import { ReactQueryProvider } from './ReactQueryProvider'
 import LeftSideBar from '@/layouts/LeftSideBar/LeftSideBar'
 import RightSideBar from '@/layouts/RightSideBar.tsx/RightSideBar'
 import Header from '@/layouts/Header/Header'
+import { AppProvider } from '@/contexts/app.context'
+import PlayerControl from '@/layouts/PlayerControl/PlayerControl'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -17,20 +19,30 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
    return (
       <ReactQueryProvider>
-         <html lang='en'>
-            <body className={inter.className}>
-               <div className='flex'>
+         <AppProvider>
+            <html lang='en'>
+               <body className={inter.className}>
                   <LeftSideBar />
                   {/* LeftSideBar + RightSideBar = 450px */}
-                  <div className='w-[calc(100vw-450px)]'>
+                  <div className='w-[calc(100vw-242.5px)] float-right'>
                      <Header />
                      {children}
                   </div>
                   <RightSideBar />
-               </div>
-               <ToastContainer autoClose={2000} />
-            </body>
-         </html>
+                  <PlayerControl />
+                  <ToastContainer
+                     autoClose={2000}
+                     hideProgressBar={false}
+                     newestOnTop={false}
+                     closeOnClick
+                     rtl={false}
+                     pauseOnFocusLoss
+                     pauseOnHover
+                     theme='dark'
+                  />
+               </body>
+            </html>
+         </AppProvider>
       </ReactQueryProvider>
    )
 }

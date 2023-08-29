@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosInstance, HttpStatusCode } from 'axios'
 import { toast } from 'react-toastify'
+
 class Http {
    instance: AxiosInstance
    constructor() {
