@@ -71,7 +71,7 @@ export default function SearchAll() {
                   <div className='flex flex-col gap-y-1.5'>
                      <span className='text-secondary text-xs'>Nghệ sĩ</span>
 
-                     <Link href={artists[0].link} className='font-bold hover:text-tprimary hover:underline'>
+                     <Link href={artists[0].link} className='font-bold isHover cursor-pointer hover:underline'>
                         {artists[0].name}
                      </Link>
 
@@ -113,7 +113,7 @@ export default function SearchAll() {
                   <div className='flex flex-col gap-y-1.5'>
                      <span className='text-secondary text-xs'>Playlist</span>
 
-                     <span className='font-bold hover:text-tprimary hover:underline'>{top.title}</span>
+                     <span className='font-bold isHover cursor-pointer hover:underline'>{top.title}</span>
 
                      <div className='text-xs max-w-[150px] truncate'>
                         {top.artists?.map(
@@ -138,7 +138,7 @@ export default function SearchAll() {
                                  <Link
                                     href={artist.link}
                                     key={artist.id}
-                                    className='text-secondary hover:text-tprimary hover:underline'
+                                    className='text-secondary isHover cursor-pointer hover:underline'
                                  >
                                     {artist.name}
                                  </Link>
@@ -147,7 +147,7 @@ export default function SearchAll() {
                                     <Link
                                        href={artist.link}
                                        key={artist.id}
-                                       className='text-secondary hover:text-tprimary hover:underline'
+                                       className='text-secondary isHover cursor-pointer hover:underline'
                                     >
                                        {artist.name}
                                     </Link>
@@ -300,7 +300,7 @@ export default function SearchAll() {
                                        <Link
                                           href={artist.link}
                                           key={artist.id}
-                                          className='text-secondary hover:text-tprimary hover:underline'
+                                          className='text-secondary isHover cursor-pointer hover:underline'
                                        >
                                           {artist.name}
                                        </Link>
@@ -309,7 +309,7 @@ export default function SearchAll() {
                                           <Link
                                              href={artist.link}
                                              key={artist.id}
-                                             className='text-secondary hover:text-tprimary hover:underline'
+                                             className='text-secondary isHover cursor-pointer hover:underline'
                                           >
                                              {artist.name}
                                           </Link>
@@ -326,7 +326,7 @@ export default function SearchAll() {
                               content={library.includes(item.encodeId) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}
                            >
                               <button
-                                 onClick={(e) => handleAddLibrary(e, item.encodeId)}
+                                 onClick={(e) => handleAddLibrary(e, item.encodeId, null, item)}
                                  className={`hover:bg-white text-white hover:bg-opacity-10 rounded-full p-1.5 ${
                                     library.includes(item.encodeId) && '!text-tprimary'
                                  }`}
@@ -368,7 +368,7 @@ export default function SearchAll() {
             <h2 className='text-xl font-bold'>Bài Hát</h2>
             <Link
                href={`/tim-kiem/bai-hat?q=${keyword}`}
-               className='uppercase hover:text-tprimary text-xs text-secondary flex items-center gap-x-1'
+               className='uppercase isHover cursor-pointer text-xs text-secondary flex items-center gap-x-1'
             >
                tất cả
                <svg
@@ -495,7 +495,7 @@ export default function SearchAll() {
                                     <Link
                                        href={artist.link}
                                        key={artist.id}
-                                       className='text-secondary hover:text-tprimary hover:underline'
+                                       className='text-secondary isHover cursor-pointer hover:underline'
                                     >
                                        {artist.name}
                                     </Link>
@@ -504,7 +504,7 @@ export default function SearchAll() {
                                        <Link
                                           href={artist.link}
                                           key={artist.id}
-                                          className='text-secondary hover:text-tprimary hover:underline'
+                                          className='text-secondary isHover cursor-pointer hover:underline'
                                        >
                                           {artist.name}
                                        </Link>
@@ -564,7 +564,7 @@ export default function SearchAll() {
                            content={library.includes(item.encodeId) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}
                         >
                            <button
-                              onClick={(e) => handleAddLibrary(e, item.encodeId)}
+                              onClick={(e) => handleAddLibrary(e, item.encodeId, null, item)}
                               className={`hover:bg-white text-white hover:bg-opacity-10 rounded-full p-1.5 ${
                                  library.includes(item.encodeId) && '!text-tprimary'
                               }`}
@@ -609,7 +609,7 @@ export default function SearchAll() {
                   <h2 className='text-xl font-bold'>Playlist/Album</h2>
                   <Link
                      href={`/tim-kiem/playlist?q=${keyword}`}
-                     className='uppercase hover:text-tprimary text-xs text-secondary flex items-center gap-x-1'
+                     className='uppercase isHover cursor-pointer text-xs text-secondary flex items-center gap-x-1'
                   >
                      tất cả
                      <svg
@@ -635,7 +635,7 @@ export default function SearchAll() {
                   <h2 className='text-xl font-bold'>MV</h2>
                   <Link
                      href={`/tim-kiem/video?q=${keyword}`}
-                     className='uppercase hover:text-tprimary text-xs text-secondary flex items-center gap-x-1'
+                     className='uppercase isHover cursor-pointer text-xs text-secondary flex items-center gap-x-1'
                   >
                      tất cả
                      <svg
@@ -661,7 +661,7 @@ export default function SearchAll() {
                   <h2 className='text-xl font-bold'>Nghệ Sĩ/OA</h2>
                   <Link
                      href={`/tim-kiem/artist?q=${keyword}`}
-                     className='uppercase hover:text-tprimary text-xs text-secondary flex items-center gap-x-1'
+                     className='uppercase isHover cursor-pointer text-xs text-secondary flex items-center gap-x-1'
                   >
                      tất cả
                      <svg
@@ -727,7 +727,7 @@ export default function SearchAll() {
                               </Link>
                               <Link
                                  href={artist.link}
-                                 className='hover:text-tprimary hover:underline font-medium mt-3 mb-1'
+                                 className='isHover cursor-pointer hover:underline font-medium mt-3 mb-1'
                               >
                                  {artist.name}
                               </Link>

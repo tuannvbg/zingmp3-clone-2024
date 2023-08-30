@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css/bundle'
@@ -67,6 +67,7 @@ export default function Home() {
    const top100List: HomeListType[] = data?.data.data.items[11].items //top 100
    const albumHotList: HomeListType[] = data?.data.data.items[13].items //album hot
    const radioList: RadioType[] = data?.data.data.items[14].items //radio nổi bật
+
    if (!bannerList) return <Loading />
    return (
       <div className={`mt-[70px] px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
@@ -123,24 +124,24 @@ export default function Home() {
             <div className='flex items-center gap-x-4'>
                <button
                   onClick={() => setTabRelease('all')}
-                  className={`uppercase text-xs text-white rounded-full px-6 py-1 ${
-                     tabRelease === 'all' ? 'bg-tprimary' : 'bg-transparent border border-gray-700'
+                  className={`uppercase text-xs rounded-full px-6 py-1 ${
+                     tabRelease === 'all' ? 'bg-tprimary text-white' : 'bg-transparent border border-gray-700'
                   }`}
                >
                   tất cả
                </button>
                <button
                   onClick={() => setTabRelease('vPop')}
-                  className={`uppercase text-xs text-white rounded-full px-6 py-1 ${
-                     tabRelease === 'vPop' ? 'bg-tprimary' : 'bg-transparent border border-gray-700'
+                  className={`uppercase text-xs rounded-full px-6 py-1 ${
+                     tabRelease === 'vPop' ? 'bg-tprimary text-white' : 'bg-transparent border border-gray-700'
                   }`}
                >
                   việt nam
                </button>
                <button
                   onClick={() => setTabRelease('others')}
-                  className={`uppercase text-xs text-white rounded-full px-6 py-1 ${
-                     tabRelease === 'others' ? 'bg-tprimary' : 'bg-transparent border border-gray-700'
+                  className={`uppercase text-xs rounded-full px-6 py-1 ${
+                     tabRelease === 'others' ? 'bg-tprimary text-white' : 'bg-transparent border border-gray-700'
                   }`}
                >
                   quốc tế
@@ -148,7 +149,7 @@ export default function Home() {
             </div>
             <Link
                href={data?.data.data.items[2].link as string}
-               className='uppercase hover:text-tprimary text-xs text-secondary flex items-center gap-x-1'
+               className='uppercase text-secondary text-xs flex items-center gap-x-1 isHover'
             >
                tất cả
                <svg
@@ -256,10 +257,7 @@ export default function Home() {
 
                   <div className='flex flex-col gap-y-1'>
                      <div className='flex items-center gap-x-2'>
-                        <h3
-                           title={item.title}
-                           className='text-white max-w-[180px] truncate capitalize text-sm font-medium'
-                        >
+                        <h3 title={item.title} className='max-w-[180px] truncate capitalize text-sm font-medium'>
                            {item.title}
                         </h3>
                         {!item.isWorldWide && (
@@ -271,7 +269,11 @@ export default function Home() {
                      <div className='text-xs text-secondary'>
                         {item.artists?.map((artist, index) => {
                            return index === item.artists.length - 1 ? (
-                              <Link href={artist.link} key={artist.id} className='hover:text-tprimary hover:underline'>
+                              <Link
+                                 href={artist.link}
+                                 key={artist.id}
+                                 className='isHover cursor-pointer hover:underline'
+                              >
                                  {artist.name}
                               </Link>
                            ) : (
@@ -279,7 +281,7 @@ export default function Home() {
                                  <Link
                                     href={artist.link}
                                     key={artist.id}
-                                    className='hover:text-tprimary hover:underline'
+                                    className='isHover cursor-pointer hover:underline'
                                  >
                                     {artist.name}
                                  </Link>
@@ -299,7 +301,7 @@ export default function Home() {
             <h2 className='text-xl font-bold'>{data?.data.data.items[3].title}</h2>
             <Link
                href={data?.data.data.items[3].link as string}
-               className='uppercase hover:text-tprimary text-xs text-secondary flex items-center gap-x-1'
+               className='uppercase text-xs text-secondary flex items-center gap-x-1 isHover'
             >
                tất cả
                <svg
@@ -337,7 +339,7 @@ export default function Home() {
             <h2 className='text-xl font-bold'>{data?.data.data.items[8].title}</h2>
             <Link
                href={data?.data.data.items[8].link as string}
-               className='uppercase hover:text-tprimary text-xs text-secondary flex items-center gap-x-1'
+               className='uppercase isHover text-xs text-secondary flex items-center gap-x-1'
             >
                tất cả
                <svg
@@ -444,7 +446,7 @@ export default function Home() {
                                     <Link
                                        href={artist.link}
                                        key={artist.id}
-                                       className='text-secondary hover:text-tprimary hover:underline'
+                                       className='text-secondary isHover cursor-pointer hover:underline'
                                     >
                                        {artist.name}
                                     </Link>
@@ -452,7 +454,7 @@ export default function Home() {
                                     <Link
                                        href={artist.link}
                                        key={artist.id}
-                                       className='text-secondary hover:text-tprimary hover:underline'
+                                       className='text-secondary isHover cursor-pointer hover:underline'
                                     >
                                        {`${artist.name}, `}
                                     </Link>
@@ -494,7 +496,7 @@ export default function Home() {
             <h2 className='text-xl font-bold'>{data?.data.data.items[11].title}</h2>
             <Link
                href={data?.data.data.items[11].link as string}
-               className='uppercase hover:text-tprimary text-xs text-secondary flex items-center gap-x-1'
+               className='uppercase text-xs text-secondary flex items-center gap-x-1 isHover'
             >
                tất cả
                <svg
@@ -518,7 +520,7 @@ export default function Home() {
          {/* Radio Nổi Bật */}
          <div className='flex items-center justify-between mt-12 mb-5'>
             <h2 className='text-xl font-bold'>{data?.data.data.items[14].title}</h2>
-            <button className='uppercase hover:text-tprimary text-xs text-secondary flex items-center gap-x-1'>
+            <Link href={'/radio'} className='uppercase text-xs text-secondary flex items-center gap-x-1 isHover'>
                tất cả
                <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -530,7 +532,7 @@ export default function Home() {
                >
                   <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
                </svg>
-            </button>
+            </Link>
          </div>
          <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}

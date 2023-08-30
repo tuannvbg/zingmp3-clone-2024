@@ -7,16 +7,18 @@ import { AppContext } from '@/contexts/app.context'
 import { Item } from '@/types/newReleaseChart.type'
 import Modal from '../Modal/Modal'
 import usePlayMusic from '@/hooks/usePlayMusic'
+import useAddLibrary from '@/hooks/useAddLibrary'
+import { SongItem } from '@/types/playlist.type'
 
 export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: boolean }) {
    const { currentSongId, isLoadingSong, isPlaying, setAtAlbum, setRecentSong } = useContext(AppContext)
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
    const { handleClickSong } = usePlayMusic()
-
+   const { handleAddLibrary, library } = useAddLibrary()
    return (
       <>
          <ul>
-            {list.map((item, index) => (
+            {list?.map((item, index) => (
                <li
                   key={item.encodeId}
                   className={`flex group hover:bg-white hover:bg-opacity-10 select-none ${
@@ -158,10 +160,7 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                      </div>
                      <div className='flex flex-col gap-y-1'>
                         <div className='flex items-center gap-x-2'>
-                           <h3
-                              title={item.title}
-                              className='text-white max-w-[250px] truncate capitalize text-sm font-medium'
-                           >
+                           <h3 title={item.title} className='max-w-[250px] truncate capitalize text-sm font-medium'>
                               {item.title}
                            </h3>
                            {!item.isWorldWide && (
@@ -176,7 +175,7 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                                  <Link
                                     href={artist.link}
                                     key={artist.id}
-                                    className='text-secondary hover:text-tprimary hover:underline'
+                                    className='text-secondary isHover hover:underline'
                                  >
                                     {artist.name}
                                  </Link>
@@ -185,7 +184,7 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                                     <Link
                                        href={artist.link}
                                        key={artist.id}
-                                       className='text-secondary hover:text-tprimary hover:underline'
+                                       className='text-secondary isHover hover:underline'
                                     >
                                        {artist.name}
                                     </Link>
@@ -200,7 +199,7 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                      {item.album && (
                         <Link
                            href={item.album.link}
-                           className='hover:text-tprimary block max-w-[250px] truncate hover:underline capitalize'
+                           className='isHover block max-w-[250px] truncate hover:underline capitalize'
                         >
                            {item.album.title}
                         </Link>
@@ -211,7 +210,7 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                         {item.mvlink && (
                            <Tooltip content={'Xem MV'}>
                               <button
-                                 className={`p-2 text-white hover:bg-white hover:bg-opacity-10 rounded-full
+                                 className={`p-2 hover:bg-white hover:bg-opacity-10 rounded-full
                            `}
                               >
                                  <svg
@@ -240,7 +239,7 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                                     viewBox='0 0 24 24'
                                     strokeWidth={1.5}
                                     stroke='currentColor'
-                                    className='w-[18px] text-white h-[18px]'
+                                    className='w-[18px] h-[18px]'
                                  >
                                     <path
                                        strokeLinecap='round'
@@ -251,22 +250,38 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                               </button>
                            </Tooltip>
                         )}
-                        <Tooltip content={'Thêm vào thư viện'}>
-                           <button className='p-2 hover:bg-white hover:bg-opacity-10 rounded-full'>
-                              <svg
-                                 xmlns='http://www.w3.org/2000/svg'
-                                 fill='none'
-                                 viewBox='0 0 24 24'
-                                 strokeWidth={1.5}
-                                 stroke='currentColor'
-                                 className='w-[18px] text-white h-[18px]'
-                              >
-                                 <path
-                                    strokeLinecap='round'
-                                    strokeLinejoin='round'
-                                    d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z'
-                                 />
-                              </svg>
+                        <Tooltip content={library.includes(item.encodeId) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}>
+                           <button
+                              onClick={(e) => handleAddLibrary(e, item.encodeId, null, item as unknown as SongItem)}
+                              className={`hover:bg-white hover:bg-opacity-10 rounded-full p-1.5 ${
+                                 library.includes(item.encodeId) && 'text-tprimary'
+                              }`}
+                           >
+                              {library.includes(item.encodeId) ? (
+                                 <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    viewBox='0 0 24 24'
+                                    fill='currentColor'
+                                    className='w-5 h-5'
+                                 >
+                                    <path d='M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z' />
+                                 </svg>
+                              ) : (
+                                 <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    fill='none'
+                                    viewBox='0 0 24 24'
+                                    strokeWidth={2}
+                                    stroke='currentColor'
+                                    className='w-5 h-5'
+                                 >
+                                    <path
+                                       strokeLinecap='round'
+                                       strokeLinejoin='round'
+                                       d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z'
+                                    />
+                                 </svg>
+                              )}
                            </button>
                         </Tooltip>
                         <Tooltip content={'Khác'}>
@@ -277,7 +292,7 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                                  viewBox='0 0 24 24'
                                  strokeWidth={1.5}
                                  stroke='currentColor'
-                                 className='w-[18px] text-white h-[18px]'
+                                 className='w-[18px] h-[18px]'
                               >
                                  <path
                                     strokeLinecap='round'

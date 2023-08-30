@@ -167,7 +167,7 @@ export default function Album({ params }: { params: { id: string } }) {
                         <Link
                            href={artist.link}
                            key={artist.id}
-                           className='text-secondary hover:text-tprimary hover:underline'
+                           className='text-secondary isHover cursor-pointer hover:underline'
                         >
                            {artist.name}
                         </Link>
@@ -175,7 +175,7 @@ export default function Album({ params }: { params: { id: string } }) {
                         <Link
                            href={artist.link}
                            key={artist.id}
-                           className='text-secondary hover:text-tprimary hover:underline'
+                           className='text-secondary isHover cursor-pointer hover:underline'
                         >
                            {`${artist.name}, `}
                         </Link>
@@ -185,7 +185,7 @@ export default function Album({ params }: { params: { id: string } }) {
                <p className='text-secondary text-xs my-1'>{formatNumberWithK(playlist.like)} người yêu thích</p>
                <button
                   onClick={handleClickSongBanner}
-                  className='flex items-center gap-x-1 uppercase bg-tprimary rounded-full px-5 hover:bg-opacity-90 mx-auto mt-4 py-2'
+                  className='flex items-center gap-x-1 text-white uppercase bg-tprimary rounded-full px-5 hover:bg-opacity-90 mx-auto mt-4 py-2'
                >
                   {currentSongId && isPlaying && atAlbum ? (
                      <>
@@ -222,8 +222,8 @@ export default function Album({ params }: { params: { id: string } }) {
                <div className='flex items-center justify-center gap-x-5 mt-4'>
                   <Tooltip content={library.includes(playlist.encodeId) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}>
                      <button
-                        onClick={(e) => handleAddLibrary(e, playlist.encodeId)}
-                        className={`hover:bg-white hover:bg-opacity-10 rounded-full p-1.5 ${
+                        onClick={(e) => handleAddLibrary(e, playlist.encodeId, playlist)}
+                        className={`hover:bg-white hover:bg-opacity-10 bg-white bg-opacity-10 rounded-full p-1.5 ${
                            library.includes(playlist.encodeId) && 'text-tprimary'
                         }`}
                      >
@@ -483,7 +483,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                  <div className='flex items-center gap-x-2'>
                                     <h3
                                        title={item.title}
-                                       className='text-white max-w-[350px] truncate capitalize text-sm font-medium'
+                                       className='max-w-[350px] truncate capitalize text-sm font-medium'
                                     >
                                        {item.title}
                                     </h3>
@@ -499,7 +499,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                           <Link
                                              href={artist.link}
                                              key={artist.id}
-                                             className='text-secondary hover:text-tprimary hover:underline'
+                                             className='text-secondary isHover cursor-pointer hover:underline'
                                           >
                                              {artist.name}
                                           </Link>
@@ -508,7 +508,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                              <Link
                                                 href={artist.link}
                                                 key={artist.id}
-                                                className='text-secondary hover:text-tprimary hover:underline'
+                                                className='text-secondary isHover cursor-pointer hover:underline'
                                              >
                                                 {artist.name}
                                              </Link>
@@ -524,7 +524,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                  {item.mvlink && (
                                     <Tooltip content={'Xem MV'}>
                                        <button
-                                          className={`p-2 text-white hover:bg-white hover:bg-opacity-10 rounded-full
+                                          className={`p-2 hover:bg-white hover:bg-opacity-10 rounded-full
                                     `}
                                        >
                                           <svg
@@ -553,7 +553,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                              viewBox='0 0 24 24'
                                              strokeWidth={1.5}
                                              stroke='currentColor'
-                                             className='w-[18px] text-white h-[18px]'
+                                             className='w-[18px] h-[18px]'
                                           >
                                              <path
                                                 strokeLinecap='round'
@@ -570,9 +570,9 @@ export default function Album({ params }: { params: { id: string } }) {
                                     }
                                  >
                                     <button
-                                       onClick={(e) => handleAddLibrary(e, item.encodeId)}
-                                       className={`hover:bg-white hover:bg-opacity-10 rounded-full p-1.5 text-white ${
-                                          library.includes(item.encodeId) && '!text-tprimary'
+                                       onClick={(e) => handleAddLibrary(e, item.encodeId, null, item)}
+                                       className={`hover:bg-white hover:bg-opacity-10 rounded-full p-1.5 ${
+                                          library.includes(item.encodeId) && 'text-tprimary'
                                        }`}
                                     >
                                        {library.includes(item.encodeId) ? (
@@ -610,7 +610,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                           viewBox='0 0 24 24'
                                           strokeWidth={1.5}
                                           stroke='currentColor'
-                                          className='w-[18px] text-white h-[18px]'
+                                          className='w-[18px] h-[18px]'
                                        >
                                           <path
                                              strokeLinecap='round'
@@ -628,7 +628,7 @@ export default function Album({ params }: { params: { id: string } }) {
                </ul>
                <div className='flex items-center gap-x-2 text-secondary mt-4'>
                   <span>{playlist?.song.total} bài hát</span>
-                  <div className='w-1.5 h-1.5 rounded-full bg-[#ffffff80]' />
+                  <div className='w-1.5 h-1.5 rounded-full bgr-secondary' />
                   <span>{secondsToHoursMinutes(playlist?.song.totalDuration)}</span>
                </div>
 
@@ -754,7 +754,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                        <div className='flex items-center gap-x-2'>
                                           <h3
                                              title={item.title}
-                                             className='text-white max-w-[200px] truncate capitalize text-sm font-medium'
+                                             className='max-w-[200px] truncate capitalize text-sm font-medium'
                                           >
                                              {item.title}
                                           </h3>
@@ -770,7 +770,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                                 <Link
                                                    href={artist.link}
                                                    key={artist.id}
-                                                   className='text-secondary hover:text-tprimary hover:underline'
+                                                   className='text-secondary isHover cursor-pointer hover:underline'
                                                 >
                                                    {artist.name}
                                                 </Link>
@@ -778,7 +778,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                                 <Link
                                                    href={artist.link}
                                                    key={artist.id}
-                                                   className='text-secondary hover:text-tprimary hover:underline'
+                                                   className='text-secondary isHover cursor-pointer hover:underline'
                                                 >
                                                    {`${artist.name}, `}
                                                 </Link>
@@ -791,7 +791,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                     {item.album && (
                                        <Link
                                           href={item.album.link}
-                                          className='hover:text-tprimary block max-w-[200px] truncate hover:underline capitalize'
+                                          className='isHover cursor-pointer block max-w-[200px] truncate hover:underline capitalize'
                                        >
                                           {item.album.title}
                                        </Link>
@@ -802,7 +802,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                        {item.mvlink && (
                                           <Tooltip content={'Xem MV'}>
                                              <button
-                                                className={`p-2 text-white hover:bg-white hover:bg-opacity-10 rounded-full
+                                                className={`p-2 hover:bg-white hover:bg-opacity-10 rounded-full
                                     `}
                                              >
                                                 <svg
@@ -831,7 +831,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                                    viewBox='0 0 24 24'
                                                    strokeWidth={1.5}
                                                    stroke='currentColor'
-                                                   className='w-[18px] text-white h-[18px]'
+                                                   className='w-[18px] h-[18px]'
                                                 >
                                                    <path
                                                       strokeLinecap='round'
@@ -848,7 +848,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                           }
                                        >
                                           <button
-                                             onClick={(e) => handleAddLibrary(e, item.encodeId)}
+                                             onClick={(e) => handleAddLibrary(e, item.encodeId, null, item as SongItem)}
                                              className={`hover:bg-white hover:bg-opacity-10 rounded-full p-1.5 ${
                                                 library.includes(item.encodeId) && 'text-tprimary'
                                              }`}
@@ -888,7 +888,7 @@ export default function Album({ params }: { params: { id: string } }) {
                                                 viewBox='0 0 24 24'
                                                 strokeWidth={1.5}
                                                 stroke='currentColor'
-                                                className='w-[18px] text-white h-[18px]'
+                                                className='w-[18px] h-[18px]'
                                              >
                                                 <path
                                                    strokeLinecap='round'
@@ -925,7 +925,7 @@ export default function Album({ params }: { params: { id: string } }) {
                      />
                      <div className='absolute hidden group-hover:block inset-0 bg-black bg-opacity-40 z-10' />
                      <div className='absolute inset-0 hidden group-hover:flex items-center z-20 justify-center'>
-                        <span className='border border-white p-4 rounded-full'>
+                        <span className='border border-white p-4 text-white rounded-full'>
                            <svg
                               stroke='currentColor'
                               fill='currentColor'
@@ -941,13 +941,13 @@ export default function Album({ params }: { params: { id: string } }) {
                         </span>
                      </div>
                   </Link>
-                  <Link href={item.link} className='font-medium hover:text-tprimary hover:underline mt-3 mb-1'>
+                  <Link href={item.link} className='font-medium isHover cursor-pointer hover:underline mt-3 mb-1'>
                      {item.name}
                   </Link>
                   <span className='text-secondary text-xs'>{formatNumberWithK(item.totalFollow)} quan tâm</span>
                   <button
                      onClick={() => handleClickFollow(item.id)}
-                     className={`flex items-center gap-x-1 text-xs w-max mx-auto mt-3 rounded-full px-3.5 ${
+                     className={`flex items-center gap-x-1 text-white text-xs w-max mx-auto mt-3 rounded-full px-3.5 ${
                         follows.includes(item.id)
                            ? 'bg-white bg-opacity-10 hover:bg-opacity-20 py-1.5'
                            : 'bg-tprimary hover:bg-opacity-90 py-1'

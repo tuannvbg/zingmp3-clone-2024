@@ -1,5 +1,6 @@
 'use client'
 import useLocalStorage from '@/hooks/useLocalStorage'
+import { HomeListType } from '@/types/homelist.type'
 import { SongItem } from '@/types/playlist.type'
 import React, { createContext, useState } from 'react'
 interface AppContextInterface {
@@ -33,6 +34,10 @@ interface AppContextInterface {
    setRecentSong: (value: SongItem[] | ((val: SongItem[]) => SongItem[])) => void
    searchData: any
    setSearchData: React.Dispatch<any>
+   playlistLibrary: HomeListType[] | []
+   setPlaylistLibrary: (value: [] | HomeListType[] | ((val: [] | HomeListType[]) => [] | HomeListType[])) => void
+   songsLibrary: SongItem[] | []
+   setSongsLibrary: (value: [] | SongItem[] | ((val: [] | SongItem[]) => [] | SongItem[])) => void
 }
 
 const initialAppContext: AppContextInterface = {
@@ -55,7 +60,11 @@ const initialAppContext: AppContextInterface = {
    recentSong: [],
    setRecentSong: () => null,
    searchData: {},
-   setSearchData: () => null
+   setSearchData: () => null,
+   playlistLibrary: [],
+   setPlaylistLibrary: () => null,
+   songsLibrary: [],
+   setSongsLibrary: () => null
 }
 
 export const AppContext = createContext<AppContextInterface>(initialAppContext)
@@ -75,6 +84,14 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
    )
    const [recentSong, setRecentSong] = useLocalStorage<SongItem[]>('recentSong', initialAppContext.recentSong)
    const [searchData, setSearchData] = useState<any>(initialAppContext.searchData)
+   const [playlistLibrary, setPlaylistLibrary] = useLocalStorage<HomeListType[] | []>(
+      'playlistLibrary',
+      initialAppContext.playlistLibrary
+   )
+   const [songsLibrary, setSongsLibrary] = useLocalStorage<SongItem[] | []>(
+      'songsLibrary',
+      initialAppContext.songsLibrary
+   )
    return (
       <AppContext.Provider
          value={{
@@ -97,7 +114,11 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
             recentSong,
             setRecentSong,
             searchData,
-            setSearchData
+            setSearchData,
+            playlistLibrary,
+            setPlaylistLibrary,
+            songsLibrary,
+            setSongsLibrary
          }}
       >
          {children}

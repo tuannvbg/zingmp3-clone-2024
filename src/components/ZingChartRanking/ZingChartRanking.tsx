@@ -12,7 +12,7 @@ export default function ZingChartRanking({ weekChartCountry, title }: Props) {
    return (
       <div className='bg-white bg-opacity-5 rounded-xl py-5 px-2.5'>
          <div className='flex items-center gap-x-1 mb-2.5 pl-10'>
-            <Link href={weekChartCountry.link as string} className='text-2xl font-bold hover:text-tprimary'>
+            <Link href={weekChartCountry.link as string} className='text-2xl font-bold isHover cursor-pointer'>
                {title}
             </Link>
             <div className='w-7 h-7 rounded-full bg-tprimary flex items-center justify-center'>

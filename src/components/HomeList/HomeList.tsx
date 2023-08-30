@@ -19,15 +19,16 @@ export default function HomeList({
    const { library, handleAddLibrary } = useAddLibrary()
 
    const result = all ? list : list.slice(0, 4)
+
    return (
       <div className='grid grid-cols-4 gap-7 select-none'>
          {result.map((item) => (
-            <div key={item.encodeId}>
-               <div onClick={() => router.push(item.link)} className='relative block group cursor-pointer'>
+            <div key={item?.encodeId}>
+               <div onClick={() => router.push(item?.link)} className='relative block group cursor-pointer'>
                   <div className='relative aspect-square overflow-hidden rounded-md'>
                      <Image
-                        src={item.thumbnailM}
-                        alt={item.title}
+                        src={item?.thumbnailM}
+                        alt={item?.title}
                         fill
                         sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                         className='w-full h-full object-cover group-hover:scale-110 transition-all duration-500'
@@ -37,14 +38,14 @@ export default function HomeList({
                      className={`absolute inset-0 z-10 items-center rounded-lg gap-x-5 justify-center hidden group-hover:flex bg-black bg-opacity-40
                `}
                   >
-                     <Tooltip content={library.includes(item.encodeId) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}>
+                     <Tooltip content={library.includes(item?.encodeId) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}>
                         <button
-                           onClick={(e) => handleAddLibrary(e, item.encodeId)}
-                           className={`hover:bg-white hover:bg-opacity-10 rounded-full p-1.5 ${
-                              library.includes(item.encodeId) && 'text-tprimary'
+                           onClick={(e) => handleAddLibrary(e, item?.encodeId, item)}
+                           className={`hover:bg-white hover:bg-opacity-10 text-white rounded-full p-1.5 ${
+                              library.includes(item?.encodeId) && 'text-tprimary'
                            }`}
                         >
-                           {library.includes(item.encodeId) ? (
+                           {library.includes(item?.encodeId) ? (
                               <svg
                                  xmlns='http://www.w3.org/2000/svg'
                                  viewBox='0 0 24 24'
@@ -72,7 +73,7 @@ export default function HomeList({
                         </button>
                      </Tooltip>
 
-                     <span className='border border-white rounded-full p-2'>
+                     <span className='border border-white text-white rounded-full p-2'>
                         <svg
                            xmlns='http://www.w3.org/2000/svg'
                            viewBox='0 0 24 24'
@@ -90,7 +91,7 @@ export default function HomeList({
                      <Tooltip content={'Khác'}>
                         <button
                            onClick={(e) => e.stopPropagation()}
-                           className='hover:bg-white hover:bg-opacity-10 rounded-full p-1.5'
+                           className='hover:bg-white text-white hover:bg-opacity-10 rounded-full p-1.5'
                         >
                            <svg
                               xmlns='http://www.w3.org/2000/svg'
@@ -112,13 +113,17 @@ export default function HomeList({
                </div>
                {title ? (
                   <div className='flex flex-col mt-2 gap-y-1'>
-                     <span title={item.title} className='font-medium truncate'>
-                        {item.title}
+                     <span title={item?.title} className='font-medium truncate'>
+                        {item?.title}
                      </span>
                      <div className='text-secondary line-clamp-2'>
-                        {item.artists?.map((artist, index) => {
-                           return index === item.artists.length - 1 ? (
-                              <Link href={artist.link} key={artist.id} className='hover:text-tprimary hover:underline'>
+                        {item?.artists?.map((artist, index) => {
+                           return index === item?.artists.length - 1 ? (
+                              <Link
+                                 href={artist.link}
+                                 key={artist.id}
+                                 className='isHover cursor-pointer hover:underline'
+                              >
                                  {artist.name}
                               </Link>
                            ) : (
@@ -126,7 +131,7 @@ export default function HomeList({
                                  <Link
                                     href={artist.link}
                                     key={artist.id}
-                                    className='hover:text-tprimary hover:underline'
+                                    className='isHover cursor-pointer hover:underline'
                                  >
                                     {artist.name}
                                  </Link>
@@ -137,8 +142,8 @@ export default function HomeList({
                      </div>
                   </div>
                ) : (
-                  <p title={item.sortDescription} className='text-secondary mt-2 line-clamp-2'>
-                     {item.sortDescription}
+                  <p title={item?.sortDescription} className='text-secondary mt-2 line-clamp-2'>
+                     {item?.sortDescription}
                   </p>
                )}
             </div>

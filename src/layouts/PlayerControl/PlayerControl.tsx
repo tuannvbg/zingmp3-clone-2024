@@ -226,7 +226,12 @@ export default function PlayerControl() {
       setIsLoadingSong(infoSongData.isLoading)
       return (
          <div
-            className={`h-[90px] bg-secondary border-t border-t-gray-700 px-5 flex items-center fixed z-50 left-0 right-0 bottom-0`}
+            style={{
+               backgroundPosition: '50%',
+               backgroundRepeat: 'no-repeat',
+               backgroundSize: 'cover'
+            }}
+            className={`h-[90px] playerControl bg-secondary border-t border-t-gray-700 px-5 flex items-center fixed z-50 left-0 right-0 bottom-0`}
          >
             {/* Detail song */}
             <div className='flex w-[30%] items-center gap-x-3'>
@@ -245,7 +250,7 @@ export default function PlayerControl() {
                            <Link
                               href={artist.link}
                               key={artist.id}
-                              className='text-secondary hover:text-tprimary hover:underline'
+                              className='text-secondary isHover cursor-pointer hover:underline'
                            >
                               {artist.name}
                            </Link>
@@ -253,7 +258,7 @@ export default function PlayerControl() {
                            <Link
                               href={artist.link}
                               key={artist.id}
-                              className='text-secondary hover:text-tprimary hover:underline'
+                              className='text-secondary isHover cursor-pointer hover:underline'
                            >
                               {`${artist.name}, `}
                            </Link>
@@ -345,7 +350,7 @@ export default function PlayerControl() {
                   </button>
                   <button
                      onClick={() => setIsPlaying((prev) => !prev)}
-                     className='p-1.5 mx-1.5 hover:text-tprimary hover:border-tprimary rounded-full border-[2px] flex items-center justify-center border-white'
+                     className='p-1.5 mx-1.5 isHover cursor-pointer hover:border-tprimary rounded-full border-[2px] flex items-center justify-center border-tprimary'
                   >
                      {isPlaying ? (
                         <svg
@@ -446,7 +451,7 @@ export default function PlayerControl() {
                                  borderRadius: '4px',
                                  background: getTrackBackground({
                                     values: [currentTime],
-                                    colors: ['#fff', '#ffffff80'],
+                                    colors: ['#ed2b91', '#aaa'],
                                     min: 0,
                                     max: audio ? audio.duration : 1000
                                  }),
@@ -466,7 +471,7 @@ export default function PlayerControl() {
                               height: '12px',
                               width: '12px',
                               borderRadius: '50%',
-                              backgroundColor: '#fff',
+                              backgroundColor: '#ed2b91',
                               outline: 'none'
                            }}
                            className='hidden group-hover:block'
@@ -607,7 +612,7 @@ export default function PlayerControl() {
                                     borderRadius: '4px',
                                     background: getTrackBackground({
                                        values: [currentVolume],
-                                       colors: ['#fff', '#ffffff80'],
+                                       colors: ['#ed2b91', '#aaa'],
                                        min: 0,
                                        max: 100
                                     }),
@@ -627,7 +632,7 @@ export default function PlayerControl() {
                                  height: '12px',
                                  width: '12px',
                                  borderRadius: '50%',
-                                 backgroundColor: '#fff',
+                                 backgroundColor: '#ed2b91',
                                  outline: 'none'
                               }}
                               className='hidden group-hover:block'

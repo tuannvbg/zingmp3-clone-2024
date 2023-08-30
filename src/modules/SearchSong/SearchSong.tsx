@@ -148,7 +148,7 @@ export default function SearchSong() {
                                     <Link
                                        href={artist.link}
                                        key={artist.id}
-                                       className='text-secondary hover:text-tprimary hover:underline'
+                                       className='text-secondary isHover cursor-pointer hover:underline'
                                     >
                                        {artist.name}
                                     </Link>
@@ -157,7 +157,7 @@ export default function SearchSong() {
                                        <Link
                                           href={artist.link}
                                           key={artist.id}
-                                          className='text-secondary hover:text-tprimary hover:underline'
+                                          className='text-secondary isHover cursor-pointer hover:underline'
                                        >
                                           {artist.name}
                                        </Link>
@@ -173,7 +173,7 @@ export default function SearchSong() {
                      {item.album && (
                         <Link
                            href={item.album.link}
-                           className='hover:text-tprimary block max-w-[200px] truncate hover:underline capitalize'
+                           className='isHover cursor-pointer block max-w-[200px] truncate hover:underline capitalize'
                         >
                            {item.album.title}
                         </Link>
@@ -226,7 +226,7 @@ export default function SearchSong() {
                         )}
                         <Tooltip content={library.includes(item.encodeId) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}>
                            <button
-                              onClick={(e) => handleAddLibrary(e, item.encodeId)}
+                              onClick={(e) => handleAddLibrary(e, item.encodeId, null, item)}
                               className={`hover:bg-white text-white hover:bg-opacity-10 rounded-full p-1.5 ${
                                  library.includes(item.encodeId) && '!text-tprimary'
                               }`}

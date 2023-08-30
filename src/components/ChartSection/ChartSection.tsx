@@ -43,13 +43,13 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
       scales: {
          y: {
             ticks: { display: false },
-            grid: { color: 'rgba(255,255,255,0.3)', drawTicks: false },
+            grid: { color: '#aaa', drawTicks: false },
             min: chart?.minScore,
             max: chart?.maxScore,
             border: { dash: [3, 4] }
          },
          x: {
-            ticks: { color: 'white' },
+            ticks: { color: '#aaa' },
             grid: { color: 'transparent' }
          }
       },
@@ -122,7 +122,7 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
 
    if (!data) return null
    return (
-      <div className={`${zingchartPage ? 'bg-transparent my-10' : 'bg-modal mt-12 p-5 min-h-[414px]'} rounded-lg`}>
+      <div className={`${zingchartPage ? 'bg-transparent my-10' : 'bg-[#431B62] mt-12 p-5 min-h-[414px]'} rounded-lg`}>
          {!zingchartPage && (
             <div className='flex items-center gap-x-3 mb-3'>
                <Link href={'/zing-chart'} className='text-[28px] font-bold text-gradient'>
@@ -133,7 +133,7 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                      style={{
                         clipPath: 'polygon(0% 0%, 100% 50%, 0% 100%)'
                      }}
-                     className='bg-primary w-2 translate-x-[1px] h-3'
+                     className='bg-black w-2 translate-x-[1px] h-3'
                   />
                </div>
             </div>
@@ -246,13 +246,13 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                                        </div>
                                     )}
                                  </div>
-                                 <div className='text-xs'>
+                                 <div className='text-xs text-[#ffffff80]'>
                                     {item.artists?.map((artist, index) => {
                                        return index === item.artists.length - 1 ? (
                                           <Link
                                              href={artist.link}
                                              key={artist.id}
-                                             className='text-secondary hover:text-tprimary hover:underline'
+                                             className='isHover cursor-pointer hover:underline'
                                           >
                                              {artist.name}
                                           </Link>
@@ -261,7 +261,7 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                                              <Link
                                                 href={artist.link}
                                                 key={artist.id}
-                                                className='text-secondary hover:text-tprimary hover:underline'
+                                                className='isHover cursor-pointer hover:underline'
                                              >
                                                 {artist.name}
                                              </Link>
@@ -283,7 +283,7 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                   <div className='text-center mt-4'>
                      <Link
                         href={'/zing-chart'}
-                        className='border border-white rounded-full px-7 py-1.5 bg-transparent hover:bg-white hover:bg-opacity-10'
+                        className='border border-white text-white rounded-full px-7 py-1.5 bg-transparent hover:bg-white hover:bg-opacity-10'
                      >
                         Xem thêm
                      </Link>
@@ -297,7 +297,7 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                   style={{ top: tooltipState.top, left: tooltipState.left, opacity: tooltipState.opacity }}
                >
                   {rank && selected && (
-                     <li className={`flex select-none rounded-md items-center text-secondary p-2.5 bg-red-500`}>
+                     <li className={`flex select-none rounded-md items-center text-white p-2.5 bg-red-500`}>
                         <div className='flex items-center gap-x-2 w-full'>
                            <div className='relative cursor-pointer overflow-hidden w-[40px] flex-shrink-0 h-[40px] rounded'>
                               <Image
@@ -312,7 +312,7 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                               <div className='flex items-center gap-x-2'>
                                  <h3
                                     title={rank.find((item) => item.encodeId === selected)?.title}
-                                    className='text-white truncate max-w-[150px] capitalize text-sm font-medium'
+                                    className='truncate max-w-[150px] capitalize text-sm font-medium'
                                  >
                                     {rank.find((item) => item.encodeId === selected)?.title}
                                  </h3>

@@ -6,9 +6,10 @@ interface TooltipProps {
    left?: boolean
    bottom?: boolean
    bottomLeft?: boolean
+   bottomCenter?: boolean
 }
 
-export default function Tooltip({ content, children, left, bottom, bottomLeft }: TooltipProps) {
+export default function Tooltip({ content, children, left, bottom, bottomLeft, bottomCenter }: TooltipProps) {
    const [showTooltip, setShowTooltip] = useState(false)
 
    const handleMouseEnter = () => {
@@ -32,6 +33,8 @@ export default function Tooltip({ content, children, left, bottom, bottomLeft }:
                   ? 'bottom-[-35px] -translate-x-[45%]'
                   : bottomLeft
                   ? 'bottom-[-35px] -translate-x-[70%]'
+                  : bottomCenter
+                  ? 'bottom-[-35px] left-[-20%]'
                   : 'left-1/2 -translate-x-1/2'
             } transition-all bg-[#333] text-xs text-white py-1 px-2 rounded z-[100] ${
                showTooltip ? 'visible opacity-100' : 'invisible opacity-0'
@@ -46,6 +49,8 @@ export default function Tooltip({ content, children, left, bottom, bottomLeft }:
             className={`absolute ${
                bottom || bottomLeft
                   ? 'bottom-[-20px] rotate-180 -translate-y-full translate-x-1/2'
+                  : bottomCenter
+                  ? 'bottom-[-20px] rotate-180 -translate-y-full translate-x-[80%]'
                   : 'bottom-9 left-1/2 -translate-x-1/2'
             } transition-all w-4 h-2 bg-[#333] z-[100] ${showTooltip ? 'visible opacity-100' : 'invisible opacity-0'}`}
          />

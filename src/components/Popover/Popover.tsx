@@ -1,4 +1,4 @@
-import { FloatingPortal, useFloating, arrow, shift, offset } from '@floating-ui/react'
+import { FloatingPortal, useFloating, arrow, shift, offset, Placement } from '@floating-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import React, { ElementType, useRef, useState } from 'react'
 
@@ -7,13 +7,24 @@ interface Props {
    renderPopover: React.ReactNode
    as?: ElementType //custom thẻ
    initialOpen?: boolean
+   posistion?: Placement
+   arrowClass?: string
+   transformOrigin?: string
 }
-export default function Popover({ children, renderPopover, as: Element = 'div', initialOpen = false }: Props) {
+export default function Popover({
+   children,
+   renderPopover,
+   as: Element = 'div',
+   initialOpen = false,
+   posistion = 'top',
+   arrowClass = 'absolute h-[10px] w-6 bottom-0 translate-y-full rotate-180 bg-[#333]',
+   transformOrigin = 'bottom'
+}: Props) {
    const [open, setOpen] = useState<boolean>(initialOpen)
    const arrowRef = useRef<HTMLElement>(null)
    const { refs, x, y, strategy, middlewareData } = useFloating({
       middleware: [offset(10), shift(), arrow({ element: arrowRef })], //offet là khoảng cách từ trên xuống(px), shirt để luôn hiển thị đúng vị trí khi reponsive
-      placement: 'top' // vị trí hiển thị
+      placement: posistion // vị trí hiển thị
    })
    const showPopover = () => {
       setOpen(true)
@@ -24,7 +35,7 @@ export default function Popover({ children, renderPopover, as: Element = 'div', 
    return (
       // cái tooltip sẽ định vị theo thằng có ref={refs.setReference} nên để đâu cũng dc
       <Element
-         className='relative flex cursor-pointer items-center gap-x-1 hover:text-white/70'
+         className='relative z-[100] flex cursor-pointer items-center gap-x-1 hover:text-white/70'
          ref={refs.setReference}
          onMouseEnter={showPopover}
          onMouseLeave={hidePopover}
@@ -41,7 +52,8 @@ export default function Popover({ children, renderPopover, as: Element = 'div', 
                         left: x,
                         top: y,
                         width: 'max-content',
-                        transformOrigin: `calc(${middlewareData.arrow?.x}px + 12px) bottom`
+                        transformOrigin: `calc(${middlewareData.arrow?.x}px + 12px) ${transformOrigin}`,
+                        zIndex: 10
                      }}
                      initial={{ opacity: 0, transform: 'scale(0)' }}
                      animate={{ opacity: 1, transform: 'scale(1)' }}
@@ -50,7 +62,7 @@ export default function Popover({ children, renderPopover, as: Element = 'div', 
                   >
                      <span
                         ref={arrowRef}
-                        className='absolute h-[10px] w-6 bottom-0 translate-y-full rotate-180 bg-[#333]'
+                        className={arrowClass}
                         style={{
                            left: middlewareData.arrow?.x,
                            top: middlewareData.arrow?.y,

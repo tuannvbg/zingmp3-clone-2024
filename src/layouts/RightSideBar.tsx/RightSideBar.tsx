@@ -41,9 +41,9 @@ export default function RightSideBar() {
       <div
          className={`${
             openSideBarRight ? 'translate-x-0' : 'translate-x-full'
-         } w-full max-w-[330px] transition-all overflow-y-auto overflow-x-hidden ease-linear duration-500 fixed right-0 top-0 bottom-[90px] z-50 bg-secondary shadow-[0_1px_0_rgba(0,0,0,0.3),0_1px_6px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(25,255,255,0.05)]`}
+         } w-full max-w-[330px] transition-all overflow-y-auto overflow-x-hidden ease-linear duration-500 fixed right-0 top-0 bottom-[90px] z-50 bg-rightsidebar shadow-[0_1px_0_rgba(0,0,0,0.3),0_1px_6px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(25,255,255,0.05)]`}
       >
-         <header className='px-2 py-[18px] sticky top-0 bg-secondary z-[100] flex items-center gap-x-2'>
+         <header className='px-2 py-[18px] sticky top-0 bg-rightsidebar z-[100] flex items-center gap-x-2'>
             <div className='flex items-center p-[3px] text-xs bg-white bg-opacity-10 rounded-full flex-1'>
                <button
                   onClick={() => setStatus('list')}
@@ -62,24 +62,6 @@ export default function RightSideBar() {
                   Nghe gần đây
                </button>
             </div>
-            {/* <Tooltip bottom content='Hẹn giờ dừng phát nhạc'>
-               <button className='p-2 bg-white bg-opacity-10 rounded-full'>
-                  <svg
-                     xmlns='http://www.w3.org/2000/svg'
-                     fill='none'
-                     viewBox='0 0 24 24'
-                     strokeWidth={1.5}
-                     stroke='currentColor'
-                     className='w-[18px] h-[18px]'
-                  >
-                     <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        d='M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z'
-                     />
-                  </svg>
-               </button>
-            </Tooltip> */}
             <Tooltip bottomLeft content='Xoá danh sách phát'>
                <button onClick={handleDeletePlaylist} className='p-2 bg-white bg-opacity-10 rounded-full'>
                   <svg
@@ -100,7 +82,7 @@ export default function RightSideBar() {
             </Tooltip>
          </header>
          {status === 'list' ? (
-            playList ? (
+            playList && playList?.length > 0 ? (
                <ul className='px-2'>
                   {playList.map((item) => {
                      return item.isWorldWide ? (
@@ -108,7 +90,7 @@ export default function RightSideBar() {
                            <li
                               className={`flex group hover:bg-white hover:bg-opacity-10  select-none ${
                                  currentSongId === item.encodeId && 'bg-white bg-opacity-10'
-                              } rounded-md items-center text-secondary text-xs p-2.5 border-b border-b-gray-800`}
+                              } rounded-md items-center text-secondary text-xs p-2.5`}
                            >
                               <div className='w-full flex items-center gap-x-2'>
                                  <div
@@ -195,7 +177,7 @@ export default function RightSideBar() {
                                     <div className='flex items-center gap-x-2'>
                                        <h3
                                           title={item.title}
-                                          className='text-white max-w-[200px] truncate capitalize text-sm font-medium'
+                                          className='max-w-[200px] truncate capitalize text-sm font-medium'
                                        >
                                           {item.title}
                                        </h3>
@@ -206,7 +188,7 @@ export default function RightSideBar() {
                                              <Link
                                                 href={artist.link}
                                                 key={artist.id}
-                                                className='text-secondary hover:text-tprimary hover:underline'
+                                                className='text-secondary isHover cursor-pointer hover:underline'
                                              >
                                                 {artist.name}
                                              </Link>
@@ -214,7 +196,7 @@ export default function RightSideBar() {
                                              <Link
                                                 href={artist.link}
                                                 key={artist.id}
-                                                className='text-secondary hover:text-tprimary hover:underline'
+                                                className='text-secondary isHover cursor-pointer hover:underline'
                                              >
                                                 {`${artist.name}, `}
                                              </Link>
@@ -231,9 +213,9 @@ export default function RightSideBar() {
                                     }
                                  >
                                     <button
-                                       onClick={(e) => handleAddLibrary(e, item.encodeId)}
-                                       className={`hover:bg-white hover:bg-opacity-10 rounded-full p-1.5 text-white ${
-                                          library.includes(item.encodeId) && '!text-tprimary'
+                                       onClick={(e) => handleAddLibrary(e, item.encodeId, null, item)}
+                                       className={`hover:bg-white hover:bg-opacity-10 rounded-full p-1.5 ${
+                                          library.includes(item.encodeId) && 'text-tprimary'
                                        }`}
                                     >
                                        {library.includes(item.encodeId) ? (
@@ -292,14 +274,14 @@ export default function RightSideBar() {
                   Danh sách phát trống
                </div>
             )
-         ) : (
+         ) : recentSong && recentSong.length > 0 ? (
             <ul className='px-2'>
                {recentSong?.map((item) => (
                   <li
                      key={item.encodeId}
                      className={`flex group hover:bg-white hover:bg-opacity-10  select-none ${
                         currentSongId === item.encodeId && 'bg-white bg-opacity-10'
-                     } rounded-md items-center text-secondary text-xs p-2.5 border-b border-b-gray-800`}
+                     } rounded-md items-center text-secondary text-xs p-2.5`}
                   >
                      <div className='w-full flex items-center gap-x-2'>
                         <div
@@ -371,10 +353,7 @@ export default function RightSideBar() {
                         </div>
                         <div className='flex flex-col gap-y-1'>
                            <div className='flex items-center gap-x-2'>
-                              <h3
-                                 title={item.title}
-                                 className='text-white max-w-[200px] truncate capitalize text-sm font-medium'
-                              >
+                              <h3 title={item.title} className='max-w-[200px] truncate capitalize text-sm font-medium'>
                                  {item.title}
                               </h3>
                            </div>
@@ -384,7 +363,7 @@ export default function RightSideBar() {
                                     <Link
                                        href={artist.link}
                                        key={artist.id}
-                                       className='text-secondary hover:text-tprimary hover:underline'
+                                       className='text-secondary isHover cursor-pointer hover:underline'
                                     >
                                        {artist.name}
                                     </Link>
@@ -392,7 +371,7 @@ export default function RightSideBar() {
                                     <Link
                                        href={artist.link}
                                        key={artist.id}
-                                       className='text-secondary hover:text-tprimary hover:underline'
+                                       className='text-secondary isHover cursor-pointer hover:underline'
                                     >
                                        {`${artist.name}, `}
                                     </Link>
@@ -407,7 +386,7 @@ export default function RightSideBar() {
                            content={library.includes(item.encodeId) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}
                         >
                            <button
-                              onClick={(e) => handleAddLibrary(e, item.encodeId)}
+                              onClick={(e) => handleAddLibrary(e, item.encodeId, null, item)}
                               className={`hover:bg-white hover:bg-opacity-10 rounded-full p-1.5 ${
                                  library.includes(item.encodeId) && 'text-tprimary'
                               }`}
@@ -443,6 +422,17 @@ export default function RightSideBar() {
                   </li>
                ))}
             </ul>
+         ) : (
+            <div className='text-center text-secondary'>
+               <Image
+                  src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/empty-mv-dark.png'}
+                  alt=''
+                  width={120}
+                  height={120}
+                  className='w-[120px] h-[120px] object-cover mx-auto'
+               />
+               Không có bài hát nào gần đây
+            </div>
          )}
       </div>
    )

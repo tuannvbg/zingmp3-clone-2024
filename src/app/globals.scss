@@ -3,6 +3,14 @@
 @tailwind utilities;
 body {
    background-color: #170f23;
+   --primary: #170f23;
+   --tprimary: #9b4de0;
+   --tertiary: #34224f;
+   --secondary: #130c1c;
+   --rightsidebar: #130c1c;
+   background-size: 1920px auto;
+   background-repeat: no-repeat;
+   background-attachment: fixed;
    color: white;
    font-size: 14px;
    &::-webkit-scrollbar {
@@ -15,7 +23,197 @@ body {
       background-color: #ffffff80;
       border-radius: 999px;
    }
+   .text-grayDa {
+      color: #dadada;
+   }
+   .text-secondary {
+      color: #ffffff80;
+   }
+   .bgr-secondary {
+      background-color: #ffffff80;
+   }
+   .text-stroke {
+      -webkit-text-stroke: 1px #ffffff80;
+      font-family: 'Roboto', sans-serif;
+   }
 }
+body.Rosé {
+   --primary: #061c4f;
+   --tprimary: #3560f5;
+   --tertiary: #1a3570;
+   --secondary: #061641;
+   --rightsidebar: #223c75;
+}
+body.Zing-Music-Awards {
+   --primary: #37075d;
+   --tprimary: #ed2b91;
+   --tertiary: #4b1178;
+   --secondary: #2f074e;
+   --rightsidebar: #5d218c;
+}
+body.XONE {
+   --primary: #1e1e1e;
+   --tprimary: #bc9a00;
+   --tertiary: #363636;
+   --secondary: #2f074e;
+   --rightsidebar: #2d2f32;
+}
+body.Tháp-Eiffel {
+   --primary: #282828;
+   --tprimary: #9b4de0;
+   --tertiary: #363636;
+   --secondary: #181818;
+   --rightsidebar: #2d2f32;
+}
+body.Jack {
+   --primary: #767269;
+   --tprimary: #d08011;
+   --tertiary: #605c52;
+   --secondary: #4c473e;
+   --rightsidebar: #726c5e;
+}
+body.IU {
+   --primary: #e6e1de;
+   --tprimary: #c24793;
+   --tertiary: #efedeb;
+   --secondary: #f5e6e0;
+   --rightsidebar: #e5e3df;
+   color: #32323d;
+   .text-grayDa {
+      color: #32323d;
+   }
+   .text-secondary {
+      color: #696969;
+   }
+   .text-stroke {
+      -webkit-text-stroke: 1px #696969;
+      font-family: 'Roboto', sans-serif;
+   }
+   .bgr-secondary {
+      background-color: #696969 !important;
+   }
+}
+body.Ji-Chang-Wook {
+   --primary: #b3d8db;
+   --tprimary: #1966b2;
+   --tertiary: #d1edf0;
+   --secondary: #a3d5dc;
+   --rightsidebar: #ced9d9;
+   color: #32323d;
+   .text-grayDa {
+      color: #32323d;
+   }
+   .text-secondary {
+      color: #696969;
+   }
+   .text-stroke {
+      -webkit-text-stroke: 1px #696969;
+      font-family: 'Roboto', sans-serif;
+   }
+   .bgr-secondary {
+      background-color: #696969 !important;
+   }
+}
+body.Lisa {
+   --primary: #f1ddd8;
+   --tprimary: #d14781;
+   --tertiary: #f9e6e2;
+   --secondary: #f4cbca;
+   --rightsidebar: #f9dbdb;
+   color: #32323d;
+   .text-grayDa {
+      color: #32323d;
+   }
+   .text-secondary {
+      color: #696969;
+   }
+   .text-stroke {
+      -webkit-text-stroke: 1px #696969;
+      font-family: 'Roboto', sans-serif;
+   }
+   .bgr-secondary {
+      background-color: #696969 !important;
+   }
+}
+body.Jennie-Kim {
+   --primary: #bbb9c4;
+   --tprimary: #8919ae;
+   --tertiary: #cac6dd;
+   --secondary: #c6c4d1;
+   --rightsidebar: #e5e3df;
+   color: #32323d;
+   .text-grayDa {
+      color: #32323d;
+   }
+   .text-secondary {
+      color: #696969;
+   }
+   .text-stroke {
+      -webkit-text-stroke: 1px #696969;
+      font-family: 'Roboto', sans-serif;
+   }
+   .bgr-secondary {
+      background-color: #696969 !important;
+   }
+}
+body.Jisoo {
+   --primary: #fff;
+   --tprimary: #8d22c3;
+   --tertiary: #fff;
+   --secondary: #fff;
+   --rightsidebar: #fff;
+   color: #32323d;
+   .text-grayDa {
+      color: #32323d;
+   }
+   .text-secondary {
+      color: #696969;
+   }
+   .text-stroke {
+      -webkit-text-stroke: 1px #696969;
+      font-family: 'Roboto', sans-serif;
+   }
+   .bgr-secondary {
+      background-color: #696969 !important;
+   }
+}
+.bg-primary {
+   background-color: var(--primary);
+}
+.bg-tprimary {
+   background-color: var(--tprimary);
+}
+.text-tprimary {
+   color: var(--tprimary);
+}
+.border-l-tprimary {
+   border-color: var(--tprimary);
+}
+.bg-tertiary {
+   background-color: var(--tertiary);
+}
+.bg-modal {
+   background-color: var(--tertiary);
+}
+.bg-secondary {
+   background-color: var(--secondary);
+}
+.bg-rightsidebar {
+   background-color: var(--rightsidebar);
+}
+.border-tprimary {
+   border-color: var(--tprimary);
+}
+.isHover:hover {
+   color: var(--tprimary) !important;
+}
+// ----------------------------------------------------------------------------//
+// ----------------------------------------------------------------------------//
+// ----------------------------------------------------------------------------//
+// ----------------------------------------------------------------------------//
+// ----------------------------------------------------------------------------//
+// ----------------------------------------------------------------------------//
+
 .hide-scrollbar::-webkit-scrollbar {
    width: 0px;
 }
@@ -377,10 +575,7 @@ div::-webkit-scrollbar-thumb {
       transform: rotate(-1turn);
    }
 }
-.text-stroke {
-   -webkit-text-stroke: 1px #ffffff80;
-   font-family: 'Roboto', sans-serif;
-}
+
 .text-stroke1 {
    -webkit-text-stroke: 1px rgb(96, 165, 250);
    font-family: 'Roboto', sans-serif;

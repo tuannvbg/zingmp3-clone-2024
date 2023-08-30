@@ -140,7 +140,7 @@ export default function Artist() {
                <h2 className='text-xl font-bold'>{sections[0].title}</h2>
                <Link
                   href={`${artistData.link}/bai-hat`}
-                  className='uppercase hover:text-tprimary text-xs text-secondary flex items-center gap-x-1'
+                  className='uppercase isHover cursor-pointer text-xs text-secondary flex items-center gap-x-1'
                >
                   tất cả
                   <svg
@@ -272,7 +272,7 @@ export default function Artist() {
                                        <Link
                                           href={artist.link}
                                           key={artist.id}
-                                          className='text-secondary hover:text-tprimary hover:underline'
+                                          className='text-secondary isHover cursor-pointer hover:underline'
                                        >
                                           {artist.name}
                                        </Link>
@@ -281,7 +281,7 @@ export default function Artist() {
                                           <Link
                                              href={artist.link}
                                              key={artist.id}
-                                             className='text-secondary hover:text-tprimary hover:underline'
+                                             className='text-secondary isHover cursor-pointer hover:underline'
                                           >
                                              {artist.name}
                                           </Link>
@@ -343,7 +343,7 @@ export default function Artist() {
                               }
                            >
                               <button
-                                 onClick={(e) => handleAddLibrary(e, item.encodeId as string)}
+                                 onClick={(e) => handleAddLibrary(e, item.encodeId as string, null, item)}
                                  className={`hover:bg-white text-white hover:bg-opacity-10 rounded-full p-1.5 ${
                                     library.includes(item.encodeId as string) && '!text-tprimary'
                                  }`}
@@ -426,7 +426,7 @@ export default function Artist() {
                               </Link>
                               <Link
                                  href={artist.link}
-                                 className='hover:text-tprimary hover:underline font-medium mt-3 mb-1'
+                                 className='isHover cursor-pointer hover:underline font-medium mt-3 mb-1'
                               >
                                  {artist.name}
                               </Link>

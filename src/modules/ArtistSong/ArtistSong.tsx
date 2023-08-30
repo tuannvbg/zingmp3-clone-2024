@@ -7,6 +7,7 @@ import { AppContext } from '@/contexts/app.context'
 import useAddLibrary from '@/hooks/useAddLibrary'
 import usePlayMusic from '@/hooks/usePlayMusic'
 import { Artist, Item } from '@/types/artist.type'
+import { SongItem } from '@/types/playlist.type'
 import { timeFormatter } from '@/utils/utils'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
@@ -158,7 +159,7 @@ export default function ArtistSong() {
                               <Link
                                  href={artist.link}
                                  key={artist.id}
-                                 className='text-secondary hover:text-tprimary hover:underline'
+                                 className='text-secondary isHover cursor-pointer hover:underline'
                               >
                                  {artist.name}
                               </Link>
@@ -167,7 +168,7 @@ export default function ArtistSong() {
                                  <Link
                                     href={artist.link}
                                     key={artist.id}
-                                    className='text-secondary hover:text-tprimary hover:underline'
+                                    className='text-secondary isHover cursor-pointer hover:underline'
                                  >
                                     {artist.name}
                                  </Link>
@@ -182,7 +183,7 @@ export default function ArtistSong() {
                   {item.album && (
                      <Link
                         href={item.album.link}
-                        className='hover:text-tprimary block max-w-[250px] truncate hover:underline capitalize'
+                        className='isHover cursor-pointer block max-w-[250px] truncate hover:underline capitalize'
                      >
                         {item.album.title}
                      </Link>
@@ -237,7 +238,7 @@ export default function ArtistSong() {
                      content={library.includes(item.encodeId as string) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}
                   >
                      <button
-                        onClick={(e) => handleAddLibrary(e, item.encodeId as string)}
+                        onClick={(e) => handleAddLibrary(e, item.encodeId as string, null, item as SongItem)}
                         className={`hover:bg-white text-white hover:bg-opacity-10 rounded-full p-1.5 ${
                            library.includes(item.encodeId as string) && '!text-tprimary'
                         }`}

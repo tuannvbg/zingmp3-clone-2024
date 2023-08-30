@@ -64,7 +64,10 @@ export default function SearchArtist() {
                               </span>
                            </div>
                         </Link>
-                        <Link href={artist.link} className='hover:text-tprimary hover:underline font-medium mt-3 mb-1'>
+                        <Link
+                           href={artist.link}
+                           className='isHover cursor-pointer hover:underline font-medium mt-3 mb-1'
+                        >
                            {artist.name}
                         </Link>
                         <span className='text-secondary text-xs'>{formatNumberWithK(artist.totalFollow)} quan tâm</span>
