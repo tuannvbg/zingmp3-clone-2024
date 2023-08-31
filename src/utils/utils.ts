@@ -1,3 +1,27 @@
+import { ErrorResponse } from '@/types/utils.type'
+import axios, { AxiosError, HttpStatusCode } from 'axios'
+
+//kiểm tra lỗi trả về có phải của axios và có status 422 k
+export function isAxiosUnprocessableEntity<FormError>(error: unknown): error is AxiosError<FormError> {
+   // eslint-disable-next-line import/no-named-as-default-member
+   return axios.isAxiosError(error) && error.response?.status === HttpStatusCode.UnprocessableEntity //422
+}
+
+//kiểm tra lỗi trả về có phải của axios và có status 401 k
+export function isAxiosUnauthorizedError<UnauthorizedError>(error: unknown): error is AxiosError<UnauthorizedError> {
+   // eslint-disable-next-line import/no-named-as-default-member
+   return axios.isAxiosError(error) && error.response?.status === HttpStatusCode.Unauthorized //4-1
+}
+
+//trả về lỗi khi token hết hạn
+export function isAxiosExpiredTokenError<UnauthorizedError>(error: unknown): error is AxiosError<UnauthorizedError> {
+   // eslint-disable-next-line import/no-named-as-default-member
+   return (
+      isAxiosUnauthorizedError<ErrorResponse<{ message: string; name: string }>>(error) &&
+      error.response?.data?.data?.name === 'EXPIRED_TOKEN'
+   )
+}
+
 export function formatDateFromTimestamp(timestamp: number) {
    const date = new Date(timestamp)
    const year = date.getFullYear()

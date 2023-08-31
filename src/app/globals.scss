@@ -642,3 +642,391 @@ div::-webkit-scrollbar-thumb {
    -webkit-box-orient: vertical;
    -webkit-line-clamp: 7;
 }
+// ---------------------FORM LOGIN/REGISTER --------------------------------//
+.container {
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   font-style: italic;
+   font-weight: bold;
+   aspect-ratio: 16/9;
+}
+
+.input-container {
+   filter: drop-shadow(46px 36px 24px #4090b5) drop-shadow(-55px -40px 25px #9e30a9);
+   animation: blinkShadowsFilter 8s ease-in infinite;
+   width: 400px;
+}
+
+.input-content {
+   display: grid;
+   align-content: center;
+   justify-items: center;
+   align-items: center;
+   text-align: center;
+   padding-inline: 1em;
+}
+
+.input-content::before {
+   content: '';
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   filter: blur(40px);
+   -webkit-clip-path: polygon(26% 0, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 100%, 7% 100%, 0 92%, 0 0);
+   clip-path: polygon(26% 0, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 100%, 7% 100%, 0 92%, 0 0);
+   background: rgba(122, 251, 255, 0.5568627451);
+   transition: all 1s ease-in-out;
+}
+
+.input-content::after {
+   content: '';
+   position: absolute;
+   width: 98%;
+   height: 98%;
+   box-shadow: inset 0px 0px 20px 20px #212121;
+   background: repeating-linear-gradient(
+         to bottom,
+         transparent 0%,
+         rgba(64, 144, 181, 0.6) 1px,
+         rgb(0, 0, 0) 3px,
+         hsl(295, 60%, 12%) 5px,
+         #153544 4px,
+         transparent 0.5%
+      ),
+      repeating-linear-gradient(to left, hsl(295, 60%, 12%) 100%, hsla(295, 60%, 12%, 0.99) 100%);
+   -webkit-clip-path: polygon(26% 0, 31% 5%, 61% 5%, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 100%, 7% 100%, 0 92%, 0 0);
+   clip-path: polygon(26% 0, 31% 5%, 61% 5%, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 100%, 7% 100%, 0 92%, 0 0);
+   animation: backglitch 50ms linear infinite;
+}
+
+.input-dist {
+   z-index: 80;
+   display: grid;
+   align-items: center;
+   text-align: center;
+   width: 100%;
+   padding-inline: 1em;
+   padding-block: 1.2em;
+   grid-template-columns: 1fr;
+}
+
+.input-type {
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: column;
+   gap: 1em;
+   font-size: 1.1rem;
+   background-color: transparent;
+   width: 100%;
+   border: none;
+}
+
+.input-is {
+   font-size: 0.9rem;
+   background-color: transparent;
+   width: 100%;
+   box-sizing: border-box;
+   padding-inline: 0.5em;
+   padding-block: 0.7em;
+   border: none;
+   transition: all 1s ease-in-out;
+   border-bottom: 1px solid hsl(221, 26%, 43%);
+}
+
+.input-is:hover {
+   transition: all 1s ease-in-out;
+   background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(102, 224, 255, 0.2) 27%,
+      rgba(102, 224, 255, 0.2) 63%,
+      transparent 100%
+   );
+}
+
+.input-content:focus-within::before {
+   transition: all 1s ease-in-out;
+   background: hsla(0, 0%, 100%, 0.814);
+}
+
+.input-is:focus {
+   outline: none;
+   border-bottom: 1px solid hsl(192, 100%, 100%);
+   color: hsl(192, 100%, 88%);
+   background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(102, 224, 255, 0.2) 27%,
+      rgba(102, 224, 255, 0.2) 63%,
+      transparent 100%
+   );
+}
+
+.input-is::-moz-placeholder {
+   color: hsla(192, 100%, 88%, 0.806);
+}
+
+.input-is::placeholder {
+   color: hsla(192, 100%, 88%, 0.806);
+}
+
+@keyframes backglitch {
+   0% {
+      box-shadow: inset 0px 20px 20px 30px #212121;
+   }
+
+   50% {
+      box-shadow: inset 0px -20px 20px 30px hsl(297, 42%, 10%);
+   }
+
+   to {
+      box-shadow: inset 0px 20px 20px 30px #212121;
+   }
+}
+
+@keyframes rotate {
+   0% {
+      transform: rotate(0deg) translate(-50%, 20%);
+   }
+
+   50% {
+      transform: rotate(180deg) translate(40%, 10%);
+   }
+
+   to {
+      transform: rotate(360deg) translate(-50%, 20%);
+   }
+}
+
+@keyframes blinkShadowsFilter {
+   0% {
+      filter: drop-shadow(46px 36px 28px rgba(64, 144, 181, 0.3411764706)) drop-shadow(-55px -40px 28px #9e30a9);
+   }
+
+   25% {
+      filter: drop-shadow(46px -36px 24px rgba(64, 144, 181, 0.8980392157)) drop-shadow(-55px 40px 24px #9e30a9);
+   }
+
+   50% {
+      filter: drop-shadow(46px 36px 30px rgba(64, 144, 181, 0.8980392157))
+         drop-shadow(-55px 40px 30px rgba(159, 48, 169, 0.2941176471));
+   }
+
+   75% {
+      filter: drop-shadow(20px -18px 25px rgba(64, 144, 181, 0.8980392157))
+         drop-shadow(-20px 20px 25px rgba(159, 48, 169, 0.2941176471));
+   }
+
+   to {
+      filter: drop-shadow(46px 36px 28px rgba(64, 144, 181, 0.3411764706)) drop-shadow(-55px -40px 28px #9e30a9);
+   }
+}
+
+// button submit
+.voltage-button {
+   position: relative;
+}
+
+.voltage-button button {
+   color: white;
+   background: #0d1127;
+   padding: 1rem 3rem 1rem 3rem;
+   border-radius: 5rem;
+   border: 5px solid var(--tprimary);
+   font-size: 15px;
+   line-height: 1em;
+   letter-spacing: 0.075em;
+   transition: background 0.3s;
+}
+
+.voltage-button button:hover {
+   cursor: pointer;
+   background: #0f1c53;
+}
+
+.voltage-button button:hover + svg,
+.voltage-button button:hover + svg + .dots {
+   opacity: 1;
+}
+
+.voltage-button svg {
+   display: block;
+   position: absolute;
+   top: -0.75em;
+   left: -0.25em;
+   width: calc(100% + 0.5em);
+   height: calc(100% + 1.5em);
+   pointer-events: none;
+   opacity: 0;
+   transition: opacity 0.4s;
+   transition-delay: 0.1s;
+}
+
+.voltage-button svg path {
+   stroke-dasharray: 100;
+   filter: url('#glow');
+}
+
+.voltage-button svg path.line-1 {
+   stroke: #f6de8d;
+   stroke-dashoffset: 0;
+   animation: spark-1 3s linear infinite;
+}
+
+.voltage-button svg path.line-2 {
+   stroke: #6bfeff;
+   stroke-dashoffset: 500;
+   animation: spark-2 3s linear infinite;
+}
+
+.voltage-button .dots {
+   opacity: 0;
+   transition: opacity 0.3s;
+   transition-delay: 0.4s;
+}
+
+.voltage-button .dots .dot {
+   width: 1rem;
+   height: 1rem;
+   background: white;
+   border-radius: 100%;
+   position: absolute;
+   opacity: 0;
+}
+
+.voltage-button .dots .dot-1 {
+   top: 0;
+   left: 20%;
+   animation: fly-up 3s linear infinite;
+}
+
+.voltage-button .dots .dot-2 {
+   top: 0;
+   left: 55%;
+   animation: fly-up 3s linear infinite;
+   animation-delay: 0.5s;
+}
+
+.voltage-button .dots .dot-3 {
+   top: 0;
+   left: 80%;
+   animation: fly-up 3s linear infinite;
+   animation-delay: 1s;
+}
+
+.voltage-button .dots .dot-4 {
+   bottom: 0;
+   left: 30%;
+   animation: fly-down 3s linear infinite;
+   animation-delay: 2.5s;
+}
+
+.voltage-button .dots .dot-5 {
+   bottom: 0;
+   left: 65%;
+   animation: fly-down 3s linear infinite;
+   animation-delay: 1.5s;
+}
+
+@keyframes spark-1 {
+   to {
+      stroke-dashoffset: -1000;
+   }
+}
+
+@keyframes spark-2 {
+   to {
+      stroke-dashoffset: -500;
+   }
+}
+
+@keyframes fly-up {
+   0% {
+      opacity: 0;
+      transform: translateY(0) scale(0.2);
+   }
+
+   5% {
+      opacity: 1;
+      transform: translateY(-1.5rem) scale(0.4);
+   }
+
+   10%,
+   100% {
+      opacity: 0;
+      transform: translateY(-3rem) scale(0.2);
+   }
+}
+
+@keyframes fly-down {
+   0% {
+      opacity: 0;
+      transform: translateY(0) scale(0.2);
+   }
+
+   5% {
+      opacity: 1;
+      transform: translateY(1.5rem) scale(0.4);
+   }
+
+   10%,
+   100% {
+      opacity: 0;
+      transform: translateY(3rem) scale(0.2);
+   }
+}
+
+// ----------------button add image---------------/
+/* Yoinked from CodePen, but improved the animation
+so that it is smooth among other more minor things */
+
+.codepen-button {
+   display: block;
+   cursor: pointer;
+   color: white;
+   margin: 0 auto;
+   position: relative;
+   text-decoration: none;
+   font-weight: 600;
+   border-radius: 6px;
+   overflow: hidden;
+   padding: 3px;
+   isolation: isolate;
+}
+
+.codepen-button::before {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 400%;
+   height: 100%;
+   background: linear-gradient(115deg, #4fcf70, #fad648, #a767e5, #12bcfe, #44ce7b);
+   background-size: 25% 100%;
+   animation: an-at-keyframe-css-at-rule-that-translates-via-the-transform-property-the-background-by-negative-25-percent-of-its-width-so-that-it-gives-a-nice-border-animation_-We-use-the-translate-property-to-have-a-nice-transition-so-it_s-not-a-jerk-of-a-start-or-stop
+      0.75s linear infinite;
+   animation-play-state: paused;
+   translate: -5% 0%;
+   transition: translate 0.25s ease-out;
+}
+
+.codepen-button:hover::before {
+   animation-play-state: running;
+   transition-duration: 0.75s;
+   translate: 0% 0%;
+}
+
+@keyframes an-at-keyframe-css-at-rule-that-translates-via-the-transform-property-the-background-by-negative-25-percent-of-its-width-so-that-it-gives-a-nice-border-animation_-We-use-the-translate-property-to-have-a-nice-transition-so-it_s-not-a-jerk-of-a-start-or-stop {
+   to {
+      transform: translateX(-25%);
+   }
+}
+
+.codepen-button span {
+   position: relative;
+   display: block;
+   padding: 8px 1.5rem;
+   font-size: 1.1rem;
+   background: #000;
+   border-radius: 3px;
+   height: 100%;
+}

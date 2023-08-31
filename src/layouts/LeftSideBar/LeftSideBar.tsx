@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useContext } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import { AppContext } from '@/contexts/app.context'
 const links: {
@@ -54,31 +54,18 @@ const links: {
          </svg>
       )
    },
-   {
-      url: '/mymusic',
-      title: 'Thư Viện',
-      icon: (
-         <svg width='24' height='24' viewBox='0 0 24 24' fill='currentColor'>
-            <path
-               fill-rule='evenodd'
-               clip-rule='evenodd'
-               d='M6.5 2.75C6.08579 2.75 5.75 3.08579 5.75 3.5C5.75 3.91421 6.08579 4.25 6.5 4.25H17.5C17.9142 4.25 18.25 3.91421 18.25 3.5C18.25 3.08579 17.9142 2.75 17.5 2.75H6.5ZM3 9.5C3 7.42893 4.67893 5.75 6.75 5.75H17.25C19.3211 5.75 21 7.42893 21 9.5V17.5C21 19.5711 19.3211 21.25 17.25 21.25H6.75C4.67893 21.25 3 19.5711 3 17.5V9.5ZM6.75 7.25C5.50736 7.25 4.5 8.25736 4.5 9.5V17.5C4.5 18.7426 5.50736 19.75 6.75 19.75H17.25C18.4926 19.75 19.5 18.7426 19.5 17.5V9.5C19.5 8.25736 18.4926 7.25 17.25 7.25H6.75ZM13.666 8.87596C13.4359 8.72253 13.14 8.70823 12.8961 8.83874C12.6522 8.96926 12.5 9.2234 12.5 9.5V13.0499C12.125 12.8581 11.7001 12.75 11.25 12.75C9.73122 12.75 8.5 13.9812 8.5 15.5C8.5 17.0188 9.73122 18.25 11.25 18.25C12.6911 18.25 13.8733 17.1415 13.9905 15.7307C13.9967 15.6916 14 15.6515 14 15.6107V15.5V10.9014L15.084 11.624C15.4286 11.8538 15.8943 11.7607 16.124 11.416C16.3538 11.0714 16.2607 10.6057 15.916 10.376L13.666 8.87596ZM12.5 15.5C12.5 14.8096 11.9404 14.25 11.25 14.25C10.5596 14.25 10 14.8096 10 15.5C10 16.1904 10.5596 16.75 11.25 16.75C11.9404 16.75 12.5 16.1904 12.5 15.5Z'
-               fill-opacity='0.8'
-            ></path>
-         </svg>
-      )
-   },
+
    {
       url: '/moi-phat-hanh',
       title: 'Nhạc Mới',
       icon: (
-         <svg width='24' height='24' viewBox='0 0 24 24' fill='currentColor'>
+         <svg width={24} height={24} viewBox='0 0 24 24' fill='currentColor'>
             <path
-               fill-rule='evenodd'
-               clip-rule='evenodd'
+               fillRule='evenodd'
+               clipRule='evenodd'
                d='M20.25 2C20.25 1.58579 19.9142 1.25 19.5 1.25C19.0858 1.25 18.75 1.58579 18.75 2C18.75 2.95195 18.4626 3.63685 18.0656 4.07478C17.6709 4.51015 17.1258 4.75 16.5 4.75C16.0858 4.75 15.75 5.08579 15.75 5.5C15.75 5.91421 16.0858 6.25 16.5 6.25C17.126 6.25 17.671 6.48996 18.0657 6.9254C18.4628 7.36341 18.75 8.04835 18.75 9C18.75 9.41421 19.0858 9.75 19.5 9.75C19.9142 9.75 20.25 9.41421 20.25 9C20.25 8.04805 20.5374 7.36315 20.9344 6.92522C21.3291 6.48985 21.8742 6.25 22.5 6.25C22.9142 6.25 23.25 5.91421 23.25 5.5C23.25 5.08579 22.9142 4.75 22.5 4.75C21.874 4.75 21.329 4.51004 20.9343 4.0746C20.5372 3.63659 20.25 2.95165 20.25 2ZM19.1769 5.08231C19.2934 4.95373 19.4013 4.81641 19.5 4.6709C19.5987 4.81629 19.7064 4.95351 19.8229 5.082C19.9625 5.23602 20.1129 5.37549 20.2725 5.49999C20.113 5.62441 19.9627 5.76378 19.8231 5.91769C19.7066 6.04627 19.5987 6.18359 19.5 6.3291C19.4013 6.18371 19.2936 6.04649 19.1771 5.918C19.0375 5.76398 18.8871 5.62451 18.7275 5.50001C18.887 5.37559 19.0373 5.23622 19.1769 5.08231ZM13.5095 5.31294C13.5652 5.72339 13.2776 6.10128 12.8672 6.15698L12.3492 6.22728L11.3238 6.36644C10.186 6.55633 9.25 7.65728 9.25 8.74999V18.5C9.25 20.5711 7.57107 22.25 5.5 22.25C3.42893 22.25 1.75 20.5711 1.75 18.5C1.75 16.4289 3.42893 14.75 5.5 14.75C6.3442 14.75 7.12325 15.0289 7.75 15.4997V8.74999C7.75 6.89294 9.25015 5.18376 11.0921 4.88439L11.1116 4.88149L12.1475 4.7409L12.6655 4.67061C13.0759 4.61491 13.4538 4.90249 13.5095 5.31294ZM5.5 16.25C6.74264 16.25 7.75 17.2573 7.75 18.5C7.75 19.7426 6.74264 20.75 5.5 20.75C4.25736 20.75 3.25 19.7426 3.25 18.5C3.25 17.2573 4.25736 16.25 5.5 16.25ZM19.5 11.75C19.9142 11.75 20.25 12.0858 20.25 12.5V17.5C20.25 19.5711 18.5711 21.25 16.5 21.25C14.4289 21.25 12.75 19.5711 12.75 17.5C12.75 15.4289 14.4289 13.75 16.5 13.75C17.3442 13.75 18.1233 14.0289 18.75 14.4997V12.5C18.75 12.0858 19.0858 11.75 19.5 11.75ZM16.5 15.25C17.7426 15.25 18.75 16.2573 18.75 17.5C18.75 18.7426 17.7426 19.75 16.5 19.75C15.2574 19.75 14.25 18.7426 14.25 17.5C14.25 16.2573 15.2574 15.25 16.5 15.25Z'
-               fill-opacity='0.8'
-            ></path>
+               fillOpacity='0.8'
+            />
          </svg>
       )
    },
@@ -86,15 +73,15 @@ const links: {
       url: '/top100',
       title: 'Top 100',
       icon: (
-         <svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
+         <svg width={24} height={24} viewBox='0 0 24 24' fill='none'>
             <path
-               fill-rule='evenodd'
-               clip-rule='evenodd'
+               fillRule='evenodd'
+               clipRule='evenodd'
                d='M12 17L7.01888 19.6187C6.65207 19.8116 6.22335 19.5001 6.29341 19.0916L7.24472 13.5451L3.21491 9.61699C2.91815 9.32773 3.08191 8.82374 3.49202 8.76415L9.06107 7.95491L11.5516 2.90849C11.735 2.53687 12.265 2.53687 12.4484 2.90849L14.9389 7.95491L20.508 8.76415C20.9181 8.82374 21.0818 9.32773 20.7851 9.61699L16.7553 13.5451L17.7066 19.0916C17.7766 19.5001 17.3479 19.8116 16.9811 19.6187L12 17Z'
                stroke='currentColor'
-               stroke-opacity='0.8'
-               stroke-width='1.5'
-            ></path>
+               strokeOpacity='0.8'
+               strokeWidth='1.5'
+            />
          </svg>
       )
    },
@@ -119,17 +106,17 @@ const links: {
       )
    },
    {
-      url: '/mymusic/songs',
+      url: '/library/songs',
       title: 'Bài Hát',
       image: 'https://zjs.zmdcdn.me/zmp3-desktop/releases/v1.0.13/static/media/my-song.cf0cb0b4.svg'
    },
    {
-      url: '/mymusic/playlist',
+      url: '/library/playlist',
       title: 'Playlist',
       image: 'https://zjs.zmdcdn.me/zmp3-desktop/releases/v1.0.13/static/media/my-playlist.7e92a5f0.svg'
    },
    {
-      url: '/mymusic/recent',
+      url: '/library/recent',
       title: 'Gần Đây',
       image: 'https://zjs.zmdcdn.me/zmp3-desktop/releases/v1.0.13/static/media/my-history.374cb625.svg'
    }
@@ -137,7 +124,8 @@ const links: {
 
 export default function LeftSideBar() {
    const pathname = usePathname()
-   const { currentSongId } = useContext(AppContext)
+   const { currentSongId, isAuthenticated } = useContext(AppContext)
+   const router = useRouter()
    return (
       <div
          className={`w-full max-w-[240px] fixed left-0 top-0 ${
@@ -156,7 +144,7 @@ export default function LeftSideBar() {
             </Link>
          </div>
          <ul>
-            {links.slice(0, 4).map((link) => (
+            {links.slice(0, 3).map((link) => (
                <li
                   className={`${pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'}`}
                   key={link.title}
@@ -169,25 +157,41 @@ export default function LeftSideBar() {
                   >
                      {link.icon}
                      <span className='font-medium'>{link.title}</span>
-                     {link.title === 'Radio' && (
-                        <Image
-                           src={'https://zjs.zmdcdn.me/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg'}
-                           alt=''
-                           width={34}
-                           height={16}
-                           className='w-[34px] h-4 object-cover'
-                        />
-                     )}
                   </Link>
                </li>
             ))}
+            <li className={`${pathname === '/mymusic' && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'}`}>
+               <button
+                  onClick={() => {
+                     if (isAuthenticated) {
+                        router.push('/mymusic/song')
+                     } else {
+                        router.push('/login')
+                        toast.warning('Vui lòng đăng nhập')
+                     }
+                  }}
+                  className={`flex items-center gap-x-2.5 py-3 pl-5 pr-5 ${
+                     pathname === '/mymusic' ? 'pl-[17px]' : 'text-grayDa hover:text-white'
+                  }`}
+               >
+                  <svg width={24} height={24} viewBox='0 0 24 24' fill='currentColor'>
+                     <path
+                        fillRule='evenodd'
+                        clipRule='evenodd'
+                        d='M6.5 2.75C6.08579 2.75 5.75 3.08579 5.75 3.5C5.75 3.91421 6.08579 4.25 6.5 4.25H17.5C17.9142 4.25 18.25 3.91421 18.25 3.5C18.25 3.08579 17.9142 2.75 17.5 2.75H6.5ZM3 9.5C3 7.42893 4.67893 5.75 6.75 5.75H17.25C19.3211 5.75 21 7.42893 21 9.5V17.5C21 19.5711 19.3211 21.25 17.25 21.25H6.75C4.67893 21.25 3 19.5711 3 17.5V9.5ZM6.75 7.25C5.50736 7.25 4.5 8.25736 4.5 9.5V17.5C4.5 18.7426 5.50736 19.75 6.75 19.75H17.25C18.4926 19.75 19.5 18.7426 19.5 17.5V9.5C19.5 8.25736 18.4926 7.25 17.25 7.25H6.75ZM13.666 8.87596C13.4359 8.72253 13.14 8.70823 12.8961 8.83874C12.6522 8.96926 12.5 9.2234 12.5 9.5V13.0499C12.125 12.8581 11.7001 12.75 11.25 12.75C9.73122 12.75 8.5 13.9812 8.5 15.5C8.5 17.0188 9.73122 18.25 11.25 18.25C12.6911 18.25 13.8733 17.1415 13.9905 15.7307C13.9967 15.6916 14 15.6515 14 15.6107V15.5V10.9014L15.084 11.624C15.4286 11.8538 15.8943 11.7607 16.124 11.416C16.3538 11.0714 16.2607 10.6057 15.916 10.376L13.666 8.87596ZM12.5 15.5C12.5 14.8096 11.9404 14.25 11.25 14.25C10.5596 14.25 10 14.8096 10 15.5C10 16.1904 10.5596 16.75 11.25 16.75C11.9404 16.75 12.5 16.1904 12.5 15.5Z'
+                        fillOpacity='0.8'
+                     />
+                  </svg>
+                  <span className='font-medium'>Thư Viện</span>
+               </button>
+            </li>
          </ul>
          <div className='my-3 px-5'>
             <div className='border-b border-b-gray-700 ' />
          </div>
          <div className={`overflow-y-auto ${currentSongId ? 'h-[calc(100vh-429.67px)]' : 'h-[calc(100vh-339.67px)]'}`}>
             <ul>
-               {links.slice(4, 7).map((link) => (
+               {links.slice(3, 6).map((link) => (
                   <li
                      className={`${pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'}`}
                      key={link.title}
@@ -206,40 +210,59 @@ export default function LeftSideBar() {
             </ul>
             <div
                style={{
-                  backgroundImage: 'linear-gradient(117deg,#614de5,#b567d9)'
+                  backgroundImage: isAuthenticated ? 'linear-gradient(117deg,#614de5,#b567d9)' : ''
                }}
-               className='my-3 py-5 px-2.5 mx-auto text-center rounded-[10px] w-[90%] text-white'
+               className={`my-3 py-5 px-2.5 mx-auto text-center rounded-[10px] w-[90%] text-white ${
+                  !isAuthenticated && 'bg-tprimary'
+               }`}
             >
-               <p className='mb-2.5'>Nghe nhạc không quảng cáo cùng kho nhạc VIP</p>
-               <button className='bg-yellow-500 px-8 py-1 hover:bg-opacity-90 rounded-full text-[13px]'>
-                  NÂNG CẤP VIP
+               <p className='mb-2.5'>
+                  {isAuthenticated
+                     ? 'Nghe nhạc không quảng cáo cùng kho nhạc VIP'
+                     : 'Đăng nhập để khám phá playlist dành riêng cho bạn'}
+               </p>
+               <button
+                  onClick={() => !isAuthenticated && router.push('/login')}
+                  className={`${
+                     isAuthenticated
+                        ? 'bg-yellow-500 hover:bg-opacity-90'
+                        : 'bg-white bg-opacity-10 hover:bg-opacity-20 border border-white'
+                  } px-8 py-1 rounded-full text-[13px]`}
+               >
+                  {isAuthenticated ? 'NÂNG CẤP VIP' : 'ĐĂNG NHẬP'}
                </button>
             </div>
-            <span className='font-semibold text-base px-5'>Thư viện</span>
-            <ul>
-               {links.slice(7).map((link) => (
-                  <li
-                     className={`${pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-10'}`}
-                     key={link.title}
-                  >
-                     <Link
-                        href={link.url}
-                        className={`flex items-center gap-x-2.5 py-3 pl-5 pr-5 ${
-                           pathname === link.url ? 'pl-[17px]' : 'text-grayDa hover:text-white'
-                        }`}
-                     >
-                        <Image
-                           src={link.image as string}
-                           alt={link.title}
-                           width={24}
-                           height={24}
-                           className='w-6 h-6 object-cover'
-                        />
-                        <span className='font-medium'>{link.title}</span>
-                     </Link>
-                  </li>
-               ))}
-            </ul>
+            {isAuthenticated && (
+               <>
+                  <span className='font-semibold text-base px-5'>Thư viện</span>
+                  <ul>
+                     {links.slice(6).map((link) => (
+                        <li
+                           className={`${
+                              pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-10'
+                           }`}
+                           key={link.title}
+                        >
+                           <Link
+                              href={link.url}
+                              className={`flex items-center gap-x-2.5 py-3 pl-5 pr-5 ${
+                                 pathname === link.url ? 'pl-[17px]' : 'text-grayDa hover:text-white'
+                              }`}
+                           >
+                              <Image
+                                 src={link.image as string}
+                                 alt={link.title}
+                                 width={24}
+                                 height={24}
+                                 className='w-6 h-6 object-cover'
+                              />
+                              <span className='font-medium'>{link.title}</span>
+                           </Link>
+                        </li>
+                     ))}
+                  </ul>
+               </>
+            )}
          </div>
          <button
             onClick={() => toast.warning('Chức năng này chưa hoàn thiện')}

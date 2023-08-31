@@ -1,12 +1,15 @@
 import { ArtistType } from '@/types/artist.type'
+import { AuthResponse } from '@/types/auth.type'
 import { ChartHomeType } from '@/types/charthome.type'
 import { HomeType } from '@/types/home.type'
 import { InfoSongType } from '@/types/infoSong.type'
+import { LyricType } from '@/types/lyric.type'
 import { NewReleaseChartType } from '@/types/newReleaseChart.type'
 import { PlaylistType } from '@/types/playlist.type'
 import { SongType } from '@/types/song.type'
 import { Top100Type } from '@/types/top100.type'
 import http from '@/utils/http'
+import http2 from '@/utils/http2'
 
 export const getHome = () => http.get<HomeType>('/home')
 
@@ -51,3 +54,15 @@ export const getArtist = (params: { name: string }) =>
    http.get<ArtistType>('/artist', {
       params
    })
+
+export const getLyric = (params: { id: string }) =>
+   http.get<LyricType>('/lyric', {
+      params
+   })
+
+// auth
+export const authApi = {
+   registerAccount: (body: { email: string; password: string }) => http2.post<AuthResponse>('/register', body),
+   login: (body: { email: string; password: string }) => http2.post<AuthResponse>('/login', body),
+   logout: () => http2.post('/logout')
+}

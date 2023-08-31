@@ -1,7 +1,10 @@
 'use client'
 import useLocalStorage from '@/hooks/useLocalStorage'
+import { Artist } from '@/types/artist.type'
 import { HomeListType } from '@/types/homelist.type'
 import { SongItem } from '@/types/playlist.type'
+import { User } from '@/types/user.type'
+import { getAccessTokenFromLS, getProfileFromLS } from '@/utils/auth'
 import React, { createContext, useState } from 'react'
 interface AppContextInterface {
    openSideBarRight: boolean
@@ -38,6 +41,12 @@ interface AppContextInterface {
    setPlaylistLibrary: (value: [] | HomeListType[] | ((val: [] | HomeListType[]) => [] | HomeListType[])) => void
    songsLibrary: SongItem[] | []
    setSongsLibrary: (value: [] | SongItem[] | ((val: [] | SongItem[]) => [] | SongItem[])) => void
+   isAuthenticated: boolean
+   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
+   profile: User | null
+   setProfile: React.Dispatch<React.SetStateAction<User | null>>
+   artistLibrary: Artist[] | []
+   setArtistLibrary: (value: [] | Artist[] | ((val: [] | Artist[]) => [] | Artist[])) => void
 }
 
 const initialAppContext: AppContextInterface = {
@@ -64,7 +73,13 @@ const initialAppContext: AppContextInterface = {
    playlistLibrary: [],
    setPlaylistLibrary: () => null,
    songsLibrary: [],
-   setSongsLibrary: () => null
+   setSongsLibrary: () => null,
+   isAuthenticated: Boolean(getAccessTokenFromLS()),
+   setIsAuthenticated: () => null,
+   profile: getProfileFromLS(),
+   setProfile: () => null,
+   artistLibrary: [],
+   setArtistLibrary: () => null
 }
 
 export const AppContext = createContext<AppContextInterface>(initialAppContext)
@@ -92,6 +107,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
       'songsLibrary',
       initialAppContext.songsLibrary
    )
+   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialAppContext.isAuthenticated)
+   const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
+   const [artistLibrary, setArtistLibrary] = useLocalStorage<Artist[] | []>('artistLibrary', [])
    return (
       <AppContext.Provider
          value={{
@@ -118,7 +136,13 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
             playlistLibrary,
             setPlaylistLibrary,
             songsLibrary,
-            setSongsLibrary
+            setSongsLibrary,
+            isAuthenticated,
+            setIsAuthenticated,
+            profile,
+            setProfile,
+            artistLibrary,
+            setArtistLibrary
          }}
       >
          {children}

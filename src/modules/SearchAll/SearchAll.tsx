@@ -7,6 +7,7 @@ import { AppContext } from '@/contexts/app.context'
 import useAddLibrary from '@/hooks/useAddLibrary'
 import useFollow from '@/hooks/useFollow'
 import usePlayMusic from '@/hooks/usePlayMusic'
+import { Artist } from '@/types/artist.type'
 import { SongItem } from '@/types/playlist.type'
 import { formatNumberWithK, timeFormatter } from '@/utils/utils'
 import { StaticImport } from 'next/dist/shared/lib/get-img-props'
@@ -735,7 +736,7 @@ export default function SearchAll() {
                                  {formatNumberWithK(artist.totalFollow)} quan tâm
                               </span>
                               <button
-                                 onClick={() => handleClickFollow(artist.id as string)}
+                                 onClick={() => handleClickFollow(artist.id as string, artist as Artist)}
                                  className={`flex items-center gap-x-1 text-xs w-max mx-auto mt-3 rounded-full px-3.5 ${
                                     follows.includes(artist.id as string)
                                        ? 'bg-white bg-opacity-10 hover:bg-opacity-20 py-1.5'

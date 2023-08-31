@@ -11,16 +11,7 @@ module.exports = {
    //tạo tại class container mới
    plugins: [
       plugin(({ addComponents }) => {
-         addComponents({
-            '.container': {
-               maxWidth: '1248px',
-               width: '100%',
-               marginLeft: 'auto',
-               marginRight: 'auto',
-               paddingLeft: '12px',
-               paddingRight: '12px'
-            }
-         })
+         addComponents({})
       })
    ]
 }

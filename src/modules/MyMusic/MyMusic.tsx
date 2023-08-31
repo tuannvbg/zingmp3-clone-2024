@@ -5,6 +5,7 @@ import Tooltip from '@/components/Tooltip/Tooltip'
 import { AppContext } from '@/contexts/app.context'
 import useAddLibrary from '@/hooks/useAddLibrary'
 import usePlayMusic from '@/hooks/usePlayMusic'
+import useProtectedRoute from '@/hooks/useProtectedRoute'
 import { HomeListType } from '@/types/homelist.type'
 import { timeFormatter } from '@/utils/utils'
 import Image from 'next/image'
@@ -17,10 +18,10 @@ export default function MyMusic() {
    const { handleAddLibrary, library } = useAddLibrary()
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
    const { handleClickSong } = usePlayMusic()
-
+   useProtectedRoute()
    return (
       <div className={`mt-[70px] px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
-         <div className='flex items-center gap-x-3 mb-10 pt-[30px]'>
+         {/* <div className='flex items-center gap-x-3 mb-10 pt-[30px]'>
             <h1 className='text-[40px] font-bold'>Thư viện</h1>
             <div className='w-9 h-9 rounded-full bg-white flex items-center justify-center'>
                <div
@@ -350,7 +351,7 @@ export default function MyMusic() {
                   Khám phá ngay
                </Link>
             </div>
-         )}
+         )} */}
          <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal} />
       </div>
    )

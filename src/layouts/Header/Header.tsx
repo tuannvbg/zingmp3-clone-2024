@@ -1,15 +1,19 @@
 'use client'
-import { search } from '@/apis/home.api'
+import { authApi, search } from '@/apis/home.api'
+import Button from '@/components/Button/Button'
 import ModalTheme from '@/components/Modal/ModalTheme'
+import Popover from '@/components/Popover/Popover'
 import Tooltip from '@/components/Tooltip/Tooltip'
 import { AppContext } from '@/contexts/app.context'
+import { useMutation } from '@tanstack/react-query'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useContext, useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 export default function Header() {
-   const { setSearchData } = useContext(AppContext)
+   const { setSearchData, profile, isAuthenticated, setIsAuthenticated, setProfile } = useContext(AppContext)
    const [isScrolled, setIsScrolled] = useState<boolean>(false)
    const [openModalTheme, setOpenModalTheme] = useState<boolean>(false)
    useEffect(() => {
@@ -45,7 +49,17 @@ export default function Header() {
       }
    })
 
-   // thay đổi theme
+   // logout
+   const logoutMutation = useMutation({
+      mutationFn: authApi.logout,
+      onSuccess: () => {
+         setIsAuthenticated(false)
+         setProfile(null)
+      }
+   })
+   const handleLogout = () => {
+      logoutMutation.mutate()
+   }
 
    return (
       <div
@@ -115,7 +129,7 @@ export default function Header() {
                )}
             </form>
          </div>
-         <div className='flex items-center gap-x-3'>
+         <div className='flex items-center gap-x-4'>
             <Tooltip bottomCenter content='Chủ đề'>
                <button
                   onClick={() => setOpenModalTheme(true)}
@@ -239,6 +253,55 @@ export default function Header() {
                   </svg>
                </button>
             </Tooltip>
+            <Popover
+               renderPopover={
+                  <div className='bg-modal flex flex-col rounded-md z-[200]'>
+                     {isAuthenticated ? (
+                        <>
+                           <Link className='hover:bg-white hover:bg-opacity-10 px-7 py-2.5' href={'/mymusic/profile'}>
+                              Thông Tin
+                           </Link>
+                           <Button
+                              onClick={handleLogout}
+                              isLoading={logoutMutation.isLoading}
+                              disabled={logoutMutation.isLoading}
+                              className='hover:bg-white hover:bg-opacity-10 px-7 py-2.5'
+                           >
+                              Đăng Xuất
+                           </Button>
+                        </>
+                     ) : (
+                        <>
+                           <Link className='hover:bg-white hover:bg-opacity-10 px-7 py-2.5' href={'/register'}>
+                              Đăng Ký
+                           </Link>
+                           <Link className='hover:bg-white hover:bg-opacity-10 px-7 py-2.5' href={'/login'}>
+                              Đăng Nhập
+                           </Link>
+                        </>
+                     )}
+                  </div>
+               }
+               posistion='bottom'
+               arrowClass='absolute h-[10px] w-6 -translate-y-full bg-modal'
+               transformOrigin='top'
+               isClick
+            >
+               <button className='w-10 h-10 rounded-full relative flex items-center overflow-hidden justify-center group'>
+                  <Image
+                     src={
+                        profile?.avatar
+                           ? `https://api-ecom.duthanhduoc.com/images/${profile?.avatar}`
+                           : 'https://zjs.zmdcdn.me/zmp3-desktop/releases/v1.9.67/static/media/user-default.3ff115bb.png'
+                     }
+                     alt='avatar'
+                     width={40}
+                     height={40}
+                     className='w-full h-full object-cover rounded-full'
+                  />
+                  <div className='absolute inset-0 bg-black bg-opacity-20 z-10 hidden group-hover:block' />
+               </button>
+            </Popover>
          </div>
          <ModalTheme isOpen={openModalTheme} setIsOpen={setOpenModalTheme} />
       </div>

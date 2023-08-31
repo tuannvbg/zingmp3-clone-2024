@@ -1,6 +1,7 @@
 'use client'
 import { AppContext } from '@/contexts/app.context'
 import useFollow from '@/hooks/useFollow'
+import { Artist } from '@/types/artist.type'
 import { formatNumberWithK } from '@/utils/utils'
 import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 import Image from 'next/image'
@@ -72,7 +73,7 @@ export default function SearchArtist() {
                         </Link>
                         <span className='text-secondary text-xs'>{formatNumberWithK(artist.totalFollow)} quan tâm</span>
                         <button
-                           onClick={() => handleClickFollow(artist.id as string)}
+                           onClick={() => handleClickFollow(artist.id as string, artist as Artist)}
                            className={`flex items-center gap-x-1 text-xs w-max mx-auto mt-3 rounded-full px-3.5 ${
                               follows.includes(artist.id as string)
                                  ? 'bg-white bg-opacity-10 hover:bg-opacity-20 py-1.5'

@@ -1,5 +1,4 @@
 'use client'
-import { getArtist } from '@/apis/home.api'
 import DOMPurify from 'dompurify'
 import HomeList from '@/components/HomeList/HomeList'
 import Loading from '@/components/Loading/Loading'
@@ -20,6 +19,7 @@ import { usePathname } from 'next/navigation'
 import React, { useContext, useEffect, useState } from 'react'
 import ModalArtist from '@/components/Modal/ModalArtist'
 import { SongItem } from '@/types/playlist.type'
+import { getArtist } from '@/apis/home.api'
 
 export default function Artist() {
    const { currentSongId, setAtAlbum, isLoadingSong, setRecentSong, isPlaying, playList, setPlayList } =
@@ -76,7 +76,7 @@ export default function Artist() {
                   <div className='flex items-center gap-x-5'>
                      <span>{formatNumberWithDot(artistData.totalFollow)} người quan tâm</span>
                      <button
-                        onClick={() => handleClickFollow(artistData.id)}
+                        onClick={() => handleClickFollow(artistData.id, artistData as unknown as Artist)}
                         className={`flex items-center gap-x-1 font-semibold text-xs w-max rounded-full px-5 border border-[rgba(254,255,255,.2)] bg-[rgba(254,255,255,.1)] py-1.5`}
                      >
                         {follows.includes(artistData.id) ? (
@@ -434,7 +434,7 @@ export default function Artist() {
                                  {formatNumberWithK(artist.totalFollow as number)} quan tâm
                               </span>
                               <button
-                                 onClick={() => handleClickFollow(artist.id as string)}
+                                 onClick={() => handleClickFollow(artist.id as string, artist as Artist)}
                                  className={`flex items-center gap-x-1 text-xs w-max mx-auto mt-3 rounded-full px-3.5 ${
                                     follows.includes(artist.id as string)
                                        ? 'bg-white bg-opacity-10 hover:bg-opacity-20 py-1.5'

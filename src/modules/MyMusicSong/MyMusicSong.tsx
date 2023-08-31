@@ -9,14 +9,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useContext, useState } from 'react'
 
-export default function MyMusicSong() {
+export default function MyMusicSong({ profile = false }: { profile?: boolean }) {
    const { currentSongId, songsLibrary, setAtAlbum, setRecentSong, isLoadingSong, isPlaying } = useContext(AppContext)
    const { handleAddLibrary, library } = useAddLibrary()
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
    const { handleClickSong } = usePlayMusic()
    return (
-      <div className={`mt-[70px] px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
-         <h1 className='font-bold py-5 text-2xl'>Bài hát yêu thích</h1>
+      <div className={profile ? '' : `mt-[70px] px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
+         {!profile && <h1 className='font-bold py-5 text-2xl'>Bài hát yêu thích</h1>}
          {songsLibrary.length > 0 ? (
             <>
                <div className='flex items-center text-secondary text-xs mt-3 p-2.5 border-b border-b-gray-800'>

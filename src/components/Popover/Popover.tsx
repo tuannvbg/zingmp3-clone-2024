@@ -1,3 +1,4 @@
+import useClickOutSide from '@/hooks/useClickOutSide'
 import { FloatingPortal, useFloating, arrow, shift, offset, Placement } from '@floating-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import React, { ElementType, useRef, useState } from 'react'
@@ -10,6 +11,7 @@ interface Props {
    posistion?: Placement
    arrowClass?: string
    transformOrigin?: string
+   isClick?: boolean
 }
 export default function Popover({
    children,
@@ -18,7 +20,8 @@ export default function Popover({
    initialOpen = false,
    posistion = 'top',
    arrowClass = 'absolute h-[10px] w-6 bottom-0 translate-y-full rotate-180 bg-[#333]',
-   transformOrigin = 'bottom'
+   transformOrigin = 'bottom',
+   isClick = false
 }: Props) {
    const [open, setOpen] = useState<boolean>(initialOpen)
    const arrowRef = useRef<HTMLElement>(null)
@@ -32,15 +35,17 @@ export default function Popover({
    const hidePopover = () => {
       setOpen(false)
    }
+   const { nodeRef } = useClickOutSide(() => setOpen(false))
    return (
       // cái tooltip sẽ định vị theo thằng có ref={refs.setReference} nên để đâu cũng dc
       <Element
          className='relative z-[100] flex cursor-pointer items-center gap-x-1 hover:text-white/70'
          ref={refs.setReference}
-         onMouseEnter={showPopover}
-         onMouseLeave={hidePopover}
+         onMouseEnter={() => !isClick && showPopover()}
+         onMouseLeave={() => !isClick && hidePopover()}
+         onClick={() => isClick && setOpen((prev) => !prev)}
       >
-         {children}
+         <span ref={nodeRef}>{children}</span>
          <div className='absolute top-full h-5 w-full bg-transparent' />
          <AnimatePresence>
             {open && (
