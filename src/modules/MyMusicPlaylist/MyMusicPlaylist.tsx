@@ -1,6 +1,7 @@
 'use client'
 import HomeList from '@/components/HomeList/HomeList'
 import { AppContext } from '@/contexts/app.context'
+import useProtectedRoute from '@/hooks/useProtectedRoute'
 import { HomeListType } from '@/types/homelist.type'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -8,8 +9,10 @@ import React, { useContext } from 'react'
 
 export default function MyMusicPlaylist({ profile }: { profile: boolean }) {
    const { currentSongId, playlistLibrary } = useContext(AppContext)
+   useProtectedRoute()
+
    return (
-      <div className={profile ? 'mt-10' : `mt-[70px] px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
+      <div className={profile ? 'mt-12' : `mt-[70px] px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
          {!profile && <h1 className='font-bold py-5 text-2xl'>Playlist yêu thích</h1>}
          {playlistLibrary.length > 0 ? (
             <HomeList all title list={playlistLibrary as HomeListType[]} />

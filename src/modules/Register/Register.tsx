@@ -61,11 +61,13 @@ export default function Register() {
          }
       })
    })
+
    useEffect(() => {
       if (isAuthenticated) {
          router.push('/mymusic/song')
       }
    }, [isAuthenticated, router])
+
    return (
       <div className={`mt-[70px] text-center px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
          <h1 className='text-3xl font-semibold leading-6 pt-8 text-white mb-12'>Đăng Ký</h1>

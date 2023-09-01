@@ -34,7 +34,7 @@ export default function RightSideBar() {
       setOpenSideBarRight(false)
       setCurrentSongId('')
       setPlayList(null)
-      toast.success('Xoá danh sách phát thành công', { position: 'bottom-left' })
+      toast.success('Xoá danh sách phát thành công')
    }
 
    return (

@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 body {
-   background-color: #170f23;
-   --primary: #170f23;
-   --tprimary: #9b4de0;
-   --tertiary: #34224f;
-   --secondary: #130c1c;
-   --rightsidebar: #130c1c;
+   background-image: url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme-background/rose.jpg');
+   --primary: #061c4f;
+   --tprimary: #3560f5;
+   --tertiary: #1a3570;
+   --secondary: #061641;
+   --rightsidebar: #223c75;
    background-size: 1920px auto;
    background-repeat: no-repeat;
    background-attachment: fixed;
@@ -17,7 +17,7 @@ body {
       width: 3px;
    }
    &::-webkit-scrollbar-track {
-      background-color: transparent;
+      background-color: var(--primary);
    }
    &::-webkit-scrollbar-thumb {
       background-color: #ffffff80;
@@ -36,7 +36,34 @@ body {
       -webkit-text-stroke: 1px #ffffff80;
       font-family: 'Roboto', sans-serif;
    }
+   .Toastify__toast,
+   .Toastify__close-button {
+      color: #fff !important;
+   }
+   .form-search {
+      background-color: rgba(255, 255, 255, 0.1);
+      input::-webkit-input-placeholder {
+         color: #dadada;
+      }
+      input::-moz-input-placeholder {
+         color: #dadada;
+      }
+      input::-webkit-search-cancel-button {
+         -webkit-appearance: none;
+         height: 20px;
+         width: 20px;
+         background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23777'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+         cursor: pointer;
+      }
+   }
+   .form-search.active {
+      background-color: var(--tertiary) !important;
+   }
+   .li-search:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+   }
 }
+
 body.Rosé {
    --primary: #061c4f;
    --tprimary: #3560f5;
@@ -78,20 +105,6 @@ body.IU {
    --tertiary: #efedeb;
    --secondary: #f5e6e0;
    --rightsidebar: #e5e3df;
-   color: #32323d;
-   .text-grayDa {
-      color: #32323d;
-   }
-   .text-secondary {
-      color: #696969;
-   }
-   .text-stroke {
-      -webkit-text-stroke: 1px #696969;
-      font-family: 'Roboto', sans-serif;
-   }
-   .bgr-secondary {
-      background-color: #696969 !important;
-   }
 }
 body.Ji-Chang-Wook {
    --primary: #b3d8db;
@@ -99,20 +112,6 @@ body.Ji-Chang-Wook {
    --tertiary: #d1edf0;
    --secondary: #a3d5dc;
    --rightsidebar: #ced9d9;
-   color: #32323d;
-   .text-grayDa {
-      color: #32323d;
-   }
-   .text-secondary {
-      color: #696969;
-   }
-   .text-stroke {
-      -webkit-text-stroke: 1px #696969;
-      font-family: 'Roboto', sans-serif;
-   }
-   .bgr-secondary {
-      background-color: #696969 !important;
-   }
 }
 body.Lisa {
    --primary: #f1ddd8;
@@ -120,20 +119,6 @@ body.Lisa {
    --tertiary: #f9e6e2;
    --secondary: #f4cbca;
    --rightsidebar: #f9dbdb;
-   color: #32323d;
-   .text-grayDa {
-      color: #32323d;
-   }
-   .text-secondary {
-      color: #696969;
-   }
-   .text-stroke {
-      -webkit-text-stroke: 1px #696969;
-      font-family: 'Roboto', sans-serif;
-   }
-   .bgr-secondary {
-      background-color: #696969 !important;
-   }
 }
 body.Jennie-Kim {
    --primary: #bbb9c4;
@@ -141,20 +126,6 @@ body.Jennie-Kim {
    --tertiary: #cac6dd;
    --secondary: #c6c4d1;
    --rightsidebar: #e5e3df;
-   color: #32323d;
-   .text-grayDa {
-      color: #32323d;
-   }
-   .text-secondary {
-      color: #696969;
-   }
-   .text-stroke {
-      -webkit-text-stroke: 1px #696969;
-      font-family: 'Roboto', sans-serif;
-   }
-   .bgr-secondary {
-      background-color: #696969 !important;
-   }
 }
 body.Jisoo {
    --primary: #fff;
@@ -162,6 +133,13 @@ body.Jisoo {
    --tertiary: #fff;
    --secondary: #fff;
    --rightsidebar: #fff;
+}
+
+body.Jisoo,
+body.Jennie-Kim,
+body.Lisa,
+body.Ji-Chang-Wook,
+body.IU {
    color: #32323d;
    .text-grayDa {
       color: #32323d;
@@ -176,7 +154,24 @@ body.Jisoo {
    .bgr-secondary {
       background-color: #696969 !important;
    }
+   .Toastify__toast,
+   .Toastify__close-button {
+      color: #32323d !important;
+   }
+   .form-search {
+      background-color: rgba(255, 255, 255, 0.4);
+      input::-webkit-input-placeholder {
+         color: #32323d;
+      }
+      input::-moz-input-placeholder {
+         color: #32323d;
+      }
+   }
+   .li-search:hover {
+      background-color: rgba(255, 255, 255, 0.6);
+   }
 }
+
 .bg-primary {
    background-color: var(--primary);
 }
@@ -213,7 +208,12 @@ body.Jisoo {
 // ----------------------------------------------------------------------------//
 // ----------------------------------------------------------------------------//
 // ----------------------------------------------------------------------------//
+//toast
+.Toastify__toast {
+   background-color: var(--tertiary) !important;
+}
 
+// ////////////////////////////////////////////////////////////////////////////
 .hide-scrollbar::-webkit-scrollbar {
    width: 0px;
 }
@@ -654,6 +654,7 @@ div::-webkit-scrollbar-thumb {
    filter: drop-shadow(46px 36px 24px #4090b5) drop-shadow(-55px -40px 25px #9e30a9);
    animation: blinkShadowsFilter 8s ease-in infinite;
    width: 400px;
+   color: #fff;
 }
 
 .input-content {
@@ -976,8 +977,6 @@ div::-webkit-scrollbar-thumb {
 }
 
 // ----------------button add image---------------/
-/* Yoinked from CodePen, but improved the animation
-so that it is smooth among other more minor things */
 
 .codepen-button {
    display: block;

@@ -1,8 +1,10 @@
 'use client'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/animations/perspective-extreme.css'
 import { authApi, search } from '@/apis/home.api'
 import Button from '@/components/Button/Button'
+import ContextMenu from '@/components/ContextMenu/ContextMenu'
 import ModalTheme from '@/components/Modal/ModalTheme'
-import Popover from '@/components/Popover/Popover'
 import Tooltip from '@/components/Tooltip/Tooltip'
 import { AppContext } from '@/contexts/app.context'
 import { useMutation } from '@tanstack/react-query'
@@ -11,8 +13,22 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useContext, useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+
+const linkSearch: string[] = [
+   'từ nơi tôi sinh ra',
+   'sao trời làm gió',
+   'ngày mai người ta lấy chồng',
+   'anh đâu muốn thấy em buồn',
+   'em là ai',
+   'hoa cỏ lau'
+]
 
 export default function Header() {
+   const history = window.history
+   const [showContextMenu, setShowContextMenu] = useState<any>(null)
+   const [open, setOpen] = useState<boolean>(false)
+   const [openSearch, setOpenSearch] = useState<boolean>(false)
    const { setSearchData, profile, isAuthenticated, setIsAuthenticated, setProfile } = useContext(AppContext)
    const [isScrolled, setIsScrolled] = useState<boolean>(false)
    const [openModalTheme, setOpenModalTheme] = useState<boolean>(false)
@@ -34,6 +50,7 @@ export default function Header() {
    const {
       register,
       handleSubmit,
+      setValue,
       formState: { isSubmitting }
    } = useForm<{ keyword: string }>({
       defaultValues: {
@@ -55,11 +72,36 @@ export default function Header() {
       onSuccess: () => {
          setIsAuthenticated(false)
          setProfile(null)
+         toast.success('Đăng xuất thành công')
+         setOpen(false)
       }
    })
    const handleLogout = () => {
       logoutMutation.mutate()
    }
+
+   // sự kiện chuột phải
+   const handleCloseContextMenu = () => {
+      setShowContextMenu(false)
+   }
+   useEffect(() => {
+      const handleShowContextMenu = (e: any) => {
+         let { clientX: left, clientY: top } = e
+         if (left > window.innerWidth - 260) {
+            left -= 250
+         }
+         if (top > window.innerHeight - 210) {
+            top -= 200
+         }
+         setShowContextMenu({ left, top })
+         e.preventDefault()
+      }
+
+      document.body.addEventListener('contextmenu', handleShowContextMenu)
+      return () => {
+         document.body.removeEventListener('contextmenu', handleShowContextMenu)
+      }
+   }, [])
 
    return (
       <div
@@ -68,7 +110,7 @@ export default function Header() {
          }  h-[70px] z-40`}
       >
          <div className='flex items-center gap-x-5'>
-            <button>
+            <button className='disabled:opacity-50' onClick={() => history.back()}>
                <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -80,7 +122,7 @@ export default function Header() {
                   <path strokeLinecap='round' strokeLinejoin='round' d='M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18' />
                </svg>
             </button>
-            <button>
+            <button className='disabled:opacity-50' onClick={() => history.forward()}>
                <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -92,48 +134,102 @@ export default function Header() {
                   <path strokeLinecap='round' strokeLinejoin='round' d='M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3' />
                </svg>
             </button>
-            <form
-               onSubmit={handleSearch}
-               className='flex h-10 items-center pl-2 bg-white bg-opacity-10 rounded-full w-[440px]'
-            >
-               <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth={1.5}
-                  stroke='currentColor'
-                  className='w-6 h-6'
-               >
-                  <path
-                     strokeLinecap='round'
-                     strokeLinejoin='round'
-                     d='M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z'
-                  />
-               </svg>
-               <input
-                  type='text'
-                  placeholder='Tìm kiếm bài hát, nghệ sĩ, lời bài hát...'
-                  className='outline-none h-full px-2 flex-1 bg-transparent placeholder:text-[#999]'
-                  {...register('keyword')}
-               />
-               {isSubmitting && (
-                  <div className='pr-2'>
-                     <Image
-                        src={'https://i.gifer.com/ZKZg.gif'}
-                        width={20}
-                        height={20}
-                        className='w-4 h-4 object-cover'
-                        alt=''
-                     />
+            <Tippy
+               animation={'perspective-extreme'}
+               onClickOutside={() => setOpenSearch(false)}
+               visible={openSearch}
+               content={
+                  <div className='bg-modal w-[440px] rounded-b-[20px] px-2.5 py-3 shadow-lg'>
+                     <h3 className='font-semibold px-2.5 pb-2'>Đề xuất cho bạn</h3>
+                     <ul>
+                        {linkSearch.map((item) => (
+                           <li
+                              onClick={async () => {
+                                 router.push(`/tim-kiem/tat-ca?q=${item}`)
+                                 const res = await search({ keyword: item })
+                                 setSearchData(res.data.data)
+                                 setValue('keyword', item)
+                                 setOpenSearch(false)
+                              }}
+                              key={item}
+                              className='flex items-center gap-x-2.5 px-2.5 py-2 li-search rounded cursor-pointer'
+                           >
+                              <svg
+                                 xmlns='http://www.w3.org/2000/svg'
+                                 fill='none'
+                                 viewBox='0 0 24 24'
+                                 strokeWidth={1.5}
+                                 stroke='currentColor'
+                                 className='w-[18px] h-[18px] text-secondary'
+                              >
+                                 <path
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
+                                    d='M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941'
+                                 />
+                              </svg>
+                              <span>{item}</span>
+                           </li>
+                        ))}
+                     </ul>
                   </div>
-               )}
-            </form>
+               }
+               interactive={true}
+               arrow={false}
+               offset={[0, 0]}
+               placement={'bottom-start'}
+               maxWidth={'auto'}
+            >
+               <form
+                  autoComplete='off'
+                  onSubmit={handleSearch}
+                  className={`flex h-10 items-center pl-2 form-search w-[440px] ${
+                     openSearch ? 'rounded-t-[20px] active' : 'rounded-full'
+                  }`}
+               >
+                  <button type='submit'>
+                     <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth={1.5}
+                        stroke='currentColor'
+                        className='w-6 h-6'
+                     >
+                        <path
+                           strokeLinecap='round'
+                           strokeLinejoin='round'
+                           d='M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z'
+                        />
+                     </svg>
+                  </button>
+                  <input
+                     type='search'
+                     placeholder='Tìm kiếm bài hát, nghệ sĩ, lời bài hát...'
+                     className='outline-none h-full px-2 flex-1 bg-transparent'
+                     {...register('keyword')}
+                     onFocus={() => setOpenSearch(true)}
+                  />
+
+                  {isSubmitting && (
+                     <div className='pr-2'>
+                        <Image
+                           src={'https://i.gifer.com/ZKZg.gif'}
+                           width={20}
+                           height={20}
+                           className='w-4 h-4 object-cover'
+                           alt=''
+                        />
+                     </div>
+                  )}
+               </form>
+            </Tippy>
          </div>
          <div className='flex items-center gap-x-4'>
             <Tooltip bottomCenter content='Chủ đề'>
                <button
                   onClick={() => setOpenModalTheme(true)}
-                  className='w-10 h-10 rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 flex items-center justify-center'
+                  className='w-10 h-10 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 flex items-center justify-center'
                >
                   <svg width={20} height={20} viewBox='0 0 20 20'>
                      <defs>
@@ -253,20 +349,52 @@ export default function Header() {
                   </svg>
                </button>
             </Tooltip>
-            <Popover
-               renderPopover={
+            <Tippy
+               animation={'perspective-extreme'}
+               onClickOutside={() => setOpen(false)}
+               visible={open}
+               content={
                   <div className='bg-modal flex flex-col rounded-md z-[200]'>
                      {isAuthenticated ? (
                         <>
-                           <Link className='hover:bg-white hover:bg-opacity-10 px-7 py-2.5' href={'/mymusic/profile'}>
+                           <Link
+                              className='hover:bg-white flex items-center gap-x-2 hover:bg-opacity-10 px-7 py-2.5'
+                              href={'/mymusic/profile'}
+                           >
+                              <svg
+                                 xmlns='http://www.w3.org/2000/svg'
+                                 viewBox='0 0 24 24'
+                                 fill='currentColor'
+                                 className='w-[18px] h-[18px]'
+                              >
+                                 <path
+                                    fillRule='evenodd'
+                                    d='M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z'
+                                    clipRule='evenodd'
+                                 />
+                              </svg>
                               Thông Tin
                            </Link>
                            <Button
                               onClick={handleLogout}
                               isLoading={logoutMutation.isLoading}
                               disabled={logoutMutation.isLoading}
-                              className='hover:bg-white hover:bg-opacity-10 px-7 py-2.5'
+                              className='hover:bg-white flex items-center gap-x-2 hover:bg-opacity-10 px-7 py-2.5'
                            >
+                              <svg
+                                 xmlns='http://www.w3.org/2000/svg'
+                                 fill='none'
+                                 viewBox='0 0 24 24'
+                                 strokeWidth={2}
+                                 stroke='currentColor'
+                                 className='w-[18px] h-[18px]'
+                              >
+                                 <path
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
+                                    d='M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9'
+                                 />
+                              </svg>
                               Đăng Xuất
                            </Button>
                         </>
@@ -282,12 +410,15 @@ export default function Header() {
                      )}
                   </div>
                }
-               posistion='bottom'
-               arrowClass='absolute h-[10px] w-6 -translate-y-full bg-modal'
-               transformOrigin='top'
-               isClick
+               interactive={true}
+               arrow={false}
+               offset={[0, 10]}
+               placement={'bottom-end'}
             >
-               <button className='w-10 h-10 rounded-full relative flex items-center overflow-hidden justify-center group'>
+               <button
+                  onClick={() => setOpen((prev) => !prev)}
+                  className='w-10 h-10 rounded-full relative flex items-center overflow-hidden justify-center group'
+               >
                   <Image
                      src={
                         profile?.avatar
@@ -301,9 +432,12 @@ export default function Header() {
                   />
                   <div className='absolute inset-0 bg-black bg-opacity-20 z-10 hidden group-hover:block' />
                </button>
-            </Popover>
+            </Tippy>
          </div>
          <ModalTheme isOpen={openModalTheme} setIsOpen={setOpenModalTheme} />
+         {showContextMenu && (
+            <ContextMenu left={showContextMenu.left} top={showContextMenu.top} onClose={handleCloseContextMenu} />
+         )}
       </div>
    )
 }

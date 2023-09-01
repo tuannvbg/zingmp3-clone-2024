@@ -146,6 +146,7 @@ export default function LeftSideBar() {
          <ul>
             {links.slice(0, 3).map((link) => (
                <li
+                  title={link.title}
                   className={`${pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'}`}
                   key={link.title}
                >
@@ -157,10 +158,24 @@ export default function LeftSideBar() {
                   >
                      {link.icon}
                      <span className='font-medium'>{link.title}</span>
+                     {link.title === 'Radio' && (
+                        <Image
+                           src={'https://zjs.zmdcdn.me/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg'}
+                           alt=''
+                           width={34}
+                           height={16}
+                           className='w-[34px] h-4 object-cover'
+                        />
+                     )}
                   </Link>
                </li>
             ))}
-            <li className={`${pathname === '/mymusic' && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'}`}>
+            <li
+               title='Thư Viện'
+               className={`${
+                  pathname.includes('/mymusic') && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'
+               }`}
+            >
                <button
                   onClick={() => {
                      if (isAuthenticated) {
@@ -171,7 +186,7 @@ export default function LeftSideBar() {
                      }
                   }}
                   className={`flex items-center gap-x-2.5 py-3 pl-5 pr-5 ${
-                     pathname === '/mymusic' ? 'pl-[17px]' : 'text-grayDa hover:text-white'
+                     pathname.includes('/mymusic') ? 'pl-[17px]' : 'text-grayDa hover:text-white'
                   }`}
                >
                   <svg width={24} height={24} viewBox='0 0 24 24' fill='currentColor'>
@@ -193,6 +208,7 @@ export default function LeftSideBar() {
             <ul>
                {links.slice(3, 6).map((link) => (
                   <li
+                     title={link.title}
                      className={`${pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'}`}
                      key={link.title}
                   >

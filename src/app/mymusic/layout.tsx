@@ -2,14 +2,13 @@
 import { AppContext } from '@/contexts/app.context'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useContext } from 'react'
 
 export default function MyMusicLayout({ children }: { children: React.ReactNode }) {
    const { currentSongId, profile } = useContext(AppContext)
    const pathname = usePathname()
    const isActive = pathname.split('/')[2]
-   const searchParams = useSearchParams()
 
    const Links: {
       title: string
@@ -52,23 +51,32 @@ export default function MyMusicLayout({ children }: { children: React.ReactNode 
                   width={160}
                   height={160}
                   className='w-full h-full object-cover hover:scale-110 transition-all duration-500'
-                  src='https://photo-zmp3.zmdcdn.me/banner/1/f/8/a/1f8a4b283b1dff9e279b4457fca3b9a2.jpg'
+                  src={
+                     profile?.avatar
+                        ? `https://api-ecom.duthanhduoc.com/images/${profile?.avatar}`
+                        : 'https://zjs.zmdcdn.me/zmp3-desktop/releases/v1.9.67/static/media/user-default.3ff115bb.png'
+                  }
                />
             </div>
             <span className='text-xl font-semibold'>{profile?.name || profile?.email}</span>
          </div>
-         <div className='flex mt-5 items-center justify-center gap-x-10'>
-            {Links.map((item) => (
-               <Link
-                  className={`text-grayDa hover:text-white ${
-                     isActive === item.active ? 'border-b-2 py-3 border-tprimary' : 'py-3.5'
-                  }`}
-                  key={item.title}
-                  href={item.url}
-               >
-                  {item.title}
-               </Link>
-            ))}
+         <div className='mt-6 flex justify-center'>
+            <ul className='flex items-center text-[13px] bg-white bg-opacity-10 px-1 py-2 rounded-full gap-3'>
+               {Links.map((item) => (
+                  <li key={item.title}>
+                     <Link
+                        className={` px-6 py-1.5 ${
+                           item.active === isActive
+                              ? 'bg-white bg-opacity-30 rounded-full'
+                              : 'text-grayDa isHover transition-all'
+                        }`}
+                        href={item.url}
+                     >
+                        {item.title}
+                     </Link>
+                  </li>
+               ))}
+            </ul>
          </div>
          {children}
       </div>

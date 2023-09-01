@@ -90,14 +90,16 @@ export default function ModalTheme({ isOpen, setIsOpen }: Props) {
          ? 'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/backgrounds/logo-dark.svg'
          : 'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/backgrounds/logo-light.svg'
 
-      if (title === 'Zing Music Awards') {
-         playerControl.style.backgroundImage =
-            "url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme-player/zma.png')"
-      } else if (title === 'XONE') {
-         playerControl.style.backgroundImage =
-            "url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme/xone-miniplayer.jpg')"
-      } else {
-         playerControl.style.backgroundImage = "url('')"
+      if (playerControl) {
+         if (title === 'Zing Music Awards') {
+            playerControl.style.backgroundImage =
+               "url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme-player/zma.png')"
+         } else if (title === 'XONE') {
+            playerControl.style.backgroundImage =
+               "url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme/xone-miniplayer.jpg')"
+         } else {
+            playerControl.style.backgroundImage = "url('')"
+         }
       }
    }
 

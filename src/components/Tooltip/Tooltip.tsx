@@ -7,9 +7,18 @@ interface TooltipProps {
    bottom?: boolean
    bottomLeft?: boolean
    bottomCenter?: boolean
+   isClick?: boolean
 }
 
-export default function Tooltip({ content, children, left, bottom, bottomLeft, bottomCenter }: TooltipProps) {
+export default function Tooltip({
+   content,
+   children,
+   left,
+   bottom,
+   bottomLeft,
+   bottomCenter,
+   isClick = false
+}: TooltipProps) {
    const [showTooltip, setShowTooltip] = useState(false)
 
    const handleMouseEnter = () => {
@@ -22,7 +31,11 @@ export default function Tooltip({ content, children, left, bottom, bottomLeft, b
 
    return (
       <div className='relative'>
-         <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+         <div
+            onMouseEnter={() => !isClick && handleMouseEnter()}
+            onMouseLeave={() => !isClick && handleMouseLeave()}
+            onClick={() => isClick && setShowTooltip((prev) => !prev)}
+         >
             {children}
          </div>
          <div

@@ -4,6 +4,7 @@ import Tooltip from '@/components/Tooltip/Tooltip'
 import { AppContext } from '@/contexts/app.context'
 import useAddLibrary from '@/hooks/useAddLibrary'
 import usePlayMusic from '@/hooks/usePlayMusic'
+import useProtectedRoute from '@/hooks/useProtectedRoute'
 import { timeFormatter } from '@/utils/utils'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -14,8 +15,9 @@ export default function MyMusicSong({ profile = false }: { profile?: boolean }) 
    const { handleAddLibrary, library } = useAddLibrary()
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
    const { handleClickSong } = usePlayMusic()
+   useProtectedRoute()
    return (
-      <div className={profile ? '' : `mt-[70px] px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
+      <div className={profile ? 'mt-12' : `mt-[70px] px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
          {!profile && <h1 className='font-bold py-5 text-2xl'>Bài hát yêu thích</h1>}
          {songsLibrary.length > 0 ? (
             <>
