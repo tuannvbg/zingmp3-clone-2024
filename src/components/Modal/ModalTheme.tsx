@@ -115,14 +115,16 @@ export default function ModalTheme({ isOpen, setIsOpen }: Props) {
          ? 'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/backgrounds/logo-dark.svg'
          : 'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/backgrounds/logo-light.svg'
 
-      if (title === 'Zing Music Awards') {
-         playerControl.style.backgroundImage =
-            "url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme-player/zma.png')"
-      } else if (title === 'XONE') {
-         playerControl.style.backgroundImage =
-            "url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme/xone-miniplayer.jpg')"
-      } else {
-         playerControl.style.backgroundImage = "url('')"
+      if (playerControl) {
+         if (title === 'Zing Music Awards') {
+            playerControl.style.backgroundImage =
+               "url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme-player/zma.png')"
+         } else if (title === 'XONE') {
+            playerControl.style.backgroundImage =
+               "url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme/xone-miniplayer.jpg')"
+         } else {
+            playerControl.style.backgroundImage = "url('')"
+         }
       }
    }
 
@@ -186,7 +188,7 @@ export default function ModalTheme({ isOpen, setIsOpen }: Props) {
                            Giao Diện
                         </Dialog.Title>
                         <h4 className='font-semibold text-lg mb-2.5'>Chủ Đề</h4>
-                        <div className='grid grid-cols-5 gap-3.5'>
+                        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3.5'>
                            {themes.slice(0, 3).map((item) => (
                               <div key={item.title}>
                                  <div
@@ -240,7 +242,7 @@ export default function ModalTheme({ isOpen, setIsOpen }: Props) {
                            ))}
                         </div>
                         <h4 className='font-semibold text-lg mt-5 mb-2.5'>Nghệ Sĩ</h4>
-                        <div className='grid grid-cols-5 gap-3.5'>
+                        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3.5'>
                            {themes.slice(3).map((item) => (
                               <div key={item.title}>
                                  <div

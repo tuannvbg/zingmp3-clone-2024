@@ -47,6 +47,10 @@ interface AppContextInterface {
    setProfile: React.Dispatch<React.SetStateAction<User | null>>
    artistLibrary: Artist[] | []
    setArtistLibrary: (value: [] | Artist[] | ((val: [] | Artist[]) => [] | Artist[])) => void
+   isShowLyric: boolean
+   setIsShowLyric: React.Dispatch<React.SetStateAction<boolean>>
+   currentTimeAudio: number
+   setCurrentTimeAudio: React.Dispatch<React.SetStateAction<number>>
 }
 
 const initialAppContext: AppContextInterface = {
@@ -79,7 +83,11 @@ const initialAppContext: AppContextInterface = {
    profile: getProfileFromLS(),
    setProfile: () => null,
    artistLibrary: [],
-   setArtistLibrary: () => null
+   setArtistLibrary: () => null,
+   isShowLyric: false,
+   setIsShowLyric: () => null,
+   currentTimeAudio: 0,
+   setCurrentTimeAudio: () => null
 }
 
 export const AppContext = createContext<AppContextInterface>(initialAppContext)
@@ -110,6 +118,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialAppContext.isAuthenticated)
    const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
    const [artistLibrary, setArtistLibrary] = useLocalStorage<Artist[] | []>('artistLibrary', [])
+   const [isShowLyric, setIsShowLyric] = useState<boolean>(initialAppContext.isShowLyric)
+   const [currentTimeAudio, setCurrentTimeAudio] = useState<number>(initialAppContext.currentTimeAudio)
    return (
       <AppContext.Provider
          value={{
@@ -142,7 +152,11 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
             profile,
             setProfile,
             artistLibrary,
-            setArtistLibrary
+            setArtistLibrary,
+            isShowLyric,
+            setIsShowLyric,
+            currentTimeAudio,
+            setCurrentTimeAudio
          }}
       >
          {children}

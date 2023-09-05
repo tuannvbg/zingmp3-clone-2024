@@ -66,3 +66,30 @@ export const authApi = {
    login: (body: { email: string; password: string }) => http2.post<AuthResponse>('/login', body),
    logout: () => http2.post('/logout')
 }
+
+// getListMV(req, res) {
+//    ZingMp3.getListMV(req.query.id, req.query.page, req.query.count).then((data) => {
+//        res.json(data)
+//    })
+// }
+
+// getCategoryMV(req, res) {
+//    ZingMp3.getCategoryMV(req.query.id).then((data) => {
+//        res.json(data)
+//    })
+// }
+
+// getVideo(req, res) {
+//    ZingMp3.getVideo(req.query.id).then((data) => {
+//        res.json(data)
+//    })
+// }
+
+// // getListMV
+// router.get("/listmv", ZingController.getListMV)
+
+// // getCategoryMV
+// router.get("/categorymv", ZingController.getCategoryMV)
+
+// // getVideo
+// router.get("/video", ZingController.getVideo)

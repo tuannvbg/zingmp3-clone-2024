@@ -138,9 +138,9 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                </div>
             </div>
          )}
-         <div className='flex items-center gap-4 h-full'>
+         <div className='flex items-center flex-wrap-reverse xl:flex-nowrap gap-4 h-full'>
             {!zingchartPage && (
-               <div className='w-[40%]'>
+               <div className='w-full xl:w-[40%] '>
                   <ul className='flex flex-col gap-y-2.5'>
                      {rank.slice(0, 3).map((item, index) => (
                         <li
@@ -290,7 +290,7 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                   </div>
                </div>
             )}
-            <div className={`${zingchartPage ? 'w-full' : 'w-[60%]'} relative`}>
+            <div className={`${zingchartPage ? 'w-full' : 'w-full xl:w-[60%]'} relative`}>
                <Line ref={chartRef} style={{ height: '300px' }} data={data} options={options as any} />
                <div
                   className='absolute z-50'

@@ -41,7 +41,7 @@ export default function RightSideBar() {
       <div
          className={`${
             openSideBarRight ? 'translate-x-0' : 'translate-x-full'
-         } w-full max-w-[330px] transition-all overflow-y-auto overflow-x-hidden ease-linear duration-500 fixed right-0 top-0 bottom-[90px] z-50 bg-rightsidebar shadow-[0_1px_0_rgba(0,0,0,0.3),0_1px_6px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(25,255,255,0.05)]`}
+         } w-full max-w-[330px] transition-all overflow-y-auto overflow-x-hidden ease-linear duration-500 fixed right-0 top-0 bottom-[116px] md:bottom-[90px] z-50 bg-rightsidebar shadow-[0_1px_0_rgba(0,0,0,0.3),0_1px_6px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(25,255,255,0.05)]`}
       >
          <header className='px-2 py-[18px] sticky top-0 bg-rightsidebar z-[100] flex items-center gap-x-2'>
             <div className='flex items-center p-[3px] text-xs bg-white bg-opacity-10 rounded-full flex-1'>

@@ -9,6 +9,7 @@ import RightSideBar from '@/layouts/RightSideBar.tsx/RightSideBar'
 import Header from '@/layouts/Header/Header'
 import { AppProvider } from '@/contexts/app.context'
 import PlayerControl from '@/layouts/PlayerControl/PlayerControl'
+import Lyric from '@/components/Lyric/Lyric'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -25,12 +26,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                <body className={inter.className}>
                   <LeftSideBar />
                   {/* LeftSideBar + RightSideBar = 450px */}
-                  <div className='w-[calc(100vw-242.5px)] float-right'>
+                  <div className='md:w-[calc(100vw-72.5px)] xl:w-[calc(100vw-242.5px)] w-full md:float-right'>
                      <Header />
                      {children}
                   </div>
                   <RightSideBar />
                   <PlayerControl />
+                  <Lyric />
                   <ToastContainer autoClose={2000} position='top-center' />
                </body>
             </html>

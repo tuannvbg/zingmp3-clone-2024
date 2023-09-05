@@ -28,7 +28,10 @@ export default function PlayerControl() {
       setAudio,
       atAlbum,
       playList,
-      setCurrentSongId
+      setCurrentSongId,
+      setIsShowLyric,
+      isShowLyric,
+      setCurrentTimeAudio
    } = useContext(AppContext)
 
    //lấy info song
@@ -85,6 +88,7 @@ export default function PlayerControl() {
    const handleTimeUpdate = () => {
       if (audio) {
          setCurrentTime(audio.currentTime)
+         setCurrentTimeAudio(audio.currentTime)
       }
    }
 
@@ -231,20 +235,24 @@ export default function PlayerControl() {
                backgroundRepeat: 'no-repeat',
                backgroundSize: 'cover'
             }}
-            className={`h-[90px] playerControl bg-secondary border-t border-t-gray-700 px-5 flex items-center fixed z-50 left-0 right-0 bottom-0`}
+            className={`md:h-[90px] h-[61px] playerControl ${
+               isShowLyric ? 'bg-transparent' : 'bg-secondary border-t border-t-gray-700'
+            } p-3 md:px-5 flex items-center fixed z-[2000] left-0 right-0 bottom-[55px] md:bottom-0 md:gap-0 gap-x-2`}
          >
             {/* Detail song */}
-            <div className='flex w-[30%] items-center gap-x-3'>
+            <div className={`md:w-[30%] w-[70%] items-center gap-x-3 ${isShowLyric ? 'hidden' : 'flex'}`}>
                <Image
                   alt={infoSong.title}
                   width={64}
                   height={64}
-                  className='w-16 h-16 object-cover rounded-md'
+                  className='md:w-16 md:h-16 w-11 h-11 object-cover rounded-md'
                   src={infoSong.thumbnail}
                />
                <div className='flex flex-col'>
-                  <strong className='font-medium capitalize'>{infoSong?.title}</strong>
-                  <span className='text-xs text-secondary truncate max-w-[200px]'>
+                  <strong className='font-medium capitalize max-w-[150px] max-[380px]:max-w-[100px] min-[500px]:max-w-[250px] truncate'>
+                     {infoSong?.title}
+                  </strong>
+                  <span className='text-xs text-secondary truncate max-w-[150px] max-[380px]:max-w-[100px] min-[500px]:max-w-[250px]'>
                      {infoSong.artists?.map((artist, index) => {
                         return index === infoSong.artists.length - 1 ? (
                            <Link
@@ -269,7 +277,7 @@ export default function PlayerControl() {
                <Tooltip content={library.includes(infoSong.encodeId) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}>
                   <button
                      onClick={(e) => handleAddLibrary(e, infoSong.encodeId)}
-                     className={`hover:bg-white hover:bg-opacity-10 rounded-full p-1.5 ${
+                     className={`hover:bg-white md:block hidden hover:bg-opacity-10 rounded-full p-1.5 ${
                         library.includes(infoSong.encodeId) && 'text-tprimary'
                      }`}
                   >
@@ -303,13 +311,13 @@ export default function PlayerControl() {
             </div>
 
             {/* main control */}
-            <div className='w-[40%]'>
-               <div className='flex items-center justify-center gap-x-3 mb-2'>
+            <div className='md:w-[40%] w-[30%] mx-auto'>
+               <div className='flex items-center justify-center md:gap-x-3 md:mb-2'>
                   <Tooltip content={isRandomSong ? 'Tắt phát ngẫu nhiên' : 'Bật phát ngẫu nhiên'}>
                      <button
                         disabled={!atAlbum}
                         onClick={() => setIsRandomSong((prev) => !prev)}
-                        className={`p-2.5 hover:bg-white hover:bg-opacity-10 rounded-full disabled:text-secondary disabled:cursor-not-allowed ${
+                        className={`p-2.5 hover:bg-white md:block hidden hover:bg-opacity-10 rounded-full disabled:text-secondary disabled:cursor-not-allowed ${
                            isRandomSong && 'text-tprimary'
                         }`}
                      >
@@ -402,7 +410,9 @@ export default function PlayerControl() {
                   <Tooltip content={isRepeat ? 'Tắt phát lại bài hát' : 'Bật phát lại bài hát'}>
                      <button
                         onClick={() => setIsRepeat((prev) => !prev)}
-                        className={`p-2 hover:bg-white hover:bg-opacity-10 rounded-full ${isRepeat && 'text-tprimary'}`}
+                        className={`p-2 md:block hidden hover:bg-white hover:bg-opacity-10 rounded-full ${
+                           isRepeat && 'text-tprimary'
+                        }`}
                      >
                         <svg
                            stroke='currentColor'
@@ -424,7 +434,7 @@ export default function PlayerControl() {
                      </button>
                   </Tooltip>
                </div>
-               <div className='flex items-center text-xs gap-x-2.5'>
+               <div className='hidden md:flex items-center text-xs gap-x-2.5'>
                   <span>{timeFormatter(currentTime)}</span>
                   <Range
                      values={[currentTime]}
@@ -483,7 +493,11 @@ export default function PlayerControl() {
             </div>
 
             {/* volume */}
-            <div className='flex w-[30%] justify-end items-center gap-x-1'>
+            <div
+               className={`w-[30%] justify-end items-center md:flex hidden gap-x-1 ${
+                  isShowLyric ? '!hidden' : '!flex'
+               }`}
+            >
                {infoSong.mvlink && (
                   <Tooltip content={'MV'}>
                      <button className={`p-2 hover:bg-white hover:bg-opacity-10 rounded-full`}>
@@ -506,7 +520,10 @@ export default function PlayerControl() {
                )}
 
                <Tooltip content={'Xem lời bài hát'}>
-                  <button className='p-2 hover:bg-white hover:bg-opacity-10 rounded-full'>
+                  <button
+                     onClick={() => setIsShowLyric(true)}
+                     className='p-2 hover:bg-white hover:bg-opacity-10 rounded-full'
+                  >
                      <svg
                         xmlns='http://www.w3.org/2000/svg'
                         fill='none'
@@ -668,6 +685,31 @@ export default function PlayerControl() {
                   </button>
                </Tooltip>
             </div>
+
+            {/* mobile */}
+            <button
+               onClick={() => setOpenSideBarRight((prev) => !prev)}
+               className={`rounded p-2 ${
+                  openSideBarRight
+                     ? 'bg-tprimary hover:bg-opacity-90'
+                     : 'bg-white bg-opacity-10 hover:bg-opacity-20 md:hidden'
+               }`}
+            >
+               <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  strokeWidth={1.5}
+                  stroke='currentColor'
+                  className='w-[18px] h-[18px]'
+               >
+                  <path
+                     strokeLinecap='round'
+                     strokeLinejoin='round'
+                     d='M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z'
+                  />
+               </svg>
+            </button>
          </div>
       )
    }

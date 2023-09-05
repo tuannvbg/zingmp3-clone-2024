@@ -47,7 +47,7 @@ export default function Tooltip({
                   : bottomLeft
                   ? 'bottom-[-35px] -translate-x-[70%]'
                   : bottomCenter
-                  ? 'bottom-[-35px] left-[-20%]'
+                  ? 'bottom-[-35px] left-[-10%]'
                   : 'left-1/2 -translate-x-1/2'
             } transition-all bg-[#333] text-xs text-white py-1 px-2 rounded z-[100] ${
                showTooltip ? 'visible opacity-100' : 'invisible opacity-0'

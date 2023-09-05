@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import { AppContext } from '@/contexts/app.context'
@@ -126,87 +126,38 @@ export default function LeftSideBar() {
    const pathname = usePathname()
    const { currentSongId, isAuthenticated } = useContext(AppContext)
    const router = useRouter()
+   const [showSideBar, setShowSideBar] = useState<boolean>(false)
    return (
-      <div
-         className={`w-full max-w-[240px] fixed left-0 top-0 ${
-            currentSongId ? 'bottom-[90px]' : 'bottom-0'
-         } bg-white bg-opacity-5`}
-      >
-         <div className='py-4 pl-7'>
-            <Link href={'/'} className='inline-block'>
-               <Image
-                  width={120}
-                  height={34}
-                  className='w-[120px] h-[34px] object-cover logo'
-                  src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/backgrounds/logo-dark.svg'}
-                  alt='logo'
-               />
-            </Link>
-         </div>
-         <ul>
-            {links.slice(0, 3).map((link) => (
-               <li
-                  title={link.title}
-                  className={`${pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'}`}
-                  key={link.title}
-               >
-                  <Link
-                     href={link.url}
-                     className={`flex items-center gap-x-2.5 py-3 pl-5 pr-5 ${
-                        pathname === link.url ? 'pl-[17px]' : 'text-grayDa hover:text-white'
-                     }`}
-                  >
-                     {link.icon}
-                     <span className='font-medium'>{link.title}</span>
-                     {link.title === 'Radio' && (
-                        <Image
-                           src={'https://zjs.zmdcdn.me/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg'}
-                           alt=''
-                           width={34}
-                           height={16}
-                           className='w-[34px] h-4 object-cover'
-                        />
-                     )}
-                  </Link>
-               </li>
-            ))}
-            <li
-               title='Thư Viện'
-               className={`${
-                  pathname.includes('/mymusic') && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'
-               }`}
-            >
-               <button
-                  onClick={() => {
-                     if (isAuthenticated) {
-                        router.push('/mymusic/song')
-                     } else {
-                        router.push('/login')
-                        toast.warning('Vui lòng đăng nhập')
+      <>
+         <div
+            className={`w-full ${
+               showSideBar ? 'max-w-[240px]' : 'max-w-[70px]'
+            } transition-all duration-300 xl:max-w-[240px] fixed left-0 top-0 ${
+               currentSongId ? 'bottom-[90px]' : 'bottom-0'
+            } bg-modal xl:bg-white xl:bg-opacity-5 hidden md:block`}
+         >
+            <div className={`py-4 xl:pl-7 ${showSideBar && 'pl-7'}`}>
+               <Link href={'/'} className='inline-block'>
+                  <Image
+                     width={120}
+                     height={34}
+                     className={`w-[120px] h-[34px] object-cover logo ${!showSideBar && 'hidden'} xl:block`}
+                     src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/backgrounds/logo-dark.svg'}
+                     alt='logo'
+                  />
+                  <Image
+                     width={50}
+                     height={45}
+                     className={`w-[50px] mx-[10px] block xl:hidden h-[45px] object-cover ${showSideBar && 'hidden'}`}
+                     src={
+                        'https://zjs.zmdcdn.me/zmp3-desktop/releases/v1.8.22/static/media/icon_zing_mp3_60.f6b51045.svg'
                      }
-                  }}
-                  className={`flex items-center gap-x-2.5 py-3 pl-5 pr-5 ${
-                     pathname.includes('/mymusic') ? 'pl-[17px]' : 'text-grayDa hover:text-white'
-                  }`}
-               >
-                  <svg width={24} height={24} viewBox='0 0 24 24' fill='currentColor'>
-                     <path
-                        fillRule='evenodd'
-                        clipRule='evenodd'
-                        d='M6.5 2.75C6.08579 2.75 5.75 3.08579 5.75 3.5C5.75 3.91421 6.08579 4.25 6.5 4.25H17.5C17.9142 4.25 18.25 3.91421 18.25 3.5C18.25 3.08579 17.9142 2.75 17.5 2.75H6.5ZM3 9.5C3 7.42893 4.67893 5.75 6.75 5.75H17.25C19.3211 5.75 21 7.42893 21 9.5V17.5C21 19.5711 19.3211 21.25 17.25 21.25H6.75C4.67893 21.25 3 19.5711 3 17.5V9.5ZM6.75 7.25C5.50736 7.25 4.5 8.25736 4.5 9.5V17.5C4.5 18.7426 5.50736 19.75 6.75 19.75H17.25C18.4926 19.75 19.5 18.7426 19.5 17.5V9.5C19.5 8.25736 18.4926 7.25 17.25 7.25H6.75ZM13.666 8.87596C13.4359 8.72253 13.14 8.70823 12.8961 8.83874C12.6522 8.96926 12.5 9.2234 12.5 9.5V13.0499C12.125 12.8581 11.7001 12.75 11.25 12.75C9.73122 12.75 8.5 13.9812 8.5 15.5C8.5 17.0188 9.73122 18.25 11.25 18.25C12.6911 18.25 13.8733 17.1415 13.9905 15.7307C13.9967 15.6916 14 15.6515 14 15.6107V15.5V10.9014L15.084 11.624C15.4286 11.8538 15.8943 11.7607 16.124 11.416C16.3538 11.0714 16.2607 10.6057 15.916 10.376L13.666 8.87596ZM12.5 15.5C12.5 14.8096 11.9404 14.25 11.25 14.25C10.5596 14.25 10 14.8096 10 15.5C10 16.1904 10.5596 16.75 11.25 16.75C11.9404 16.75 12.5 16.1904 12.5 15.5Z'
-                        fillOpacity='0.8'
-                     />
-                  </svg>
-                  <span className='font-medium'>Thư Viện</span>
-               </button>
-            </li>
-         </ul>
-         <div className='my-3 px-5'>
-            <div className='border-b border-b-gray-700 ' />
-         </div>
-         <div className={`overflow-y-auto ${currentSongId ? 'h-[calc(100vh-429.67px)]' : 'h-[calc(100vh-339.67px)]'}`}>
+                     alt='logo'
+                  />
+               </Link>
+            </div>
             <ul>
-               {links.slice(3, 6).map((link) => (
+               {links.slice(0, 3).map((link) => (
                   <li
                      title={link.title}
                      className={`${pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'}`}
@@ -219,83 +170,225 @@ export default function LeftSideBar() {
                         }`}
                      >
                         {link.icon}
-                        <span className='font-medium'>{link.title}</span>
+                        <span className={`font-medium xl:block ${!showSideBar && 'hidden'}`}>{link.title}</span>
+                        {link.title === 'Radio' && (
+                           <Image
+                              src={'https://zjs.zmdcdn.me/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg'}
+                              alt=''
+                              width={34}
+                              height={16}
+                              className={`w-[34px] h-4 object-cover xl:block ${!showSideBar && 'hidden'}`}
+                           />
+                        )}
                      </Link>
                   </li>
                ))}
-            </ul>
-            <div
-               style={{
-                  backgroundImage: isAuthenticated ? 'linear-gradient(117deg,#614de5,#b567d9)' : ''
-               }}
-               className={`my-3 py-5 px-2.5 mx-auto text-center rounded-[10px] w-[90%] text-white ${
-                  !isAuthenticated && 'bg-tprimary'
-               }`}
-            >
-               <p className='mb-2.5'>
-                  {isAuthenticated
-                     ? 'Nghe nhạc không quảng cáo cùng kho nhạc VIP'
-                     : 'Đăng nhập để khám phá playlist dành riêng cho bạn'}
-               </p>
-               <button
-                  onClick={() => !isAuthenticated && router.push('/login')}
+               <li
+                  title='Thư Viện'
                   className={`${
-                     isAuthenticated
-                        ? 'bg-yellow-500 hover:bg-opacity-90'
-                        : 'bg-white bg-opacity-10 hover:bg-opacity-20 border border-white'
-                  } px-8 py-1 rounded-full text-[13px]`}
+                     pathname.includes('/mymusic') && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'
+                  }`}
                >
-                  {isAuthenticated ? 'NÂNG CẤP VIP' : 'ĐĂNG NHẬP'}
-               </button>
+                  <button
+                     onClick={() => {
+                        if (isAuthenticated) {
+                           router.push('/mymusic/song')
+                        } else {
+                           router.push('/login')
+                           toast.warning('Vui lòng đăng nhập')
+                        }
+                     }}
+                     className={`flex items-center gap-x-2.5 py-3 pl-5 pr-5 ${
+                        pathname.includes('/mymusic') ? 'pl-[17px]' : 'text-grayDa hover:text-white'
+                     }`}
+                  >
+                     <svg width={24} height={24} viewBox='0 0 24 24' fill='currentColor'>
+                        <path
+                           fillRule='evenodd'
+                           clipRule='evenodd'
+                           d='M6.5 2.75C6.08579 2.75 5.75 3.08579 5.75 3.5C5.75 3.91421 6.08579 4.25 6.5 4.25H17.5C17.9142 4.25 18.25 3.91421 18.25 3.5C18.25 3.08579 17.9142 2.75 17.5 2.75H6.5ZM3 9.5C3 7.42893 4.67893 5.75 6.75 5.75H17.25C19.3211 5.75 21 7.42893 21 9.5V17.5C21 19.5711 19.3211 21.25 17.25 21.25H6.75C4.67893 21.25 3 19.5711 3 17.5V9.5ZM6.75 7.25C5.50736 7.25 4.5 8.25736 4.5 9.5V17.5C4.5 18.7426 5.50736 19.75 6.75 19.75H17.25C18.4926 19.75 19.5 18.7426 19.5 17.5V9.5C19.5 8.25736 18.4926 7.25 17.25 7.25H6.75ZM13.666 8.87596C13.4359 8.72253 13.14 8.70823 12.8961 8.83874C12.6522 8.96926 12.5 9.2234 12.5 9.5V13.0499C12.125 12.8581 11.7001 12.75 11.25 12.75C9.73122 12.75 8.5 13.9812 8.5 15.5C8.5 17.0188 9.73122 18.25 11.25 18.25C12.6911 18.25 13.8733 17.1415 13.9905 15.7307C13.9967 15.6916 14 15.6515 14 15.6107V15.5V10.9014L15.084 11.624C15.4286 11.8538 15.8943 11.7607 16.124 11.416C16.3538 11.0714 16.2607 10.6057 15.916 10.376L13.666 8.87596ZM12.5 15.5C12.5 14.8096 11.9404 14.25 11.25 14.25C10.5596 14.25 10 14.8096 10 15.5C10 16.1904 10.5596 16.75 11.25 16.75C11.9404 16.75 12.5 16.1904 12.5 15.5Z'
+                           fillOpacity='0.8'
+                        />
+                     </svg>
+                     <span className={`font-medium xl:block ${!showSideBar && 'hidden'}`}>Thư Viện</span>
+                  </button>
+               </li>
+            </ul>
+            <div className='my-3 px-5'>
+               <div className='border-b border-b-gray-700 ' />
             </div>
-            {isAuthenticated && (
-               <>
-                  <span className='font-semibold text-base px-5'>Thư viện</span>
-                  <ul>
-                     {links.slice(6).map((link) => (
-                        <li
-                           className={`${
-                              pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-10'
-                           }`}
-                           key={link.title}
-                        >
-                           <Link
-                              href={link.url}
-                              className={`flex items-center gap-x-2.5 py-3 pl-5 pr-5 ${
-                                 pathname === link.url ? 'pl-[17px]' : 'text-grayDa hover:text-white'
-                              }`}
-                           >
-                              <Image
-                                 src={link.image as string}
-                                 alt={link.title}
-                                 width={24}
-                                 height={24}
-                                 className='w-6 h-6 object-cover'
-                              />
-                              <span className='font-medium'>{link.title}</span>
-                           </Link>
-                        </li>
-                     ))}
-                  </ul>
-               </>
-            )}
-         </div>
-         <button
-            onClick={() => toast.warning('Chức năng này chưa hoàn thiện')}
-            className='flex absolute bottom-0 left-0 right-0 h-[52px] items-center gap-x-3 px-7 border-t border-t-gray-700 w-full'
-         >
-            <svg
-               xmlns='http://www.w3.org/2000/svg'
-               fill='none'
-               viewBox='0 0 24 24'
-               strokeWidth={1.5}
-               stroke='currentColor'
-               className='w-5 h-5'
+            <div
+               className={`overflow-y-auto ${currentSongId ? 'h-[calc(100vh-429.67px)]' : 'h-[calc(100vh-339.67px)]'}`}
             >
-               <path strokeLinecap='round' strokeLinejoin='round' d='M12 4.5v15m7.5-7.5h-15' />
-            </svg>
-            Tạo playlist mới
-         </button>
-      </div>
+               <ul>
+                  {links.slice(3, 6).map((link) => (
+                     <li
+                        title={link.title}
+                        className={`${
+                           pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'
+                        }`}
+                        key={link.title}
+                     >
+                        <Link
+                           href={link.url}
+                           className={`flex items-center gap-x-2.5 py-3 pl-5 pr-5 ${
+                              pathname === link.url ? 'pl-[17px]' : 'text-grayDa hover:text-white'
+                           }`}
+                        >
+                           {link.icon}
+                           <span className={`font-medium xl:block ${!showSideBar && 'hidden'}`}>{link.title}</span>
+                        </Link>
+                     </li>
+                  ))}
+               </ul>
+               <div
+                  style={{
+                     backgroundImage: isAuthenticated ? 'linear-gradient(117deg,#614de5,#b567d9)' : ''
+                  }}
+                  className={`my-3 py-5 px-2.5 hidden mx-auto xl:block text-center rounded-[10px] w-[90%] text-white ${
+                     !isAuthenticated && 'bg-tprimary'
+                  }`}
+               >
+                  <p className='mb-2.5'>
+                     {isAuthenticated
+                        ? 'Nghe nhạc không quảng cáo cùng kho nhạc VIP'
+                        : 'Đăng nhập để khám phá playlist dành riêng cho bạn'}
+                  </p>
+                  <button
+                     onClick={() => !isAuthenticated && router.push('/login')}
+                     className={`${
+                        isAuthenticated
+                           ? 'bg-yellow-500 hover:bg-opacity-90'
+                           : 'bg-white bg-opacity-10 hover:bg-opacity-20 border border-white'
+                     } px-8 py-1 rounded-full text-[13px]`}
+                  >
+                     {isAuthenticated ? 'NÂNG CẤP VIP' : 'ĐĂNG NHẬP'}
+                  </button>
+               </div>
+               {isAuthenticated && (
+                  <>
+                     <span className='font-semibold text-base px-5 hidden xl:block'>Thư viện</span>
+                     <ul className='hidden xl:block'>
+                        {links.slice(6).map((link) => (
+                           <li
+                              title={link.title}
+                              className={`${
+                                 pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-10'
+                              }`}
+                              key={link.title}
+                           >
+                              <Link
+                                 href={link.url}
+                                 className={`flex items-center gap-x-2.5 py-3 pl-5 pr-5 ${
+                                    pathname === link.url ? 'pl-[17px]' : 'text-grayDa hover:text-white'
+                                 }`}
+                              >
+                                 <Image
+                                    src={link.image as string}
+                                    alt={link.title}
+                                    width={24}
+                                    height={24}
+                                    className='w-6 h-6 object-cover'
+                                 />
+                                 <span className='font-medium'>{link.title}</span>
+                              </Link>
+                           </li>
+                        ))}
+                     </ul>
+                  </>
+               )}
+            </div>
+            <button
+               onClick={() => toast.warning('Chức năng này chưa hoàn thiện')}
+               className={`${
+                  showSideBar ? 'flex' : 'hidden'
+               } xl:flex absolute bottom-0 left-0 right-0 h-[52px] items-center gap-x-3 px-7 border-t border-t-gray-700 w-full`}
+            >
+               <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  strokeWidth={1.5}
+                  stroke='currentColor'
+                  className='w-5 h-5'
+               >
+                  <path strokeLinecap='round' strokeLinejoin='round' d='M12 4.5v15m7.5-7.5h-15' />
+               </svg>
+               Tạo playlist mới
+            </button>
+            <button
+               onClick={() => setShowSideBar((prev) => !prev)}
+               className={`flex xl:hidden absolute hover:bg-opacity-20 ${
+                  showSideBar ? 'right-1 bottom-1' : 'bottom-3 left-0 right-0 mx-auto'
+               } h-10 w-10 justify-center items-center bg-white rounded-full bg-opacity-10`}
+            >
+               {showSideBar ? (
+                  <svg
+                     xmlns='http://www.w3.org/2000/svg'
+                     fill='none'
+                     viewBox='0 0 24 24'
+                     strokeWidth={1.5}
+                     stroke='currentColor'
+                     className='w-6 h-6'
+                  >
+                     <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
+                  </svg>
+               ) : (
+                  <svg
+                     xmlns='http://www.w3.org/2000/svg'
+                     fill='none'
+                     viewBox='0 0 24 24'
+                     strokeWidth={1.5}
+                     stroke='currentColor'
+                     className='w-5 h-5'
+                  >
+                     <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
+                  </svg>
+               )}
+            </button>
+         </div>
+
+         {/* mobile */}
+         <ul className='fixed md:hidden left-0 right-0 text-xs bottom-0 border-t border-t-gray-800 h-[55px] flex items-center bg-secondary z-[1000]'>
+            {links.slice(0, 3).map((link) => (
+               <li key={link.title} className='flex-1'>
+                  <Link
+                     href={link.url}
+                     className={`flex flex-col items-center justify-center w-full  ${
+                        pathname === link.url ? 'text-tprimary' : 'text-grayDa'
+                     }`}
+                  >
+                     {link.icon}
+                     <span className={`font-medium`}>{link.title}</span>
+                  </Link>
+               </li>
+            ))}
+            <li className='flex-1' title='Thư Viện'>
+               <button
+                  onClick={() => {
+                     if (isAuthenticated) {
+                        router.push('/mymusic/song')
+                     } else {
+                        router.push('/login')
+                        toast.warning('Vui lòng đăng nhập')
+                     }
+                  }}
+                  className={`flex flex-col items-center justify-center w-full ${
+                     pathname.includes('/mymusic') ? 'text-tprimary' : 'text-grayDa'
+                  }`}
+               >
+                  <svg width={24} height={24} viewBox='0 0 24 24' fill='currentColor'>
+                     <path
+                        fillRule='evenodd'
+                        clipRule='evenodd'
+                        d='M6.5 2.75C6.08579 2.75 5.75 3.08579 5.75 3.5C5.75 3.91421 6.08579 4.25 6.5 4.25H17.5C17.9142 4.25 18.25 3.91421 18.25 3.5C18.25 3.08579 17.9142 2.75 17.5 2.75H6.5ZM3 9.5C3 7.42893 4.67893 5.75 6.75 5.75H17.25C19.3211 5.75 21 7.42893 21 9.5V17.5C21 19.5711 19.3211 21.25 17.25 21.25H6.75C4.67893 21.25 3 19.5711 3 17.5V9.5ZM6.75 7.25C5.50736 7.25 4.5 8.25736 4.5 9.5V17.5C4.5 18.7426 5.50736 19.75 6.75 19.75H17.25C18.4926 19.75 19.5 18.7426 19.5 17.5V9.5C19.5 8.25736 18.4926 7.25 17.25 7.25H6.75ZM13.666 8.87596C13.4359 8.72253 13.14 8.70823 12.8961 8.83874C12.6522 8.96926 12.5 9.2234 12.5 9.5V13.0499C12.125 12.8581 11.7001 12.75 11.25 12.75C9.73122 12.75 8.5 13.9812 8.5 15.5C8.5 17.0188 9.73122 18.25 11.25 18.25C12.6911 18.25 13.8733 17.1415 13.9905 15.7307C13.9967 15.6916 14 15.6515 14 15.6107V15.5V10.9014L15.084 11.624C15.4286 11.8538 15.8943 11.7607 16.124 11.416C16.3538 11.0714 16.2607 10.6057 15.916 10.376L13.666 8.87596ZM12.5 15.5C12.5 14.8096 11.9404 14.25 11.25 14.25C10.5596 14.25 10 14.8096 10 15.5C10 16.1904 10.5596 16.75 11.25 16.75C11.9404 16.75 12.5 16.1904 12.5 15.5Z'
+                        fillOpacity='0.8'
+                     />
+                  </svg>
+                  <span className={`font-medium`}>Thư Viện</span>
+               </button>
+            </li>
+         </ul>
+      </>
    )
 }

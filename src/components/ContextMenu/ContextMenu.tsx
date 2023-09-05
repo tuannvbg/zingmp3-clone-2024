@@ -52,7 +52,11 @@ const ContextMenu = ({ left, top, onClose }: Props) => {
    }, [onClose])
 
    return (
-      <ul ref={wrapperRef} className='fixed bg-modal w-[250px] rounded-md py-2.5 shadow-lg' style={{ left, top }}>
+      <ul
+         ref={wrapperRef}
+         className='fixed bg-modal w-[250px] rounded-md py-2.5 shadow-lg z-[2000]'
+         style={{ left, top }}
+      >
          <li className={classNameLi} onClick={handleBack}>
             <svg
                xmlns='http://www.w3.org/2000/svg'

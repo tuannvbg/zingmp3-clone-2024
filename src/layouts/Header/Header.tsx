@@ -60,9 +60,9 @@ export default function Header() {
 
    const handleSearch = handleSubmit(async (data) => {
       if (data.keyword !== '') {
+         router.push(`/tim-kiem/tat-ca?q=${data.keyword}`)
          const res = await search(data)
          setSearchData(res.data.data)
-         router.push(`/tim-kiem/tat-ca?q=${data.keyword}`)
       }
    })
 
@@ -105,12 +105,12 @@ export default function Header() {
 
    return (
       <div
-         className={`fixed flex items-center transition-all justify-between px-14 top-0 right-0 left-[240px] ${
+         className={`fixed flex items-center gap-x-2 transition-all justify-between px-3 md:px-14 top-0 right-0 left-0 md:left-[70px] xl:left-[240px] ${
             isScrolled ? 'bg-primary shadow-[0_3px_5px_rgba(0,_0,_0,_0.1)]' : 'bg-transparent'
          }  h-[70px] z-40`}
       >
-         <div className='flex items-center gap-x-5'>
-            <button className='disabled:opacity-50' onClick={() => history.back()}>
+         <div className='flex items-center gap-x-5 w-full'>
+            <button className='disabled:opacity-50 hidden md:block' onClick={() => history.back()}>
                <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -122,7 +122,7 @@ export default function Header() {
                   <path strokeLinecap='round' strokeLinejoin='round' d='M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18' />
                </svg>
             </button>
-            <button className='disabled:opacity-50' onClick={() => history.forward()}>
+            <button className='disabled:opacity-50 hidden md:block' onClick={() => history.forward()}>
                <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -134,102 +134,104 @@ export default function Header() {
                   <path strokeLinecap='round' strokeLinejoin='round' d='M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3' />
                </svg>
             </button>
-            <Tippy
-               animation={'perspective-extreme'}
-               onClickOutside={() => setOpenSearch(false)}
-               visible={openSearch}
-               content={
-                  <div className='bg-modal w-[440px] rounded-b-[20px] px-2.5 py-3 shadow-lg'>
-                     <h3 className='font-semibold px-2.5 pb-2'>Đề xuất cho bạn</h3>
-                     <ul>
-                        {linkSearch.map((item) => (
-                           <li
-                              onClick={async () => {
-                                 router.push(`/tim-kiem/tat-ca?q=${item}`)
-                                 const res = await search({ keyword: item })
-                                 setSearchData(res.data.data)
-                                 setValue('keyword', item)
-                                 setOpenSearch(false)
-                              }}
-                              key={item}
-                              className='flex items-center gap-x-2.5 px-2.5 py-2 li-search rounded cursor-pointer'
-                           >
-                              <svg
-                                 xmlns='http://www.w3.org/2000/svg'
-                                 fill='none'
-                                 viewBox='0 0 24 24'
-                                 strokeWidth={1.5}
-                                 stroke='currentColor'
-                                 className='w-[18px] h-[18px] text-secondary'
+            <div className='max-w-[440px] w-full relative'>
+               <Tippy
+                  animation={'perspective-extreme'}
+                  onClickOutside={() => setOpenSearch(false)}
+                  visible={openSearch}
+                  content={
+                     <div className='bg-modal absolute left-0 right-0 w-full rounded-b-[20px] px-2.5 py-3 shadow-lg'>
+                        <h3 className='font-semibold px-2.5 pb-2'>Đề xuất cho bạn</h3>
+                        <ul>
+                           {linkSearch.map((item) => (
+                              <li
+                                 onClick={async () => {
+                                    router.push(`/tim-kiem/tat-ca?q=${item}`)
+                                    const res = await search({ keyword: item })
+                                    setSearchData(res.data.data)
+                                    setValue('keyword', item)
+                                    setOpenSearch(false)
+                                 }}
+                                 key={item}
+                                 className='flex items-center gap-x-2.5 px-2.5 py-2 li-search rounded cursor-pointer'
                               >
-                                 <path
-                                    strokeLinecap='round'
-                                    strokeLinejoin='round'
-                                    d='M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941'
-                                 />
-                              </svg>
-                              <span>{item}</span>
-                           </li>
-                        ))}
-                     </ul>
-                  </div>
-               }
-               interactive={true}
-               arrow={false}
-               offset={[0, 0]}
-               placement={'bottom-start'}
-               maxWidth={'auto'}
-            >
-               <form
-                  autoComplete='off'
-                  onSubmit={handleSearch}
-                  className={`flex h-10 items-center pl-2 form-search w-[440px] ${
-                     openSearch ? 'rounded-t-[20px] active' : 'rounded-full'
-                  }`}
-               >
-                  <button type='submit'>
-                     <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        strokeWidth={1.5}
-                        stroke='currentColor'
-                        className='w-6 h-6'
-                     >
-                        <path
-                           strokeLinecap='round'
-                           strokeLinejoin='round'
-                           d='M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z'
-                        />
-                     </svg>
-                  </button>
-                  <input
-                     type='search'
-                     placeholder='Tìm kiếm bài hát, nghệ sĩ, lời bài hát...'
-                     className='outline-none h-full px-2 flex-1 bg-transparent'
-                     {...register('keyword')}
-                     onFocus={() => setOpenSearch(true)}
-                  />
-
-                  {isSubmitting && (
-                     <div className='pr-2'>
-                        <Image
-                           src={'https://i.gifer.com/ZKZg.gif'}
-                           width={20}
-                           height={20}
-                           className='w-4 h-4 object-cover'
-                           alt=''
-                        />
+                                 <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    fill='none'
+                                    viewBox='0 0 24 24'
+                                    strokeWidth={1.5}
+                                    stroke='currentColor'
+                                    className='w-[18px] h-[18px] text-secondary'
+                                 >
+                                    <path
+                                       strokeLinecap='round'
+                                       strokeLinejoin='round'
+                                       d='M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941'
+                                    />
+                                 </svg>
+                                 <span>{item}</span>
+                              </li>
+                           ))}
+                        </ul>
                      </div>
-                  )}
-               </form>
-            </Tippy>
+                  }
+                  interactive={true}
+                  arrow={false}
+                  offset={[0, 0]}
+                  placement={'bottom-start'}
+                  maxWidth={'auto'}
+               >
+                  <form
+                     autoComplete='off'
+                     onSubmit={handleSearch}
+                     className={`flex h-10 items-center pl-2 form-search w-full ${
+                        openSearch ? 'rounded-t-[20px] active' : 'rounded-full'
+                     }`}
+                  >
+                     <button type='submit'>
+                        <svg
+                           xmlns='http://www.w3.org/2000/svg'
+                           fill='none'
+                           viewBox='0 0 24 24'
+                           strokeWidth={1.5}
+                           stroke='currentColor'
+                           className='w-6 h-6'
+                        >
+                           <path
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              d='M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z'
+                           />
+                        </svg>
+                     </button>
+                     <input
+                        type='search'
+                        placeholder='Tìm kiếm bài hát, nghệ sĩ, lời bài hát...'
+                        className='outline-none h-full px-2 flex-shrink-0 w-full flex-1 bg-transparent'
+                        {...register('keyword')}
+                        onFocus={() => setOpenSearch(true)}
+                     />
+
+                     {isSubmitting && (
+                        <div className='pr-2'>
+                           <Image
+                              src={'https://i.gifer.com/ZKZg.gif'}
+                              width={20}
+                              height={20}
+                              className='w-4 h-4 object-cover'
+                              alt=''
+                           />
+                        </div>
+                     )}
+                  </form>
+               </Tippy>
+            </div>
          </div>
-         <div className='flex items-center gap-x-4'>
+         <div className='flex items-center gap-x-2 md:gap-x-4'>
             <Tooltip bottomCenter content='Chủ đề'>
                <button
                   onClick={() => setOpenModalTheme(true)}
-                  className='w-10 h-10 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 flex items-center justify-center'
+                  className='w-10 h-10 rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 flex items-center justify-center'
                >
                   <svg width={20} height={20} viewBox='0 0 20 20'>
                      <defs>
