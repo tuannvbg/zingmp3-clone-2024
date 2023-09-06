@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useContext } from 'react'
 
-export default function MyMusicPlaylist({ profile }: { profile: boolean }) {
+export default function MyMusicPlaylist({ profile }: { profile?: boolean }) {
    const { currentSongId, playlistLibrary } = useContext(AppContext)
    useProtectedRoute()
 
