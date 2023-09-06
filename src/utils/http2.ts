@@ -17,8 +17,8 @@ export class Http2 {
    private refreshToken: string
    private refreshTokenRequest: Promise<string> | null
    constructor() {
-      this.accessToken = getAccessTokenFromLS()
-      this.refreshToken = getRefreshTokenFromLS()
+      this.accessToken = getAccessTokenFromLS() as string
+      this.refreshToken = getRefreshTokenFromLS() as string
       this.refreshTokenRequest = null
       this.instance = axios.create({
          baseURL: 'https://api-ecom.duthanhduoc.com',
