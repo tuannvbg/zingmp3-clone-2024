@@ -17,14 +17,12 @@ import { RadioType } from '@/types/radio.type'
 import { toast } from 'react-toastify'
 import useGetHome from '@/hooks/useGetHome'
 import usePlayMusic from '@/hooks/usePlayMusic'
-import Modal from '@/components/Modal/Modal'
 import { WeekChartType } from '@/types/weekChart.type'
 import ChartSection from '@/components/ChartSection/ChartSection'
 import ReleaseItem from '@/components/ReleaseItem/ReleaseItem'
 
 export default function Home() {
    const [tabRelease, setTabRelease] = useState<'all' | 'vPop' | 'others'>('all')
-   const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
 
    const router = useRouter()
 

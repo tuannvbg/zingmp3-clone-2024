@@ -42,7 +42,8 @@ export default function Lyric() {
    //lấy data lyric
    const { data, isLoading } = useQuery({
       queryKey: ['lyric', currentSongId],
-      queryFn: () => getLyric({ id: currentSongId })
+      queryFn: () => getLyric({ id: currentSongId }),
+      enabled: Boolean(currentSongId)
    })
    const lyrics = data?.data.data?.sentences
    const imgBgViewFull = data?.data.data?.defaultIBGUrls
