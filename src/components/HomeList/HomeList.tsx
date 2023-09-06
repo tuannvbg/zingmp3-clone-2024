@@ -20,7 +20,7 @@ export default function HomeList({
    return (
       <>
          {all ? (
-            <div className='grid grid-cols-4 xl:grid-cols-5 gap-7 select-none'>
+            <div className='grid sm:grid-cols-3 grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 lg:gap-7 gap-5 select-none'>
                {list.map((item) => (
                   <div key={item?.encodeId}>
                      <div onClick={() => router.push(item?.link)} className='relative block group cursor-pointer'>

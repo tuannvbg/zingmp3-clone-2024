@@ -134,7 +134,7 @@ export default function LeftSideBar() {
                showSideBar ? 'max-w-[240px]' : 'max-w-[70px]'
             } transition-all duration-300 xl:max-w-[240px] fixed left-0 top-0 ${
                currentSongId ? 'bottom-[90px]' : 'bottom-0'
-            } bg-modal xl:bg-white xl:bg-opacity-5 hidden md:block`}
+            } bg-modal xl:bg-white xl:bg-opacity-5 hidden min-[900px]:block`}
          >
             <div className={`py-4 xl:pl-7 ${showSideBar && 'pl-7'}`}>
                <Link href={'/'} className='inline-block'>
@@ -349,7 +349,7 @@ export default function LeftSideBar() {
          </div>
 
          {/* mobile */}
-         <ul className='fixed md:hidden left-0 right-0 text-xs bottom-0 border-t border-t-gray-800 h-[55px] flex items-center bg-secondary z-[1000]'>
+         <ul className='fixed min-[900px]:hidden left-0 right-0 text-xs bottom-0 border-t border-t-gray-800 h-[55px] flex items-center bg-secondary z-[1000]'>
             {links.slice(0, 3).map((link) => (
                <li key={link.title} className='flex-1'>
                   <Link

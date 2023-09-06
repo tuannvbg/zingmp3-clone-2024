@@ -43,7 +43,7 @@ export default function MyMusicLayout({ children }: { children: React.ReactNode 
    ]
 
    return (
-      <div className={`mt-[70px] px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
+      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>
          <div className='pt-7 flex flex-col gap-y-3 items-center'>
             <div className='w-40 h-40 rounded-full overflow-hidden border-4 border-tprimary'>
                <Image
@@ -60,12 +60,44 @@ export default function MyMusicLayout({ children }: { children: React.ReactNode 
             </div>
             <span className='text-xl font-semibold'>{profile?.name || profile?.email}</span>
          </div>
-         <div className='mt-6 flex justify-center'>
-            <ul className='flex items-center text-[13px] bg-white bg-opacity-10 px-1 py-2 rounded-full gap-3'>
+         <div className='mt-6 flex justify-center flex-col gap-y-5 md:flex-row md:gap-0 items-center'>
+            <ul className='hidden sm:flex items-center text-[13px] bg-white bg-opacity-10 px-1 py-2 rounded-full gap-3'>
                {Links.map((item) => (
                   <li key={item.title}>
                      <Link
                         className={` px-6 py-1.5 ${
+                           item.active === isActive
+                              ? 'bg-white bg-opacity-30 rounded-full'
+                              : 'text-grayDa isHover transition-all'
+                        }`}
+                        href={item.url}
+                     >
+                        {item.title}
+                     </Link>
+                  </li>
+               ))}
+            </ul>
+            <ul className='flex sm:hidden items-center text-[13px] bg-white bg-opacity-10 px-1 py-1 md:py-2 rounded-full gap-3'>
+               {Links.slice(0, 2).map((item) => (
+                  <li key={item.title}>
+                     <Link
+                        className={`px-4 py-1 md:px-6 md:py-1.5 ${
+                           item.active === isActive
+                              ? 'bg-white bg-opacity-30 rounded-full'
+                              : 'text-grayDa isHover transition-all'
+                        }`}
+                        href={item.url}
+                     >
+                        {item.title}
+                     </Link>
+                  </li>
+               ))}
+            </ul>
+            <ul className='flex sm:hidden items-center text-[13px] bg-white bg-opacity-10 px-1 py-1 md:py-2 rounded-full gap-3'>
+               {Links.slice(2).map((item) => (
+                  <li key={item.title}>
+                     <Link
+                        className={`px-4 py-1 md:px-6 md:py-1.5 ${
                            item.active === isActive
                               ? 'bg-white bg-opacity-30 rounded-full'
                               : 'text-grayDa isHover transition-all'

@@ -184,6 +184,9 @@ body.IU {
 .border-l-tprimary {
    border-color: var(--tprimary);
 }
+.border-b-tprimary {
+   border-bottom-color: var(--tprimary);
+}
 .bg-tertiary {
    background-color: var(--tertiary);
 }
@@ -406,6 +409,11 @@ ul::-webkit-scrollbar-thumb {
    animation: blinkShadowsFilter 8s ease-in infinite;
    width: 400px;
    color: #fff;
+}
+@media (max-width: 500px) {
+   .input-container {
+      width: 320px;
+   }
 }
 
 .input-content {

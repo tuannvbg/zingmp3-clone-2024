@@ -18,7 +18,7 @@ export default function SearchArtist() {
       <>
          <h2 className='text-xl font-bold mb-5'>Nghệ Sĩ/OA</h2>
          {artists ? (
-            <div className='grid grid-cols-4 gap-7'>
+            <div className='grid gap-5 sm:grid-cols-3 grid-cols-2 lg:grid-cols-4 lg:gap-7'>
                {artists.map(
                   (artist: {
                      id: React.Key | null | undefined

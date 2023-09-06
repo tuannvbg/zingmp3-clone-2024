@@ -132,17 +132,15 @@ export default function Profile() {
                      <div className='input-content'>
                         <div className='input-dist'>
                            <div className='input-type'>
-                              <div className='flex flex-col sm:flex-row items-center gap-y-1 gap-x-5 mb-3'>
-                                 <div className='w-full sm:w-[20%] sm:text-right capitalize'>Email:</div>
-                                 <div className='w-full sm:w-[80%] text-left'>{profileData?.email}</div>
+                              <div className='flex flex-row items-center gap-y-1 gap-x-5 mb-3'>
+                                 <div className='w-[20%] text-right capitalize'>Email:</div>
+                                 <div className='w-[80%] text-left'>{profileData?.email}</div>
                               </div>
-                              <div className='flex flex-col sm:flex-row items-center gap-y-1 gap-x-5'>
-                                 <div className='w-full sm:w-[20%] sm:text-right capitalize sm:-translate-y-3'>
-                                    Tên:
-                                 </div>
+                              <div className='flex flex-row items-center gap-y-1 gap-x-5'>
+                                 <div className='w-[20%] text-right capitalize -translate-y-3'>Tên:</div>
                                  <Input
                                     name='name'
-                                    className='w-full sm:w-[80%] flex flex-col gap-y-1'
+                                    className='w-[80%] flex flex-col gap-y-1'
                                     placeholder='Tên'
                                     register={register}
                                     errorMessage={errors.name?.message}
@@ -306,53 +304,39 @@ const ChangePassword = () => {
          className='pt-6 font-bold italic'
       >
          <div className='flex flex-col gap-y-2 w-full items-center'>
-            <div className='input-container !w-[500px]'>
+            <div className='input-container'>
                <div className='input-content'>
                   <div className='input-dist'>
                      <div className='input-type'>
-                        <div className='flex flex-col sm:flex-row items-center gap-y-1 gap-x-5'>
-                           <div className='w-full sm:w-[35%] sm:text-right capitalize sm:-translate-y-3'>
-                              Mật khẩu cũ:
-                           </div>
-                           <Input
-                              name='password'
-                              type='password'
-                              hasIcon
-                              className='w-full sm:w-[65%] flex flex-col gap-y-1'
-                              placeholder='Mật khẩu cũ'
-                              register={register}
-                              errorMessage={errors.password?.message}
-                           />
-                        </div>
-                        <div className='flex flex-col sm:flex-row items-center gap-y-1 gap-x-5'>
-                           <div className='w-full sm:w-[35%] sm:text-right capitalize sm:-translate-y-3'>
-                              Mật khẩu mới:
-                           </div>
-                           <Input
-                              name='new_password'
-                              type='password'
-                              hasIcon
-                              className=' w-full sm:w-[65%] flex flex-col gap-y-1'
-                              placeholder='Mật khẩu mới'
-                              register={register}
-                              errorMessage={errors.new_password?.message}
-                           />
-                        </div>
+                        <Input
+                           name='password'
+                           type='password'
+                           hasIcon
+                           className='w-full  flex flex-col gap-y-1'
+                           placeholder='Mật khẩu cũ'
+                           register={register}
+                           errorMessage={errors.password?.message}
+                        />
 
-                        <div className='flex flex-col sm:flex-row items-center gap-y-1 gap-x-5'>
-                           <div className='w-full sm:w-[35%] sm:text-right capitalize sm:-translate-y-3'>
-                              Nhập lại mật khẩu:
-                           </div>
-                           <Input
-                              name='confirm_password'
-                              type='password'
-                              hasIcon
-                              className=' w-full sm:w-[65%] flex flex-col gap-y-1'
-                              placeholder='Nhập lại mật khẩu'
-                              register={register}
-                              errorMessage={errors.confirm_password?.message}
-                           />
-                        </div>
+                        <Input
+                           name='new_password'
+                           type='password'
+                           hasIcon
+                           className='w-full flex flex-col gap-y-1'
+                           placeholder='Mật khẩu mới'
+                           register={register}
+                           errorMessage={errors.new_password?.message}
+                        />
+
+                        <Input
+                           name='confirm_password'
+                           type='password'
+                           hasIcon
+                           className='w-full flex flex-col gap-y-1'
+                           placeholder='Nhập lại mật khẩu'
+                           register={register}
+                           errorMessage={errors.confirm_password?.message}
+                        />
                      </div>
                   </div>
                </div>

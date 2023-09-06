@@ -13,7 +13,7 @@ export default function Chill() {
    const chillList: HomeListType[] = data?.data.data.items[3].items //chill
    if (!chillList) return <Loading />
    return (
-      <div className={`mt-[70px] ${currentSongId ? 'pb-28' : 'pb-10'}`}>
+      <div className={`mt-[70px] ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>
          <div className='relative w-full pt-[27%]'>
             <Image
                fill
@@ -23,7 +23,7 @@ export default function Chill() {
                src={'https://photo-zmp3.zmdcdn.me/cover/c/9/b/3/c9b3c456eeabd9d4e3241666397d71aa.jpg'}
             />
          </div>
-         <div className='px-14 mt-10'>
+         <div className='px-3 sm:px-8 lg:px-14 mt-10'>
             <HomeList all title list={chillList} />
          </div>
       </div>

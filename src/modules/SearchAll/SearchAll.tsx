@@ -42,7 +42,7 @@ export default function SearchAll() {
       <>
          {/* NỔI BẬT */}
          <h2 className='mb-5 text-xl font-bold'>Nổi Bật</h2>
-         <div className='grid grid-cols-3 gap-x-7'>
+         <div className='grid sm:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-x-7'>
             {top.objectType === 'artist' && (
                <div className='p-2.5 rounded-md bg-white bg-opacity-5 flex items-center gap-x-4 hover:bg-opacity-10'>
                   <Link href={artists[0].link} className='relative group overflow-hidden rounded-full cursor-pointer'>
@@ -384,7 +384,7 @@ export default function SearchAll() {
                </svg>
             </Link>
          </div>
-         <ul className='grid grid-cols-2 gap-x-7'>
+         <ul className='grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-x-7'>
             {playList &&
                playList.slice(0, 6).map((item: SongItem) => (
                   <li
@@ -480,7 +480,7 @@ export default function SearchAll() {
                            <div className='flex items-center gap-x-2'>
                               <h3
                                  title={item.title}
-                                 className='text-white max-w-[250px] truncate capitalize text-sm font-medium'
+                                 className='text-white max-w-[150px] sm:max-w-[250px] truncate capitalize text-sm font-medium'
                               >
                                  {item.title}
                               </h3>
@@ -490,7 +490,7 @@ export default function SearchAll() {
                                  </div>
                               )}
                            </div>
-                           <div className='text-xs max-w-[250px] truncate'>
+                           <div className='text-xs max-w-[150px] sm:max-w-[250px] truncate'>
                               {item.artists?.map((artist, index) => {
                                  return index === item.artists.length - 1 ? (
                                     <Link
@@ -677,7 +677,7 @@ export default function SearchAll() {
                      </svg>
                   </Link>
                </div>
-               <div className='grid grid-cols-4 gap-x-7'>
+               <div className='grid sm:grid-cols-3 gap-5 grid-cols-2 lg:grid-cols-4 lg:gap-x-7'>
                   {artists
                      .slice(0, 4)
                      .map(

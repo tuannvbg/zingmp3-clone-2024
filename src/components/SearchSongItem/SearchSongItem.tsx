@@ -1,81 +1,31 @@
-import { timeFormatter } from '@/utils/utils'
-import React, { useContext, useState } from 'react'
-import Tooltip from '../Tooltip/Tooltip'
-import Link from 'next/link'
-import Image from 'next/image'
+'use client'
+import Modal from '@/components/Modal/Modal'
+import Tooltip from '@/components/Tooltip/Tooltip'
 import { AppContext } from '@/contexts/app.context'
-import { Item } from '@/types/newReleaseChart.type'
-import Modal from '../Modal/Modal'
-import usePlayMusic from '@/hooks/usePlayMusic'
 import useAddLibrary from '@/hooks/useAddLibrary'
+import usePlayMusic from '@/hooks/usePlayMusic'
 import { SongItem } from '@/types/playlist.type'
+import { timeFormatter } from '@/utils/utils'
+import Image from 'next/image'
+import Link from 'next/link'
+import React, { useContext, useState } from 'react'
 
-export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: boolean }) {
-   const { currentSongId, isLoadingSong, isPlaying, setAtAlbum, setRecentSong } = useContext(AppContext)
+export default function SearchSongItem({ songs }: { songs: any }) {
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
+   const { currentSongId, setAtAlbum, setRecentSong, isLoadingSong, isPlaying } = useContext(AppContext)
    const { handleClickSong } = usePlayMusic()
-   const { handleAddLibrary, library } = useAddLibrary()
+   const { library, handleAddLibrary } = useAddLibrary()
    return (
       <>
          <ul>
-            {list?.map((item, index) => (
+            {songs?.map((item: SongItem) => (
                <li
                   key={item.encodeId}
-                  className={`flex group hover:bg-white hover:bg-opacity-10 select-none ${
+                  className={`flex group hover:bg-white hover:bg-opacity-10  select-none ${
                      currentSongId === item.encodeId && 'bg-white bg-opacity-10'
-                  } rounded-md items-center text-xs p-2.5 ${!isRanking && 'border-b border-b-gray-800'}`}
+                  } rounded-md items-center text-secondary text-xs p-2.5 border-b border-b-gray-800`}
                >
-                  <div className='w-[50%] flex items-center gap-x-2'>
-                     <span
-                        className={`text-[32px] min-w-[900px]:w-12 flex-shrink-0 text-center text-transparent font-black mr-2 ${
-                           index === 0
-                              ? 'text-stroke1'
-                              : index === 1
-                              ? 'text-stroke2'
-                              : index === 2
-                              ? 'text-stroke3'
-                              : 'text-stroke'
-                        }`}
-                     >
-                        {index + 1}
-                     </span>
-                     <div className='w-[18px] flex flex-col items-center gap-y-1 mr-1'>
-                        {item.rakingStatus > 0 ? (
-                           <>
-                              <div
-                                 style={{
-                                    clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)'
-                                 }}
-                                 className='w-3 h-2 bg-green-500'
-                              />
-                              {Math.abs(item.rakingStatus)}
-                           </>
-                        ) : item.rakingStatus < 0 ? (
-                           <>
-                              <div
-                                 style={{
-                                    clipPath: 'polygon(0% 0%, 100% 0%, 50% 100%)'
-                                 }}
-                                 className='w-3 h-2 bg-red-500'
-                              />
-                              {Math.abs(item.rakingStatus)}
-                           </>
-                        ) : (
-                           <span className='text-secondary'>
-                              <svg
-                                 xmlns='http://www.w3.org/2000/svg'
-                                 fill='none'
-                                 viewBox='0 0 24 24'
-                                 strokeWidth={2}
-                                 stroke='currentColor'
-                                 className='w-[18px] h-[18px]'
-                              >
-                                 <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 12h-15' />
-                              </svg>
-                           </span>
-                        )}
-                     </div>
-
+                  <div className='w-full sm:w-[53%] flex items-center gap-x-2'>
                      <div
                         onClick={() => {
                            if (item.isWorldWide) {
@@ -83,12 +33,12 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                               handleClickSong(item.encodeId)
                               setRecentSong((prev) => {
                                  if (prev.length >= 20) {
-                                    return prev.includes(item as any)
-                                       ? ([item, ...prev.filter((i) => i !== (item as any))] as any)
+                                    return prev.includes(item)
+                                       ? [item, ...prev.filter((i) => i !== item)]
                                        : [item, ...prev.filter((_, index) => index !== prev.length - 1)]
                                  } else {
-                                    return prev.includes(item as any)
-                                       ? [item, ...prev.filter((i) => i !== (item as any))]
+                                    return prev.includes(item)
+                                       ? [item, ...prev.filter((i) => i !== item)]
                                        : [item, ...prev]
                                  }
                               })
@@ -162,7 +112,7 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                         <div className='flex items-center gap-x-2'>
                            <h3
                               title={item.title}
-                              className='max-w-[160px] sm:max-w-[250px] truncate capitalize text-sm font-medium'
+                              className='text-white max-w-[150px] sm:max-w-[250px] truncate capitalize text-sm font-medium'
                            >
                               {item.title}
                            </h3>
@@ -172,15 +122,23 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                               </div>
                            )}
                         </div>
-                        <div className='text-xs text-secondary max-w-[160px] sm:max-w-[250px] truncate'>
+                        <div className='text-xs max-w-[150px] sm:max-w-[250px] truncate'>
                            {item.artists?.map((artist, index) => {
                               return index === item.artists.length - 1 ? (
-                                 <Link href={artist.link} key={artist.id} className=' isHover hover:underline'>
+                                 <Link
+                                    href={artist.link}
+                                    key={artist.id}
+                                    className='text-secondary isHover cursor-pointer hover:underline'
+                                 >
                                     {artist.name}
                                  </Link>
                               ) : (
                                  <>
-                                    <Link href={artist.link} key={artist.id} className='isHover hover:underline'>
+                                    <Link
+                                       href={artist.link}
+                                       key={artist.id}
+                                       className='text-secondary isHover cursor-pointer hover:underline'
+                                    >
                                        {artist.name}
                                     </Link>
                                     ,{' '}
@@ -190,24 +148,23 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                         </div>
                      </div>
                   </div>
-                  <div className='flex-1 hidden md:block w-0 self-center basis-auto mr-2'>
+                  <div className='hidden sm:block flex-1 w-0 self-center basis-auto mr-2'>
                      {item.album && (
                         <Link
                            href={item.album.link}
-                           className='isHover block max-w-[250px] truncate hover:underline capitalize'
+                           className='isHover cursor-pointer block max-w-[200px] truncate hover:underline capitalize'
                         >
                            {item.album.title}
                         </Link>
                      )}
                   </div>
-                  <div className='hidden md:block'>
+                  <div>
                      <div className='hidden group-hover:flex items-center gap-x-3'>
                         {item.mvlink && (
                            <Tooltip content={'Xem MV'}>
-                              <Link
-                                 href={item.mvlink}
-                                 className={`p-2 hover:bg-white block hover:bg-opacity-10 rounded-full
-                           `}
+                              <button
+                                 className={`p-2 text-white hover:bg-white hover:bg-opacity-10 rounded-full
+                              `}
                               >
                                  <svg
                                     xmlns='http://www.w3.org/2000/svg'
@@ -223,7 +180,7 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                                        d='M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h1.5C5.496 19.5 6 18.996 6 18.375m-3.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-1.5A1.125 1.125 0 0118 18.375M20.625 4.5H3.375m17.25 0c.621 0 1.125.504 1.125 1.125M20.625 4.5h-1.5C18.504 4.5 18 5.004 18 5.625m3.75 0v1.5c0 .621-.504 1.125-1.125 1.125M3.375 4.5c-.621 0-1.125.504-1.125 1.125M3.375 4.5h1.5C5.496 4.5 6 5.004 6 5.625m-3.75 0v1.5c0 .621.504 1.125 1.125 1.125m0 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m1.5-3.75C5.496 8.25 6 7.746 6 7.125v-1.5M4.875 8.25C5.496 8.25 6 8.754 6 9.375v1.5m0-5.25v5.25m0-5.25C6 5.004 6.504 4.5 7.125 4.5h9.75c.621 0 1.125.504 1.125 1.125m1.125 2.625h1.5m-1.5 0A1.125 1.125 0 0118 7.125v-1.5m1.125 2.625c-.621 0-1.125.504-1.125 1.125v1.5m2.625-2.625c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125M18 5.625v5.25M7.125 12h9.75m-9.75 0A1.125 1.125 0 016 10.875M7.125 12C6.504 12 6 12.504 6 13.125m0-2.25C6 11.496 5.496 12 4.875 12M18 10.875c0 .621-.504 1.125-1.125 1.125M18 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m-12 5.25v-5.25m0 5.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125m-12 0v-1.5c0-.621-.504-1.125-1.125-1.125M18 18.375v-5.25m0 5.25v-1.5c0-.621.504-1.125 1.125-1.125M18 13.125v1.5c0 .621.504 1.125 1.125 1.125M18 13.125c0-.621.504-1.125 1.125-1.125M6 13.125v1.5c0 .621-.504 1.125-1.125 1.125M6 13.125C6 12.504 5.496 12 4.875 12m-1.5 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M19.125 12h1.5m0 0c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h1.5m14.25 0h1.5'
                                     />
                                  </svg>
-                              </Link>
+                              </button>
                            </Tooltip>
                         )}
                         {item.hasLyric && (
@@ -235,7 +192,7 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                                     viewBox='0 0 24 24'
                                     strokeWidth={1.5}
                                     stroke='currentColor'
-                                    className='w-[18px] h-[18px]'
+                                    className='w-[18px] text-white h-[18px]'
                                  >
                                     <path
                                        strokeLinecap='round'
@@ -248,9 +205,9 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                         )}
                         <Tooltip content={library.includes(item.encodeId) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}>
                            <button
-                              onClick={(e) => handleAddLibrary(e, item.encodeId, null, item as unknown as SongItem)}
-                              className={`hover:bg-white hover:bg-opacity-10 rounded-full p-1.5 ${
-                                 library.includes(item.encodeId) && 'text-tprimary'
+                              onClick={(e) => handleAddLibrary(e, item.encodeId, null, item)}
+                              className={`hover:bg-white text-white hover:bg-opacity-10 rounded-full p-1.5 ${
+                                 library.includes(item.encodeId) && '!text-tprimary'
                               }`}
                            >
                               {library.includes(item.encodeId) ? (
@@ -278,24 +235,6 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                                     />
                                  </svg>
                               )}
-                           </button>
-                        </Tooltip>
-                        <Tooltip content={'Khác'}>
-                           <button className='p-2 hover:bg-white hover:bg-opacity-10 rounded-full'>
-                              <svg
-                                 xmlns='http://www.w3.org/2000/svg'
-                                 fill='none'
-                                 viewBox='0 0 24 24'
-                                 strokeWidth={1.5}
-                                 stroke='currentColor'
-                                 className='w-[18px] h-[18px]'
-                              >
-                                 <path
-                                    strokeLinecap='round'
-                                    strokeLinejoin='round'
-                                    d='M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z'
-                                 />
-                              </svg>
                            </button>
                         </Tooltip>
                      </div>

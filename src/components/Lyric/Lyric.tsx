@@ -12,6 +12,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css/bundle'
 import Loading from '../Loading/Loading'
 import ItemLyric from '../ItemLyric/ItemLyric'
+import Link from 'next/link'
 export default function Lyric() {
    const { isShowLyric, setIsShowLyric, currentSongId } = useContext(AppContext)
    const [isFullScreen, setIsFullScreen] = useState<boolean>(false)
@@ -25,6 +26,8 @@ export default function Lyric() {
    })
 
    const thumbnailM = infoSongData.data?.data.data.thumbnailM
+   const name = infoSongData.data?.data.data.title
+   const artists = infoSongData.data?.data.data.artists
    // Toggle full screen
    const toggleShowScreen = () => {
       if (!document.fullscreenElement) {
@@ -72,13 +75,46 @@ export default function Lyric() {
                </Swiper>
             </ul>
          )}
-         <header className='flex items-center justify-end h-[76px] px-5'>
-            <h1 className='text-2xl font-bold mr-[30%] relative'>Lời bài hát</h1>
+         <header className='flex items-center justify-between min-[900px]:justify-end h-[76px] px-5'>
+            <div className='flex relative z-20 items-center min-[900px]:hidden gap-x-3'>
+               <Image
+                  alt={name as string}
+                  src={thumbnailM as string}
+                  width={50}
+                  height={50}
+                  className='w-[50px] h-[50px] rounded-full object-cover'
+               />
+               <div className='flex flex-col'>
+                  <span>{name}</span>
+                  <div className='text-secondary text-xs my-1'>
+                     {artists?.map((artist, index) => {
+                        return index === artists.length - 1 ? (
+                           <Link
+                              href={artist.link}
+                              key={artist.id}
+                              className='text-secondary isHover cursor-pointer hover:underline'
+                           >
+                              {artist.name}
+                           </Link>
+                        ) : (
+                           <Link
+                              href={artist.link}
+                              key={artist.id}
+                              className='text-secondary isHover cursor-pointer hover:underline'
+                           >
+                              {`${artist.name}, `}
+                           </Link>
+                        )
+                     })}
+                  </div>
+               </div>
+            </div>
+            <h1 className='text-2xl font-bold mr-[30%] relative hidden min-[900px]:block'>Lời bài hát</h1>
             <div className='flex items-center gap-x-3'>
                <Tooltip bottomCenter content={isFullScreen ? 'Thoát' : 'Toàn màn hình'}>
                   <button
                      onClick={toggleShowScreen}
-                     className='flex items-center justify-center bg-white bg-opacity-10 w-10 h-10 rounded-full hover:bg-opacity-20'
+                     className='hidden min-[900px]:flex items-center justify-center bg-white bg-opacity-10 w-10 h-10 rounded-full hover:bg-opacity-20'
                   >
                      {isFullScreen ? (
                         <svg
@@ -173,9 +209,9 @@ export default function Lyric() {
          </header>
 
          <div className='flex z-10 absolute left-0 right-0 bottom-[90px] top-[76px] items-center p-10 gap-x-24'>
-            <div className='w-[30%] aspect-square relative overflow-hidden rounded-lg'>
+            <div className='hidden min-[900px]:block w-[30%] aspect-square relative overflow-hidden rounded-lg'>
                <Image
-                  alt=''
+                  alt={name as string}
                   src={thumbnailM as string}
                   fill
                   sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
@@ -183,7 +219,7 @@ export default function Lyric() {
                />
             </div>
             <ul
-               className={`w-[70%] h-[calc(100vh-166px)] overflow-auto transition-all duration-500 ${
+               className={`w-full min-[900px]:w-[70%] h-[calc(100vh-166px)] overflow-auto transition-all duration-500 ${
                   textSize === 1 ? 'text-3xl' : textSize === 2 ? 'text-[35px]' : 'text-[40px]'
                } leading-loose font-semibold`}
             >

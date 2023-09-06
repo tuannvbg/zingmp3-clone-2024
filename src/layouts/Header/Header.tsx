@@ -105,7 +105,7 @@ export default function Header() {
 
    return (
       <div
-         className={`fixed flex items-center gap-x-2 transition-all justify-between px-3 md:px-14 top-0 right-0 left-0 md:left-[70px] xl:left-[240px] ${
+         className={`fixed flex items-center gap-x-2 transition-all justify-between px-3 sm:px-8 min-[900px]:px-14 top-0 right-0 left-0 min-[900px]:left-[70px] xl:left-[240px] ${
             isScrolled ? 'bg-primary shadow-[0_3px_5px_rgba(0,_0,_0,_0.1)]' : 'bg-transparent'
          }  h-[70px] z-40`}
       >

@@ -12,7 +12,7 @@ export default function ArtistList({ artistList }: { artistList: Artist[] }) {
    const { follows, handleClickFollow } = useFollow()
    if (!artistList) return <Loading />
    return (
-      <div className='grid grid-cols-4 gap-7'>
+      <div className='grid md:grid-rows-3 grid-cols-2 lg:grid-cols-4 gap-y-7 gap-x-5 md:gap-7'>
          {artistList.map((artist) => (
             <div key={artist.id} className='flex flex-col text-center'>
                <Link

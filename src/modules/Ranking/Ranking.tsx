@@ -26,7 +26,7 @@ export default function Ranking() {
    }, [rankingList, setPlayList])
    if (!playList) return <Loading />
    return (
-      <div className={`mt-[70px] ${currentSongId ? 'pb-28' : 'pb-10'}`}>
+      <div className={`mt-[70px] ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>
          <div className='relative w-full pt-[20%]'>
             <Image
                fill
@@ -36,10 +36,10 @@ export default function Ranking() {
                src={data?.data.data.banner as string}
             />
          </div>
-         <div className='px-14'>
+         <div className='px-3 sm:px-8 lg:px-14'>
             <div className='pt-[30px] flex items-center gap-x-3 pb-5'>
-               <h1 className='text-[40px] font-bold'>BXH Nhạc Mới</h1>
-               <div className='w-9 h-9 rounded-full bg-white flex items-center justify-center'>
+               <h1 className='text-3xl sm:text-[40px] font-bold'>BXH Nhạc Mới</h1>
+               <div className='w-9 h-9 flex-shrink-0 rounded-full bg-white flex items-center justify-center'>
                   <div
                      style={{
                         clipPath: 'polygon(0% 0%, 100% 50%, 0% 100%)'

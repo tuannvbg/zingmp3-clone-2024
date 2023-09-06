@@ -44,7 +44,7 @@ export default function Artist() {
 
    if (!artistData || !sections) return <Loading />
    return (
-      <div className={`${currentSongId ? 'pb-28' : 'pb-10'}`}>
+      <div className={`${currentSongId ? 'pb-40 md:pb-32' : 'pb-24 md:pb-20'}`}>
          <div className='relative h-[410px]'>
             <Image src={artistData.cover} alt={artistData.name} fill priority className='w-full h-full object-cover' />
             <div
@@ -53,22 +53,22 @@ export default function Artist() {
                }}
                className='absolute inset-0 z-10'
             />
-            <div className='absolute bottom-6 left-14 right-14 z-20'>
+            <div className='absolute bottom-6 left-5 right-5 md:left-14 md:right-14 z-20'>
                <div className='flex items-center gap-x-5 mb-5'>
                   <h1
                      style={{
                         textShadow: '0 1px 4px rgba(0,0,0,.16)'
                      }}
-                     className='font-bold text-6xl'
+                     className='font-bold text-3xl md:text-6xl'
                   >
                      {artistData.name}
                   </h1>
-                  <div className='w-[52px] h-[52px] rounded-full bg-white flex items-center justify-center'>
+                  <div className='md:w-[52px] md:h-[52px] w-8 h-8 rounded-full bg-white flex items-center justify-center'>
                      <div
                         style={{
                            clipPath: 'polygon(0% 0%, 100% 50%, 0% 100%)'
                         }}
-                        className='bg-tprimary w-4 translate-x-[1px] h-5'
+                        className='bg-tprimary w-3 h-4 md:w-4 translate-x-[1px] md:h-5'
                      />
                   </div>
                </div>
@@ -119,7 +119,7 @@ export default function Artist() {
                            </div>
                         }
                      >
-                        <button className='w-[41px] h-11'>
+                        <button className='w-[41px] md:block hidden h-11'>
                            <svg width='100%' height='100%' viewBox='0 0 38 40'>
                               <g fill='none' fillRule='evenodd'>
                                  <path
@@ -134,7 +134,7 @@ export default function Artist() {
                </div>
             </div>
          </div>
-         <div className='px-14'>
+         <div className='px-3 sm:px-8 lg:px-14'>
             {/* Bài hát nổi bật */}
             <div className='flex items-center justify-between mt-12 mb-5'>
                <h2 className='text-xl font-bold'>{sections[0].title}</h2>
@@ -155,7 +155,7 @@ export default function Artist() {
                   </svg>
                </Link>
             </div>
-            <ul className='grid grid-cols-2 gap-x-7'>
+            <ul className='grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-7'>
                {playList &&
                   playList.slice(0, 6).map((item) => (
                      <li
@@ -256,7 +256,7 @@ export default function Artist() {
                               <div className='flex items-center gap-x-2'>
                                  <h3
                                     title={item.title}
-                                    className='text-white max-w-[180px] truncate capitalize text-sm font-medium'
+                                    className='text-white max-w-[150px] sm:max-w-[180px] truncate capitalize text-sm font-medium'
                                  >
                                     {item.title}
                                  </h3>
@@ -266,7 +266,7 @@ export default function Artist() {
                                     </div>
                                  )}
                               </div>
-                              <div className='text-xs max-w-[200px] truncate'>
+                              <div className='text-xs max-w-[150px] sm:max-w-[180px] truncate'>
                                  {item.artists?.map((artist, index) => {
                                     return index === (item.artists as Artist[]).length - 1 ? (
                                        <Link
@@ -392,7 +392,7 @@ export default function Artist() {
                ) : (
                   <>
                      <h2 className='text-xl mt-12 mb-5 font-bold'>{section?.title}</h2>
-                     <div className='grid grid-cols-4 gap-7'>
+                     <div className='grid sm:grid-cols-3 grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-7'>
                         {section?.items.slice(0, 4).map((artist) => (
                            <div key={artist.id} className='flex flex-col text-center'>
                               <Link
@@ -480,7 +480,7 @@ export default function Artist() {
             {artistData.biography && (
                <>
                   <h2 className='text-xl mt-12 mb-5 font-bold'>Về {artistData.name}</h2>
-                  <div className='grid grid-cols-2 gap-7'>
+                  <div className='grid grid-cols-1 sm:grid-cols-2 gap-7'>
                      <div className='h-[297px] relative'>
                         <Image
                            src={artistData.thumbnailM}

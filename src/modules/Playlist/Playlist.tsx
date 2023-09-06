@@ -9,14 +9,12 @@ import useClickOutSide from '@/hooks/useClickOutSide'
 import useFollow from '@/hooks/useFollow'
 import useGetPlaylist from '@/hooks/useGetPlaylist'
 import usePlayMusic from '@/hooks/usePlayMusic'
-import { SongItem } from '@/types/playlist.type'
 import { formatDateFromTimestamp, formatNumberWithK, secondsToHoursMinutes, timeFormatter } from '@/utils/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 
 export default function Playlist({ params }: { params: { id: string } }) {
-   const { follows, handleClickFollow } = useFollow()
    const [isChecked, setIsChecked] = useState<string[]>([]) //check vào các bài nhạc
    const [openSortSong, setOpenSortSong] = useState(false) //toggle bảng sắp xếp bài hát
    const { nodeRef } = useClickOutSide(() => setOpenSortSong(false)) //tắt bảng sắp xếp bài hát
@@ -99,9 +97,9 @@ export default function Playlist({ params }: { params: { id: string } }) {
    if (!playlist) return <Loading />
 
    return (
-      <div className={`mt-[70px] px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
-         <div className='pt-[30px] flex items-start gap-x-7'>
-            <div className='w-[33%] sticky top-[100px] text-center'>
+      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>
+         <div className='pt-[30px] flex flex-col min-[900px]:flex-row items-start gap-7'>
+            <div className='min-[900px]:w-[33%] w-[70%] sm:w-[50%] mx-auto min-[900px]:sticky min-[900px]:top-[100px] text-center'>
                <div
                   onClick={handleClickSongBanner}
                   className={`relative shadow-lg aspect-square overflow-hidden group cursor-pointer ${
@@ -167,19 +165,11 @@ export default function Playlist({ params }: { params: { id: string } }) {
                <div className='text-secondary text-xs my-1'>
                   {playlist.artists?.map((artist, index) => {
                      return index === playlist.artists.length - 1 ? (
-                        <Link
-                           href={artist.link}
-                           key={artist.id}
-                           className='text-secondary isHover cursor-pointer hover:underline'
-                        >
+                        <Link href={artist.link} key={artist.id} className='isHover cursor-pointer hover:underline'>
                            {artist.name}
                         </Link>
                      ) : (
-                        <Link
-                           href={artist.link}
-                           key={artist.id}
-                           className='text-secondary isHover cursor-pointer hover:underline'
-                        >
+                        <Link href={artist.link} key={artist.id} className='isHover cursor-pointer hover:underline'>
                            {`${artist.name}, `}
                         </Link>
                      )
@@ -277,12 +267,12 @@ export default function Playlist({ params }: { params: { id: string } }) {
                   </Tooltip>
                </div>
             </div>
-            <div className='w-[67%]'>
+            <div className='min-[900px]:w-[67%] w-full'>
                <p>
                   <span className='text-secondary'>Lời tựa</span> {playlist.description}
                </p>
-               <div className='flex items-center text-secondary text-xs mt-3 p-2.5 border-b border-b-gray-800'>
-                  <div className='w-[53%] flex items-center gap-x-3'>
+               <div className='flex items-center text-xs mt-3 p-2.5 border-b border-b-gray-800'>
+                  <div className='sm:w-[53%] w-full flex items-center gap-x-3'>
                      <div className='relative'>
                         <button
                            ref={nodeRef}
@@ -331,8 +321,8 @@ export default function Playlist({ params }: { params: { id: string } }) {
                      </div>
                      BÀI HÁT
                   </div>
-                  <div className='flex-1'>ALBUM</div>
-                  <div>THỜI GIAN</div>
+                  <div className='flex-1 sm:block hidden'>ALBUM</div>
+                  <div className='whitespace-nowrap'>THỜI GIAN</div>
                </div>
                {/* list nhạc */}
                <ul>
@@ -344,9 +334,9 @@ export default function Playlist({ params }: { params: { id: string } }) {
                            className={`flex group hover:bg-white hover:bg-opacity-10  select-none ${
                               isChecked.includes(item.encodeId) ||
                               (currentSongId === item.encodeId && 'bg-white bg-opacity-10')
-                           } rounded-md items-center text-secondary text-xs p-2.5 border-b border-b-gray-800`}
+                           } rounded-md items-center text-xs p-2.5 border-b border-b-gray-800`}
                         >
-                           <div className='w-[53%] flex items-center gap-x-2'>
+                           <div className='w-full sm:w-[53%] flex items-center gap-x-2'>
                               <label
                                  className={`cursor-pointer hidden group-hover:block translate-y-[3px] ${
                                     isChecked.includes(item.encodeId) && '!block'
@@ -485,7 +475,7 @@ export default function Playlist({ params }: { params: { id: string } }) {
                                  <div className='flex items-center gap-x-2'>
                                     <h3
                                        title={item.title}
-                                       className='max-w-[180px] truncate capitalize text-sm font-medium'
+                                       className='max-w-[120px] lg:max-w-[200px] truncate capitalize text-sm font-medium'
                                     >
                                        {item.title}
                                     </h3>
@@ -495,13 +485,13 @@ export default function Playlist({ params }: { params: { id: string } }) {
                                        </div>
                                     )}
                                  </div>
-                                 <div className='text-xs max-w-[200px] truncate'>
+                                 <div className='text-xs text-secondary max-w-[120px] lg:max-w-[200px] truncate'>
                                     {item.artists?.map((artist, index) => {
                                        return index === item.artists.length - 1 ? (
                                           <Link
                                              href={artist.link}
                                              key={artist.id}
-                                             className='text-secondary isHover cursor-pointer hover:underline'
+                                             className='isHover cursor-pointer hover:underline'
                                           >
                                              {artist.name}
                                           </Link>
@@ -510,7 +500,7 @@ export default function Playlist({ params }: { params: { id: string } }) {
                                              <Link
                                                 href={artist.link}
                                                 key={artist.id}
-                                                className='text-secondary isHover cursor-pointer hover:underline'
+                                                className='isHover cursor-pointer hover:underline'
                                              >
                                                 {artist.name}
                                              </Link>
@@ -521,11 +511,11 @@ export default function Playlist({ params }: { params: { id: string } }) {
                                  </div>
                               </div>
                            </div>
-                           <div className='flex-1 w-0 self-center basis-auto mr-2'>
+                           <div className='flex-1 sm:block hidden w-0 self-center basis-auto mr-2'>
                               {item.album && (
                                  <Link
                                     href={item.album.link}
-                                    className='isHover cursor-pointer block max-w-[200px] truncate hover:underline capitalize'
+                                    className='isHover cursor-pointer block max-w-[120px] lg:max-w-[200px] truncate hover:underline capitalize'
                                  >
                                     {item.album.title}
                                  </Link>

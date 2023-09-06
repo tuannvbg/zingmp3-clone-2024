@@ -62,7 +62,7 @@ export default function Home() {
 
    if (!bannerList) return <Loading />
    return (
-      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-32 md:pb-28' : 'pb-14 md:pb-10'}`}>
+      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>
          {/* banner */}
          <div className='pt-[30px]'>
             <Swiper

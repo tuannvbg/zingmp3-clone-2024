@@ -42,10 +42,10 @@ export default function ZingChartWeek({ params }: { params: { id: string } }) {
    }, [params.id, setPlayList, zingChartWeeks, playList])
    if (!playList || !zingChartWeeks) return <Loading />
    return (
-      <div className={`mt-[70px] px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
+      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>
          <div className='pt-[30px] flex items-center gap-x-3 pb-5'>
-            <h1 className='text-[40px] font-bold'>Bảng Xếp Hạng Tuần</h1>
-            <div className='w-9 h-9 rounded-full bg-white flex items-center justify-center'>
+            <h1 className='text-3xl sm:text-[40px] font-bold'>Bảng Xếp Hạng Tuần</h1>
+            <div className='w-9 h-9 flex-shrink-0 rounded-full bg-white flex items-center justify-center'>
                <div
                   style={{
                      clipPath: 'polygon(0% 0%, 100% 50%, 0% 100%)'
@@ -54,10 +54,10 @@ export default function ZingChartWeek({ params }: { params: { id: string } }) {
                />
             </div>
          </div>
-         <div className='flex items-center gap-x-10'>
+         <div className='flex text-xl font-bold sm:text-2xl sm:font-extrabold items-center flex-wrap gap-x-10'>
             <Link
                href={zingChartWeeks.vn.link}
-               className={`py-3.5 text-2xl font-extrabold ${
+               className={`py-3.5 ${
                   playList === (zingChartWeeks.vn.items as SongItem[]) && 'border-b-[3px] border-b-tprimary'
                }`}
             >
@@ -65,7 +65,7 @@ export default function ZingChartWeek({ params }: { params: { id: string } }) {
             </Link>
             <Link
                href={zingChartWeeks.us.link}
-               className={`py-3.5 text-2xl font-extrabold ${
+               className={`py-3.5 ${
                   playList === (zingChartWeeks.us.items as SongItem[]) && 'border-b-[3px] border-b-tprimary'
                }`}
             >
@@ -73,7 +73,7 @@ export default function ZingChartWeek({ params }: { params: { id: string } }) {
             </Link>
             <Link
                href={zingChartWeeks.korea.link}
-               className={`py-3.5 text-2xl font-extrabold ${
+               className={`py-3.5 ${
                   playList === (zingChartWeeks.korea.items as SongItem[]) && 'border-b-[3px] border-b-tprimary'
                }`}
             >

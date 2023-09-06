@@ -29,7 +29,7 @@ export default function ZingChart() {
    if (!zingchartData) return <Loading />
    return (
       <div className={`mt-[70px]`}>
-         <div className='px-14'>
+         <div className='px-3 sm:px-8 lg:px-14'>
             <div className='flex items-center gap-x-3 mb-3 pt-[30px]'>
                <h1 className='text-[40px] font-bold text-gradient'>#zingchart</h1>
                <div className='w-9 h-9 rounded-full bg-white flex items-center justify-center'>
@@ -57,7 +57,11 @@ export default function ZingChart() {
                </button>
             </div>
          </div>
-         <div className={`bg-tertiary mt-10 px-14 py-5 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
+         <div
+            className={`bg-tertiary mt-10 px-3 sm:px-8 min-[900px]:px-14 py-5 ${
+               currentSongId ? 'pb-32 min-w-[900px]:pb-28' : 'pb-14 min-w-[900px]:pb-10'
+            }`}
+         >
             <h2 className='text-[40px] font-bold mb-5'>Bảng Xếp Hạng Tuần</h2>
             <div className='flex flex-col gap-y-7'>
                <ZingChartRanking title='Việt Nam' weekChartCountry={weekChart?.vn as Vn} />
