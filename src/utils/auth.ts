@@ -4,11 +4,15 @@ export const LocalStorageEventTarget = new EventTarget()
 
 //nếu có access token trong local storage thì login rồi(set isAuthenticated là true)
 export const setAccessTokenFromLS = (access_token: string) => {
-   localStorage.setItem('access_token', access_token)
+   if (typeof window !== 'undefined') {
+      localStorage.setItem('access_token', access_token)
+   }
 }
 
 export const setRefreshTokenFromLS = (refresh_token: string) => {
-   localStorage.setItem('refresh_token', refresh_token)
+   if (typeof window !== 'undefined') {
+      localStorage.setItem('refresh_token', refresh_token)
+   }
 }
 
 //khi log out thì bỏ đi
@@ -22,15 +26,27 @@ export const clearLS = () => {
    LocalStorageEventTarget.dispatchEvent(clearLSEvent)
 }
 // get phải return còn set,remove thì k
-export const getAccessTokenFromLS = () => localStorage.getItem('access_token') || ''
-export const getRefreshTokenFromLS = () => localStorage.getItem('refresh_token') || ''
+export const getAccessTokenFromLS = () => {
+   if (typeof window !== 'undefined') {
+      return localStorage.getItem('access_token') || ''
+   }
+}
+export const getRefreshTokenFromLS = () => {
+   if (typeof window !== 'undefined') {
+      return localStorage.getItem('refresh_token') || ''
+   }
+}
 
 //khi lưu obj user vào thì json.stringify còn lấy ra thì json.parse
 export const setProfileFromLS = (profile: User) => {
-   localStorage.setItem('profile', JSON.stringify(profile))
+   if (typeof window !== 'undefined') {
+      localStorage.setItem('profile', JSON.stringify(profile))
+   }
 }
 
 export const getProfileFromLS = () => {
-   const result = localStorage.getItem('profile')
-   return result ? JSON.parse(result) : null
+   if (typeof window !== 'undefined') {
+      const result = localStorage.getItem('profile')
+      return result ? JSON.parse(result) : null
+   }
 }

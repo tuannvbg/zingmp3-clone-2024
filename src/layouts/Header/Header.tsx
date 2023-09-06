@@ -25,7 +25,6 @@ const linkSearch: string[] = [
 ]
 
 export default function Header() {
-   const history = window.history
    const [showContextMenu, setShowContextMenu] = useState<any>(null)
    const [open, setOpen] = useState<boolean>(false)
    const [openSearch, setOpenSearch] = useState<boolean>(false)
