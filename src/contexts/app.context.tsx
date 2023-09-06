@@ -117,7 +117,10 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
    )
    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialAppContext.isAuthenticated)
    const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
-   const [artistLibrary, setArtistLibrary] = useLocalStorage<Artist[] | []>('artistLibrary', [])
+   const [artistLibrary, setArtistLibrary] = useLocalStorage<Artist[] | []>(
+      'artistLibrary',
+      initialAppContext.artistLibrary
+   )
    const [isShowLyric, setIsShowLyric] = useState<boolean>(initialAppContext.isShowLyric)
    const [currentTimeAudio, setCurrentTimeAudio] = useState<number>(initialAppContext.currentTimeAudio)
    return (

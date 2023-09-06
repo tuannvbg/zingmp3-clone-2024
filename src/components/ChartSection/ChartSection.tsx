@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Line } from 'react-chartjs-2'
+import { v4 as uuidv4 } from 'uuid'
 import {
    Chart as ChartJS,
    CategoryScale,
@@ -292,12 +293,15 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
             )}
             <div className={`${zingchartPage ? 'w-full' : 'w-full xl:w-[60%]'} relative`}>
                <Line ref={chartRef} style={{ height: '300px' }} data={data} options={options as any} />
-               <div
+               <ul
                   className='absolute z-50'
                   style={{ top: tooltipState.top, left: tooltipState.left, opacity: tooltipState.opacity }}
                >
                   {rank && selected && (
-                     <li className={`flex select-none rounded-md items-center text-white p-2.5 bg-red-500`}>
+                     <li
+                        key={uuidv4()}
+                        className={`flex select-none rounded-md items-center text-white p-2.5 bg-red-500`}
+                     >
                         <div className='flex items-center gap-x-2 w-full'>
                            <div className='relative cursor-pointer overflow-hidden w-[40px] flex-shrink-0 h-[40px] rounded'>
                               <Image
@@ -338,7 +342,7 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                         </div>
                      </li>
                   )}
-               </div>
+               </ul>
             </div>
          </div>
          <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal} />
