@@ -15,7 +15,10 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
    title: 'Zing MP3 - Nghe nhạc mới, HOT nhất và tải nhạc miễn phí',
    description:
-      'Tận hưởng âm nhạc chất lượng cao 320kbps miễn phí với hàng triệu bài hát mới, playlist nhạc HOT, bảng xếp hạng #zingchart.'
+      'Tận hưởng âm nhạc chất lượng cao 320kbps miễn phí với hàng triệu bài hát mới, playlist nhạc HOT, bảng xếp hạng #zingchart.',
+   openGraph: {
+      images: 'https://static-zmp3.zadn.vn/skins/common/logo600.png'
+   }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

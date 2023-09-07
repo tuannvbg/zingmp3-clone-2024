@@ -12,7 +12,8 @@ const nextConfig = {
       ],
       formats: ['image/webp'],
       minimumCacheTTL: 60
-   }
+   },
+   swcMinify: false
 }
 
 module.exports = nextConfig
