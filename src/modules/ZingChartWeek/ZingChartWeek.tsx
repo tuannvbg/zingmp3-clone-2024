@@ -42,7 +42,7 @@ export default function ZingChartWeek({ params }: { params: { id: string } }) {
    }, [params.id, setPlayList, zingChartWeeks, playList])
    if (!playList || !zingChartWeeks) return <Loading />
    return (
-      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>
+      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-20 md:pb-16'}`}>
          <div className='pt-[30px] flex items-center gap-x-3 pb-5'>
             <h1 className='text-3xl sm:text-[40px] font-bold'>Bảng Xếp Hạng Tuần</h1>
             <div className='w-9 h-9 flex-shrink-0 rounded-full bg-white flex items-center justify-center'>

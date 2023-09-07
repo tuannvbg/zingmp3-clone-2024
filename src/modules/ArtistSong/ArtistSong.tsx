@@ -20,7 +20,7 @@ export default function ArtistSong() {
    const songs = artistData?.sections[0].items
    if (!artistData || !songs) return <Loading />
    return (
-      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>
+      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-20 md:pb-16'}`}>
          <div className='flex items-center gap-x-3 py-5'>
             <h1
                style={{

@@ -214,7 +214,7 @@ export default function Header() {
                      {isSubmitting && (
                         <div className='pr-2'>
                            <Image
-                              src={'https://i.gifer.com/ZKZg.gif'}
+                              src={'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'}
                               width={20}
                               height={20}
                               className='w-4 h-4 object-cover'

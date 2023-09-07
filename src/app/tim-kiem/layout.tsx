@@ -44,7 +44,7 @@ export default function SearchLayout({ children }: { children: React.ReactNode }
    ]
 
    return (
-      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>
+      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-20 md:pb-16'}`}>
          <div className='flex justify-center items-center border-b border-b-gray-700 mb-7'>
             <h1 className='text-2xl font-bold hidden min-[900px]:block pr-5 border-r border-r-gray-700'>
                Kết Quả Tìm Kiếm

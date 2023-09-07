@@ -11,7 +11,7 @@ export default function ItemLyric({ lyric }: { lyric: Sentence }) {
 
    const scrollActive = useCallback(() => {
       setTimeout(() => {
-         if (!liRef.current) return
+         if (!liRef.current || document.body) return
          smoothScrollIntoView(liRef.current, {
             block: 'center',
             behavior: 'smooth'

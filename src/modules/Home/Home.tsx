@@ -60,7 +60,7 @@ export default function Home() {
 
    if (!bannerList) return <Loading />
    return (
-      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>
+      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-20 md:pb-16'}`}>
          {/* banner */}
          <div className='pt-[30px]'>
             <Swiper
@@ -347,7 +347,7 @@ export default function Home() {
                         {isLoadingSong && currentSongId === item.encodeId && (
                            <div className='absolute inset-0 flex items-center justify-center z-20'>
                               <Image
-                                 src={'https://i.gifer.com/ZKZg.gif'}
+                                 src={'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'}
                                  width={20}
                                  height={20}
                                  className='w-8 h-8 object-cover'

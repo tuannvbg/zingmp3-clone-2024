@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/animations/perspective-extreme.css'
 import { AppContext } from '@/contexts/app.context'
 import Image from 'next/image'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Tooltip from '../Tooltip/Tooltip'
 import { useQuery } from '@tanstack/react-query'
 import { getInfoSong, getLyric } from '@/apis/home.api'
@@ -47,6 +47,14 @@ export default function Lyric() {
    })
    const lyrics = data?.data.data?.sentences
    const imgBgViewFull = data?.data.data?.defaultIBGUrls
+
+   useEffect(() => {
+      if (isShowLyric) {
+         document.body.classList.add('hide-scrollbar')
+      } else {
+         document.body.classList.remove('hide-scrollbar')
+      }
+   }, [isShowLyric])
    return (
       <div
          className={`fixed inset-0 bg-modal z-[1000] transition-all duration-500 ${

@@ -220,7 +220,7 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                                  {isLoadingSong && currentSongId === item.encodeId && (
                                     <div className='absolute inset-0 flex items-center justify-center z-20'>
                                        <Image
-                                          src={'https://i.gifer.com/ZKZg.gif'}
+                                          src={'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'}
                                           width={20}
                                           height={20}
                                           className='w-5 h-5 object-cover'

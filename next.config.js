@@ -8,7 +8,8 @@ const nextConfig = {
          'i.gifer.com',
          'photo-playlist-zmp3.zmdcdn.me',
          'zjs.zmdcdn.me',
-         'api-ecom.duthanhduoc.com'
+         'api-ecom.duthanhduoc.com',
+         'media.tenor.com'
       ],
       formats: ['image/webp'],
       minimumCacheTTL: 60

@@ -63,7 +63,6 @@ body {
       background-color: rgba(255, 255, 255, 0.1);
    }
 }
-
 body.Rosé {
    --primary: #061c4f;
    --tprimary: #3560f5;
@@ -214,7 +213,6 @@ body.IU {
 .Toastify__toast {
    background-color: var(--tertiary) !important;
 }
-
 // ////////////////////////////////////////////////////////////////////////////
 .hide-scrollbar::-webkit-scrollbar {
    width: 0px;

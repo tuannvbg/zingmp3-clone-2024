@@ -22,7 +22,7 @@ export default function SongRelease() {
    const releaseList: ReleaseType = data?.data.data.items[2].items //mới phát hành
    if (!releaseList) return <Loading />
    return (
-      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>
+      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-20 md:pb-16'}`}>
          <div className='pt-[30px] flex flex-wrap items-center gap-x-3'>
             <h1 className='text-[40px] font-bold'>Mới Phát Hành</h1>
             <div className='w-9 h-9 rounded-full bg-white flex items-center justify-center'>
@@ -146,7 +146,7 @@ export default function SongRelease() {
                            {isLoadingSong && currentSongId === item.encodeId && (
                               <div className='absolute inset-0 flex items-center justify-center z-20'>
                                  <Image
-                                    src={'https://i.gifer.com/ZKZg.gif'}
+                                    src={'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'}
                                     width={20}
                                     height={20}
                                     className='w-5 h-5 object-cover'
