@@ -250,10 +250,10 @@ export default function PlayerControl() {
                   onClick={() => setIsShowLyric(true)}
                />
                <div className='flex flex-col'>
-                  <strong className='font-medium capitalize max-w-[150px] max-[425px]:max-w-[100px] sm:max-w-[250px] truncate'>
+                  <strong className='font-medium capitalize max-w-[150px] max-[425px]:max-w-[100px] sm:max-w-[250px] min-[900px]:max-w-[150px] xl:max-w-[250px] truncate'>
                      {infoSong?.title}
                   </strong>
-                  <span className='text-xs text-secondary truncate max-w-[150px] max-[425px]:max-w-[100px] sm:max-w-[250px]'>
+                  <span className='text-xs text-secondary truncate max-w-[150px] max-[425px]:max-w-[100px] sm:max-w-[250px] min-[900px]:max-w-[150px] xl:max-w-[250px]'>
                      {infoSong.artists?.map((artist, index) => {
                         return index === infoSong.artists.length - 1 ? (
                            <Link

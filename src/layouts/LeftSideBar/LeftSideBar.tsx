@@ -134,7 +134,7 @@ export default function LeftSideBar() {
                showSideBar ? 'max-w-[240px]' : 'max-w-[70px]'
             } transition-all duration-300 xl:max-w-[240px] fixed left-0 top-0 ${
                currentSongId ? 'bottom-[90px]' : 'bottom-0'
-            } bg-modal xl:bg-white xl:bg-opacity-5 hidden min-[900px]:block`}
+            } bg-modal xl:bg-white xl:bg-opacity-5 z-50 hidden min-[900px]:block`}
          >
             <div className={`py-4 xl:pl-7 ${showSideBar && 'pl-7'}`}>
                <Link href={'/'} className='inline-block'>
