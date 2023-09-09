@@ -41,6 +41,7 @@ export default function Register() {
             setIsAuthenticated(true)
             setProfile(data.data.data.user)
             toast.success('Đăng ký thành công')
+            router.push('/mymusic/song')
          },
          onError: (error) => {
             //nếu có lỗi trả về từ axios thì sẽ lấy ra message lỗi từ axios gắn vào setError của react-hook-form để hiển thị ra ngoài input
@@ -66,7 +67,8 @@ export default function Register() {
       if (isAuthenticated) {
          router.push('/mymusic/song')
       }
-   }, [isAuthenticated, router])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [isAuthenticated])
 
    return (
       <div className={`mt-[70px] text-center px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>

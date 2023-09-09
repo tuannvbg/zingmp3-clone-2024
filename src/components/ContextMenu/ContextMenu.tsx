@@ -49,7 +49,8 @@ const ContextMenu = ({ left, top, onClose }: Props) => {
          document.body.removeEventListener('wheel', onClose)
          window.removeEventListener('resize', onClose)
       }
-   }, [onClose])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [])
 
    return (
       <ul

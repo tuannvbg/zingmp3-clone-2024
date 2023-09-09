@@ -11,5 +11,6 @@ export default function useProtectedRoute() {
          router.push('/login')
          toast.warning('Vui lòng đăng nhập')
       }
-   }, [isAuthenticated, router])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [isAuthenticated])
 }

@@ -39,7 +39,8 @@ export default function ZingChartWeek({ params }: { params: { id: string } }) {
          setPlayList(zingChartWeeks?.korea.items as SongItem[])
          setWeek(zingChartWeeks?.korea)
       }
-   }, [params.id, setPlayList, zingChartWeeks, playList])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [params.id, zingChartWeeks, playList])
    if (!playList || !zingChartWeeks) return <Loading />
    return (
       <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-20 md:pb-16'}`}>

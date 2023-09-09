@@ -32,7 +32,8 @@ export default function SearchAll() {
       if (songs) {
          setPlayList(songs)
       }
-   }, [setPlayList, songs])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [songs])
    const top = searchData.top
    const playlists = searchData.playlists
    const videos = searchData.videos

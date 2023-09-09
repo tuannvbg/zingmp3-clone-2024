@@ -5,7 +5,7 @@ import Loading from '@/components/Loading/Loading'
 import { AppContext } from '@/contexts/app.context'
 import { HomeListType } from '@/types/homelist.type'
 import { useQuery } from '@tanstack/react-query'
-import React, { Fragment, useContext, useEffect } from 'react'
+import React, { Fragment, useContext } from 'react'
 
 export default function Top100() {
    const { currentSongId } = useContext(AppContext)

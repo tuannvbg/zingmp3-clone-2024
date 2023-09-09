@@ -25,7 +25,8 @@ export default function ZingChart() {
       if (zingchartData) {
          setPlayList(zingchartData as SongItem[])
       }
-   }, [setPlayList, zingchartData])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [zingchartData])
    if (!zingchartData) return <Loading />
    return (
       <div className={`mt-[70px]`}>
