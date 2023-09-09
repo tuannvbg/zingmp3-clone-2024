@@ -3,16 +3,18 @@ import useLocalStorage from './useLocalStorage'
 import { HomeListType } from '@/types/homelist.type'
 import { AppContext } from '@/contexts/app.context'
 import { SongItem } from '@/types/playlist.type'
+import { Data } from '@/types/video.type'
 
 export default function useAddLibrary() {
    const [library, setLibrary] = useLocalStorage<string[]>('library', []) //thêm vào thư viện
-   const { setPlaylistLibrary, setSongsLibrary } = useContext(AppContext)
+   const { setPlaylistLibrary, setSongsLibrary, setVideoLibrary } = useContext(AppContext)
    //thêm vào thư viện
    const handleAddLibrary = (
       e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
       id: string,
       playlist?: HomeListType | null,
-      song?: SongItem
+      song?: SongItem | null,
+      video?: Data
    ) => {
       e.stopPropagation()
       if (library.includes(id)) {
@@ -23,6 +25,9 @@ export default function useAddLibrary() {
          if (song) {
             setSongsLibrary((prev) => prev.filter((item) => item.encodeId !== id))
          }
+         if (video) {
+            setVideoLibrary((prev) => prev.filter((item) => item.encodeId !== id))
+         }
       } else {
          setLibrary((prev) => [...prev, id])
          if (playlist) {
@@ -30,6 +35,9 @@ export default function useAddLibrary() {
          }
          if (song) {
             setSongsLibrary((prev) => [...prev, song])
+         }
+         if (video) {
+            setVideoLibrary((prev) => [...prev, video])
          }
       }
    }

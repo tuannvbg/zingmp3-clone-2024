@@ -2,12 +2,13 @@
 import HomeList from '@/components/HomeList/HomeList'
 import Loading from '@/components/Loading/Loading'
 import Modal from '@/components/Modal/Modal'
+import MvArtistItem from '@/components/MvArtistItem/MvArtistItem'
 import Tooltip from '@/components/Tooltip/Tooltip'
 import { AppContext } from '@/contexts/app.context'
 import useAddLibrary from '@/hooks/useAddLibrary'
 import useFollow from '@/hooks/useFollow'
 import usePlayMusic from '@/hooks/usePlayMusic'
-import { Artist } from '@/types/artist.type'
+import { Artist, Item } from '@/types/artist.type'
 import { SongItem } from '@/types/playlist.type'
 import { formatNumberWithK, timeFormatter } from '@/utils/utils'
 import { StaticImport } from 'next/dist/shared/lib/get-img-props'
@@ -164,7 +165,7 @@ export default function SearchAll() {
                      <Tooltip left content={library.includes(top.encodeId) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}>
                         <button
                            onClick={(e) => handleAddLibrary(e, top.encodeId)}
-                           className={`hover:bg-white hover:bg-opacity-10 rounded-full p-1.5 ${
+                           className={`hover:bg-white text-white hover:bg-opacity-10 rounded-full p-1.5 ${
                               library.includes(top.encodeId) && 'text-tprimary'
                            }`}
                         >
@@ -330,7 +331,7 @@ export default function SearchAll() {
                               <button
                                  onClick={(e) => handleAddLibrary(e, item.encodeId, null, item)}
                                  className={`hover:bg-white text-white hover:bg-opacity-10 rounded-full p-1.5 ${
-                                    library.includes(item.encodeId) && '!text-tprimary'
+                                    library.includes(item.encodeId) && 'text-tprimary'
                                  }`}
                               >
                                  {library.includes(item.encodeId) ? (
@@ -568,7 +569,7 @@ export default function SearchAll() {
                            <button
                               onClick={(e) => handleAddLibrary(e, item.encodeId, null, item)}
                               className={`hover:bg-white text-white hover:bg-opacity-10 rounded-full p-1.5 ${
-                                 library.includes(item.encodeId) && '!text-tprimary'
+                                 library.includes(item.encodeId) && 'text-tprimary'
                               }`}
                            >
                               {library.includes(item.encodeId) ? (
@@ -652,7 +653,11 @@ export default function SearchAll() {
                      </svg>
                   </Link>
                </div>
-               <HomeList title list={videos} />
+               <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7'>
+                  {videos.slice(0, 4).map((item: Item) => (
+                     <MvArtistItem item={item} key={item.encodeId} />
+                  ))}
+               </div>
             </>
          )}
 

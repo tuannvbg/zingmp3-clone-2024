@@ -775,7 +775,9 @@ ul::-webkit-scrollbar-thumb {
       transform: translateX(-25%);
    }
 }
-
+li {
+   list-style-type: none;
+}
 .codepen-button span {
    position: relative;
    display: block;
@@ -788,4 +790,15 @@ ul::-webkit-scrollbar-thumb {
 #tippy-1 {
    width: 100%;
    max-width: 440px;
+}
+.video-animate {
+   animation: video 0.5s linear;
+}
+@keyframes video {
+   0% {
+      transform: translateY(100%);
+   }
+   100% {
+      transform: translateY(0);
+   }
 }

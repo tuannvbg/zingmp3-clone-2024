@@ -1,13 +1,16 @@
 import { ArtistType } from '@/types/artist.type'
 import { AuthResponse } from '@/types/auth.type'
+import { CategoryMVType } from '@/types/categorymv.type'
 import { ChartHomeType } from '@/types/charthome.type'
 import { HomeType } from '@/types/home.type'
 import { InfoSongType } from '@/types/infoSong.type'
+import { ListMVType } from '@/types/listmv.type'
 import { LyricType } from '@/types/lyric.type'
 import { NewReleaseChartType } from '@/types/newReleaseChart.type'
 import { PlaylistType } from '@/types/playlist.type'
 import { SongType } from '@/types/song.type'
 import { Top100Type } from '@/types/top100.type'
+import { VideoType } from '@/types/video.type'
 import http from '@/utils/http'
 import http2 from '@/utils/http2'
 
@@ -79,17 +82,23 @@ export const authApi = {
 //    })
 // }
 
-// getVideo(req, res) {
-//    ZingMp3.getVideo(req.query.id).then((data) => {
-//        res.json(data)
-//    })
-// }
+export const getVideo = (params: { id: string }) =>
+   http.get<VideoType>('/video', {
+      params
+   })
+
+export const getCategoryMV = (params: { id: string }) =>
+   http.get<CategoryMVType>('/categorymv', {
+      params
+   })
+
+export const getListMV = (params: { id: string; page: number; count: number }) =>
+   http.get<ListMVType>('/listmv', {
+      params
+   })
 
 // // getListMV
 // router.get("/listmv", ZingController.getListMV)
 
 // // getCategoryMV
 // router.get("/categorymv", ZingController.getCategoryMV)
-
-// // getVideo
-// router.get("/video", ZingController.getVideo)

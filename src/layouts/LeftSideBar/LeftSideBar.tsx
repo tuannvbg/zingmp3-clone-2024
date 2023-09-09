@@ -86,7 +86,7 @@ const links: {
       )
    },
    {
-      url: '/mv',
+      url: '/the-loai-video/Viet-Nam/IWZ9Z08I.html',
       title: 'MV',
       icon: (
          <svg

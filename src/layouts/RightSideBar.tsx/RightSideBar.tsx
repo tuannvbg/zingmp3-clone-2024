@@ -21,7 +21,9 @@ export default function RightSideBar() {
       setOpenSideBarRight,
       recentSong,
       albumInfo,
-      setRecentSong
+      setRecentSong,
+      audio,
+      setAudio
    } = useContext(AppContext)
    const { library, handleAddLibrary } = useAddLibrary()
    const [status, setStatus] = useState<'list' | 'recent'>('list')
@@ -32,6 +34,8 @@ export default function RightSideBar() {
       localStorage.removeItem('currentSongId')
       localStorage.removeItem('playList')
       setOpenSideBarRight(false)
+      audio?.pause()
+      setAudio(null)
       setCurrentSongId('')
       setPlayList(null)
       toast.success('Xoá danh sách phát thành công')
@@ -90,7 +94,7 @@ export default function RightSideBar() {
                            <li
                               className={`flex group hover:bg-white hover:bg-opacity-10  select-none ${
                                  currentSongId === item.encodeId && 'bg-white bg-opacity-10'
-                              } rounded-md items-center text-secondary text-xs p-2.5`}
+                              } rounded-md items-center text-xs p-2.5`}
                            >
                               <div className='w-full flex items-center gap-x-2'>
                                  <div
@@ -182,13 +186,13 @@ export default function RightSideBar() {
                                           {item.title}
                                        </h3>
                                     </div>
-                                    <div className='text-xs max-w-[200px] truncate'>
+                                    <div className='text-xs max-w-[200px] truncate text-secondary'>
                                        {item.artists?.map((artist, index) => {
                                           return index === item.artists.length - 1 ? (
                                              <Link
                                                 href={artist.link}
                                                 key={artist.id}
-                                                className='text-secondary isHover cursor-pointer hover:underline'
+                                                className='isHover cursor-pointer hover:underline'
                                              >
                                                 {artist.name}
                                              </Link>
@@ -196,7 +200,7 @@ export default function RightSideBar() {
                                              <Link
                                                 href={artist.link}
                                                 key={artist.id}
-                                                className='text-secondary isHover cursor-pointer hover:underline'
+                                                className='isHover cursor-pointer hover:underline'
                                              >
                                                 {`${artist.name}, `}
                                              </Link>
@@ -281,7 +285,7 @@ export default function RightSideBar() {
                      key={item.encodeId}
                      className={`flex group hover:bg-white hover:bg-opacity-10  select-none ${
                         currentSongId === item.encodeId && 'bg-white bg-opacity-10'
-                     } rounded-md items-center text-secondary text-xs p-2.5`}
+                     } rounded-md items-center text-xs p-2.5`}
                   >
                      <div className='w-full flex items-center gap-x-2'>
                         <div
@@ -357,13 +361,13 @@ export default function RightSideBar() {
                                  {item.title}
                               </h3>
                            </div>
-                           <div className='text-xs max-w-[200px] truncate'>
+                           <div className='text-xs max-w-[200px] truncate text-secondary'>
                               {item.artists?.map((artist, index) => {
                                  return index === item.artists.length - 1 ? (
                                     <Link
                                        href={artist.link}
                                        key={artist.id}
-                                       className='text-secondary isHover cursor-pointer hover:underline'
+                                       className='isHover cursor-pointer hover:underline'
                                     >
                                        {artist.name}
                                     </Link>
@@ -371,7 +375,7 @@ export default function RightSideBar() {
                                     <Link
                                        href={artist.link}
                                        key={artist.id}
-                                       className='text-secondary isHover cursor-pointer hover:underline'
+                                       className='isHover cursor-pointer hover:underline'
                                     >
                                        {`${artist.name}, `}
                                     </Link>

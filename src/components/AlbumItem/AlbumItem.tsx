@@ -14,7 +14,6 @@ import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 
 export default function AlbumItem({ params }: { params: { id: string } }) {
-   const [isChecked, setIsChecked] = useState<string[]>([]) //check vào các bài nhạc
    const [openSortSong, setOpenSortSong] = useState(false) //toggle bảng sắp xếp bài hát
    const { nodeRef } = useClickOutSide(() => setOpenSortSong(false)) //tắt bảng sắp xếp bài hát
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
@@ -44,15 +43,6 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [songs])
-
-   //checked bài hát
-   const handleChecked = (id: string) => {
-      if (isChecked.includes(id)) {
-         setIsChecked((prev) => prev.filter((songId) => songId !== id))
-      } else {
-         setIsChecked((prev) => [...prev, id])
-      }
-   }
 
    const { handleClickSong } = usePlayMusic()
 
@@ -94,6 +84,47 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [params.id, playlist])
+
+   // SẮP XẾP A-Z
+   const handleSortAZTitle = () => {
+      if (playlistMusic) {
+         const result = [...playlistMusic].sort((a, b) => {
+            const titleA = a.title.toLowerCase()
+            const titleB = b.title.toLowerCase()
+            if (titleA < titleB) {
+               return -1
+            }
+            if (titleA > titleB) {
+               return 1
+            }
+            return 0
+         })
+         setPlayList(result)
+      }
+   }
+
+   const handleSortAZArtist = () => {
+      if (playlistMusic) {
+         const result = [...playlistMusic].sort((a, b) => {
+            const titleA = a.artistsNames.toLowerCase()
+            const titleB = b.artistsNames.toLowerCase()
+            if (titleA < titleB) {
+               return -1
+            }
+            if (titleA > titleB) {
+               return 1
+            }
+            return 0
+         })
+         setPlayList(result)
+      }
+   }
+
+   const resetSort = () => {
+      if (songs) {
+         setPlayList(songs)
+      }
+   }
 
    if (!playlist) return <Loading />
 
@@ -304,17 +335,23 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
                                  }}
                               />
                               <div className='absolute left-0 top-[150%] bg-tertiary rounded-lg p-1 z-[100] text-white text-xs'>
-                                 <button className='p-2 hover:bg-white hover:bg-opacity-10 whitespace-nowrap w-full text-left rounded-lg'>
+                                 <button
+                                    onClick={resetSort}
+                                    className='p-2 hover:bg-white hover:bg-opacity-10 whitespace-nowrap w-full text-left rounded-lg'
+                                 >
                                     Mặc định
                                  </button>
-                                 <button className='p-2 hover:bg-white hover:bg-opacity-10 whitespace-nowrap w-full text-left rounded-lg'>
+                                 <button
+                                    onClick={handleSortAZTitle}
+                                    className='p-2 hover:bg-white hover:bg-opacity-10 whitespace-nowrap w-full text-left rounded-lg'
+                                 >
                                     Tên bài hát (A-Z)
                                  </button>
-                                 <button className='p-2 hover:bg-white hover:bg-opacity-10 whitespace-nowrap w-full text-left rounded-lg'>
+                                 <button
+                                    onClick={handleSortAZArtist}
+                                    className='p-2 hover:bg-white hover:bg-opacity-10 whitespace-nowrap w-full text-left rounded-lg'
+                                 >
                                     Tên ca sĩ (A-Z)
-                                 </button>
-                                 <button className='p-2 hover:bg-white hover:bg-opacity-10 whitespace-nowrap w-full text-left rounded-lg'>
-                                    Tên Album (A-Z)
                                  </button>
                               </div>
                            </>
@@ -332,62 +369,25 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
                      playlistMusic.map((item) => (
                         <li
                            key={item.encodeId}
-                           className={`flex group hover:bg-white hover:bg-opacity-10  select-none ${
-                              isChecked.includes(item.encodeId) ||
-                              (currentSongId === item.encodeId && 'bg-white bg-opacity-10')
+                           className={`flex group hover:bg-white hover:bg-opacity-10 select-none ${
+                              currentSongId === item.encodeId && 'bg-white bg-opacity-10'
                            } rounded-md items-center text-xs p-2.5 border-b border-b-gray-800`}
                         >
                            <div className='w-full sm:w-[53%] flex items-center gap-x-2'>
-                              <label
-                                 className={`cursor-pointer hidden group-hover:block translate-y-[3px] ${
-                                    isChecked.includes(item.encodeId) && '!block'
-                                 }`}
+                              <svg
+                                 xmlns='http://www.w3.org/2000/svg'
+                                 fill='none'
+                                 viewBox='0 0 24 24'
+                                 strokeWidth={1.5}
+                                 stroke='currentColor'
+                                 className='w-4 h-4 flex-shrink-0'
                               >
-                                 <input
-                                    type='checkbox'
-                                    onChange={() => handleChecked(item.encodeId)}
-                                    checked={isChecked.includes(item.encodeId)}
-                                    className='hidden'
+                                 <path
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
+                                    d='M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z'
                                  />
-                                 <span
-                                    className={`inline-flex items-center justify-center w-4 h-4 text-white bg-transparent border rounded ${
-                                       isChecked.includes(item.encodeId) ? 'border-white' : 'border-secondary'
-                                    }`}
-                                 >
-                                    {isChecked.includes(item.encodeId) && (
-                                       <svg
-                                          xmlns='http://www.w3.org/2000/svg'
-                                          fill='none'
-                                          viewBox='0 0 24 24'
-                                          strokeWidth={3}
-                                          stroke='currentColor'
-                                          className='w-4 h-4'
-                                       >
-                                          <path
-                                             strokeLinecap='round'
-                                             strokeLinejoin='round'
-                                             d='M4.5 12.75l6 6 9-13.5'
-                                          />
-                                       </svg>
-                                    )}
-                                 </span>
-                              </label>
-                              {!isChecked.includes(item.encodeId) && (
-                                 <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    fill='none'
-                                    viewBox='0 0 24 24'
-                                    strokeWidth={1.5}
-                                    stroke='currentColor'
-                                    className='w-4 h-4 group-hover:hidden flex-shrink-0'
-                                 >
-                                    <path
-                                       strokeLinecap='round'
-                                       strokeLinejoin='round'
-                                       d='M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z'
-                                    />
-                                 </svg>
-                              )}
+                              </svg>
                               <div
                                  onClick={() => {
                                     if (item.isWorldWide) {

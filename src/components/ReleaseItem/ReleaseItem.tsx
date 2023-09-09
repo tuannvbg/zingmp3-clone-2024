@@ -8,7 +8,7 @@ import Image from 'next/image'
 import { All, Other } from '@/types/release.type'
 
 export default function ReleaseItem({ item }: { item: All | Other }) {
-   const { currentSongId, isLoadingSong, isPlaying, setAtAlbum, setRecentSong } = useContext(AppContext)
+   const { currentSongId, isLoadingSong, isPlaying, setRecentSong } = useContext(AppContext)
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
    const { handleClickSong } = usePlayMusic()
    return (
@@ -20,7 +20,6 @@ export default function ReleaseItem({ item }: { item: All | Other }) {
          <div
             onClick={() => {
                if (item.isWorldWide) {
-                  setAtAlbum(true)
                   setRecentSong((prev) => {
                      if (prev.length >= 20) {
                         return prev.includes(item as any)

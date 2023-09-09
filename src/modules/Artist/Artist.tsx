@@ -20,6 +20,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import ModalArtist from '@/components/Modal/ModalArtist'
 import { SongItem } from '@/types/playlist.type'
 import { getArtist } from '@/apis/home.api'
+import MvArtistItem from '@/components/MvArtistItem/MvArtistItem'
 
 export default function Artist() {
    const { currentSongId, setAtAlbum, isLoadingSong, setRecentSong, isPlaying, playList, setPlayList } =
@@ -387,8 +388,21 @@ export default function Artist() {
             {sections.slice(2).map((section) => {
                return ['Album', 'MV', 'Xuất hiện trong', 'Tuyển tập'].includes(section.title) ? (
                   <>
-                     <h2 className='text-xl mt-12 mb-5 font-bold'>{section?.title}</h2>
-                     <HomeList title list={section?.items as HomeListType[]} />
+                     {section.title === 'MV' ? (
+                        <>
+                           <h2 className='text-xl mt-12 mb-5 font-bold'>{section?.title}</h2>
+                           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7'>
+                              {section?.items.slice(0, 4).map((item: Item) => (
+                                 <MvArtistItem item={item} key={item.encodeId} />
+                              ))}
+                           </div>
+                        </>
+                     ) : (
+                        <>
+                           <h2 className='text-xl mt-12 mb-5 font-bold'>{section?.title}</h2>
+                           <HomeList title list={section?.items as HomeListType[]} />
+                        </>
+                     )}
                   </>
                ) : (
                   <>

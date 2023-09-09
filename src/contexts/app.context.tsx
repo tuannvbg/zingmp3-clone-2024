@@ -4,6 +4,7 @@ import { Artist } from '@/types/artist.type'
 import { HomeListType } from '@/types/homelist.type'
 import { SongItem } from '@/types/playlist.type'
 import { User } from '@/types/user.type'
+import { Data } from '@/types/video.type'
 import { getAccessTokenFromLS, getProfileFromLS } from '@/utils/auth'
 import React, { createContext, useState } from 'react'
 interface AppContextInterface {
@@ -51,6 +52,12 @@ interface AppContextInterface {
    setIsShowLyric: React.Dispatch<React.SetStateAction<boolean>>
    currentTimeAudio: number
    setCurrentTimeAudio: React.Dispatch<React.SetStateAction<number>>
+   currentIdVideo: string
+   setCurrentIdVideo: React.Dispatch<React.SetStateAction<string>>
+   videoLibrary: [] | Data[]
+   setVideoLibrary: React.Dispatch<React.SetStateAction<[] | Data[]>>
+   categoryMv: string
+   setCategoryMv: React.Dispatch<React.SetStateAction<string>>
 }
 
 const initialAppContext: AppContextInterface = {
@@ -87,7 +94,13 @@ const initialAppContext: AppContextInterface = {
    isShowLyric: false,
    setIsShowLyric: () => null,
    currentTimeAudio: 0,
-   setCurrentTimeAudio: () => null
+   setCurrentTimeAudio: () => null,
+   currentIdVideo: '',
+   setCurrentIdVideo: () => null,
+   videoLibrary: [],
+   setVideoLibrary: () => null,
+   categoryMv: 'Tất cả',
+   setCategoryMv: () => null
 }
 
 export const AppContext = createContext<AppContextInterface>(initialAppContext)
@@ -123,6 +136,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
    )
    const [isShowLyric, setIsShowLyric] = useState<boolean>(initialAppContext.isShowLyric)
    const [currentTimeAudio, setCurrentTimeAudio] = useState<number>(initialAppContext.currentTimeAudio)
+   const [currentIdVideo, setCurrentIdVideo] = useState<string>(initialAppContext.currentIdVideo)
+   const [videoLibrary, setVideoLibrary] = useLocalStorage<Data[] | []>('videoLibrary', initialAppContext.videoLibrary)
+   const [categoryMv, setCategoryMv] = useState<string>(initialAppContext.categoryMv)
    return (
       <AppContext.Provider
          value={{
@@ -159,7 +175,13 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
             isShowLyric,
             setIsShowLyric,
             currentTimeAudio,
-            setCurrentTimeAudio
+            setCurrentTimeAudio,
+            currentIdVideo,
+            setCurrentIdVideo,
+            videoLibrary,
+            setVideoLibrary,
+            categoryMv,
+            setCategoryMv
          }}
       >
          {children}
