@@ -42,7 +42,8 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
       if (songs) {
          setPlayList(songs)
       }
-   }, [setPlayList, songs])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [songs])
 
    //checked bài hát
    const handleChecked = (id: string) => {
@@ -91,7 +92,8 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
       if (playlist) {
          setAlbumInfo({ title: playlist.title, link: playlist.link })
       }
-   }, [params.id, playlist, setAlbumInfo])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [params.id, playlist])
 
    if (!playlist) return <Loading />
 
