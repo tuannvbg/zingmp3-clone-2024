@@ -19,7 +19,8 @@ export default function MyMusicRecent() {
       if (recentSong) {
          setPlayList(recentSong)
       }
-   }, [recentSong, setPlayList])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [recentSong])
    return (
       <div className={`mt-[70px] px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
          <h1 className='font-bold py-5 text-2xl'>Bài hát gần đây</h1>

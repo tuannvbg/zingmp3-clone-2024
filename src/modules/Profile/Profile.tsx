@@ -49,7 +49,8 @@ export default function Profile() {
          setValue('name', profileData.name)
          setValue('avatar', profileData.avatar)
       }
-   }, [profileData, setValue])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [profileData])
 
    //update profile
    const updateProfileMutation = useMutation({

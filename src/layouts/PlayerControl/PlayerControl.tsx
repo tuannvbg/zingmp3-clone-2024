@@ -57,7 +57,8 @@ export default function PlayerControl() {
          setAudio(null)
          setAudio(new Audio(song))
       }
-   }, [song, setAudio])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [song])
 
    useEffect(() => {
       if (audio) {

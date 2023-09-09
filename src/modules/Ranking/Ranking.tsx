@@ -23,7 +23,8 @@ export default function Ranking() {
       if (rankingList) {
          setPlayList(rankingList as unknown as SongItem[])
       }
-   }, [rankingList, setPlayList])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [rankingList])
    if (!playList) return <Loading />
    return (
       <div className={`mt-[70px] ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>

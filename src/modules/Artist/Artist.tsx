@@ -38,7 +38,8 @@ export default function Artist() {
       if (sections?.[0]) {
          setPlayList(sections[0].items as SongItem[])
       }
-   }, [sections, setPlayList])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [sections])
    const { handleClickSong } = usePlayMusic()
    const { follows, handleClickFollow } = useFollow()
 
