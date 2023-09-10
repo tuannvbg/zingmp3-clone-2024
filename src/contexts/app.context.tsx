@@ -58,6 +58,8 @@ interface AppContextInterface {
    setVideoLibrary: React.Dispatch<React.SetStateAction<[] | Data[]>>
    categoryMv: string
    setCategoryMv: React.Dispatch<React.SetStateAction<string>>
+   timer: number | null
+   setTimer: React.Dispatch<React.SetStateAction<number | null>>
 }
 
 const initialAppContext: AppContextInterface = {
@@ -100,7 +102,9 @@ const initialAppContext: AppContextInterface = {
    videoLibrary: [],
    setVideoLibrary: () => null,
    categoryMv: 'Tất cả',
-   setCategoryMv: () => null
+   setCategoryMv: () => null,
+   timer: null,
+   setTimer: () => null
 }
 
 export const AppContext = createContext<AppContextInterface>(initialAppContext)
@@ -139,6 +143,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
    const [currentIdVideo, setCurrentIdVideo] = useState<string>(initialAppContext.currentIdVideo)
    const [videoLibrary, setVideoLibrary] = useLocalStorage<Data[] | []>('videoLibrary', initialAppContext.videoLibrary)
    const [categoryMv, setCategoryMv] = useState<string>(initialAppContext.categoryMv)
+   const [timer, setTimer] = useState<number | null>(initialAppContext.timer)
    return (
       <AppContext.Provider
          value={{
@@ -181,7 +186,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
             videoLibrary,
             setVideoLibrary,
             categoryMv,
-            setCategoryMv
+            setCategoryMv,
+            timer,
+            setTimer
          }}
       >
          {children}

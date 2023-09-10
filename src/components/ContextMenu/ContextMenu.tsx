@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation'
 import { useRef, useEffect } from 'react'
+import ReactDOM from 'react-dom'
 interface Props {
    left: number
    top: number
@@ -52,10 +53,10 @@ const ContextMenu = ({ left, top, onClose }: Props) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [])
 
-   return (
+   return ReactDOM.createPortal(
       <ul
          ref={wrapperRef}
-         className='fixed bg-modal w-[250px] rounded-md py-2.5 shadow-lg z-[2000]'
+         className='fixed bg-modal w-[250px] rounded-md py-2.5 shadow-lg z-[2000000000000]'
          style={{ left, top }}
       >
          <li className={classNameLi} onClick={handleBack}>
@@ -113,7 +114,8 @@ const ContextMenu = ({ left, top, onClose }: Props) => {
             </svg>
             <span>Khám phá</span>
          </li>
-      </ul>
+      </ul>,
+      document.body
    )
 }
 

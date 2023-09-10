@@ -1,12 +1,15 @@
+'use client'
+import { AppContext } from '@/contexts/app.context'
 import { Dialog, Transition } from '@headlessui/react'
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext } from 'react'
 
 interface Props {
    isOpen: boolean
    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function Modal({ isOpen, setIsOpen }: Props) {
+export default function ModalCloseTimer({ isOpen, setIsOpen }: Props) {
+   const { setTimer } = useContext(AppContext)
    function closeModal() {
       setIsOpen(false)
    }
@@ -37,28 +40,28 @@ export default function Modal({ isOpen, setIsOpen }: Props) {
                      leaveFrom='opacity-100 scale-100'
                      leaveTo='opacity-0 scale-95'
                   >
-                     <Dialog.Panel className='transform relative overflow-hidden rounded-lg bg-modal max-w-[340px] p-5 text-center align-middle shadow-xl transition-all'>
-                        <Dialog.Title as='h3' className='text-[19px] font-semibold leading-6'>
-                           Dành Cho Tài Khoản Vip
+                     <Dialog.Panel className='transform relative overflow-hidden rounded-lg bg-modal w-[540px] p-5 text-left align-middle shadow-xl transition-all'>
+                        <Dialog.Title as='h3' className='text-lg mb-2.5 font-semibold leading-6'>
+                           Xóa Hẹn Giờ
                         </Dialog.Title>
-                        <p className='my-3.5 text-secondary'>
-                           Theo yêu cầu của đơn vị sở hữu bản quyền, bạn cần tài khoản VIP để nghe bài hát này.
-                        </p>
-                        <button className='uppercase bg-yellow-500 hover:bg-opacity-90 rounded-full py-1 w-full text-white'>
-                           Nâng cấp vip
-                        </button>
-                        <button title='Đóng' className='absolute top-2 right-2' onClick={closeModal}>
-                           <svg
-                              xmlns='http://www.w3.org/2000/svg'
-                              fill='none'
-                              viewBox='0 0 24 24'
-                              strokeWidth={1.5}
-                              stroke='currentColor'
-                              className='w-6 h-6'
+                        <p>Bạn có chắc chắn muốn xóa hẹn giờ?</p>
+                        <div className='flex text-xs items-center justify-end gap-x-4'>
+                           <button
+                              onClick={closeModal}
+                              className='border py-1.5 px-3.5 hover:bg-opacity-20 rounded-full border-gray-400 bg-white bg-opacity-10'
                            >
-                              <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
-                           </svg>
-                        </button>
+                              KHÔNG
+                           </button>
+                           <button
+                              onClick={() => {
+                                 setTimer(null)
+                                 closeModal()
+                              }}
+                              className='py-1.5 px-3.5 rounded-full bg-tprimary hover:bg-opacity-50'
+                           >
+                              CÓ
+                           </button>
+                        </div>
                      </Dialog.Panel>
                   </Transition.Child>
                </div>

@@ -7,8 +7,13 @@ import usePlayMusic from '@/hooks/usePlayMusic'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useContext, useState, Fragment } from 'react'
+import ModalStopMusic from '@/components/Modal/ModalStopMusic'
+import ModalCloseTimer from '@/components/Modal/ModalCloseTimer'
 
 export default function RightSideBar() {
+   const [openModal, setOpenModal] = useState<boolean>(false)
+   const [showModalClose, setShowModalClose] = useState<boolean>(false)
+
    const {
       openSideBarRight,
       playList,
@@ -23,7 +28,8 @@ export default function RightSideBar() {
       albumInfo,
       setRecentSong,
       audio,
-      setAudio
+      setAudio,
+      timer
    } = useContext(AppContext)
    const { library, handleAddLibrary } = useAddLibrary()
    const [status, setStatus] = useState<'list' | 'recent'>('list')
@@ -66,6 +72,31 @@ export default function RightSideBar() {
                   Nghe gần đây
                </button>
             </div>
+            <Tooltip bottomLeft content={timer ? 'Xoá hẹn giờ' : 'Hẹn giờ dừng phát nhạc'}>
+               <button
+                  onClick={() => {
+                     if (timer) {
+                        setShowModalClose(true)
+                     } else {
+                        setOpenModal(true)
+                     }
+                  }}
+                  className={`p-2 rounded-full ${timer ? 'bg-tprimary' : 'bg-white bg-opacity-10'}`}
+               >
+                  <svg
+                     stroke='currentColor'
+                     fill='currentColor'
+                     strokeWidth={0}
+                     viewBox='0 0 24 24'
+                     height='18px'
+                     width='18px'
+                     xmlns='http://www.w3.org/2000/svg'
+                  >
+                     <path fill='none' d='M0 0h24v24H0z' />
+                     <path d='M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42A8.962 8.962 0 0012 4c-4.97 0-9 4.03-9 9s4.02 9 9 9a8.994 8.994 0 007.03-14.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z' />
+                  </svg>
+               </button>
+            </Tooltip>
             <Tooltip bottomLeft content='Xoá danh sách phát'>
                <button onClick={handleDeletePlaylist} className='p-2 bg-white bg-opacity-10 rounded-full'>
                   <svg
@@ -438,6 +469,8 @@ export default function RightSideBar() {
                Không có bài hát nào gần đây
             </div>
          )}
+         <ModalStopMusic isOpen={openModal} setIsOpen={setOpenModal} />
+         <ModalCloseTimer isOpen={showModalClose} setIsOpen={setShowModalClose} />
       </div>
    )
 }

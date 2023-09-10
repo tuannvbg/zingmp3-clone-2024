@@ -1,8 +1,10 @@
 'use client'
 import { getInfoSong, getSong } from '@/apis/home.api'
+import Timer from '@/components/Timer/Timer'
 import Tooltip from '@/components/Tooltip/Tooltip'
 import { AppContext } from '@/contexts/app.context'
 import useAddLibrary from '@/hooks/useAddLibrary'
+import useInfoSong from '@/hooks/useInfoSong'
 import { timeFormatter } from '@/utils/utils'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
@@ -31,17 +33,12 @@ export default function PlayerControl() {
       setCurrentSongId,
       setIsShowLyric,
       isShowLyric,
-      setCurrentTimeAudio
+      setCurrentTimeAudio,
+      timer
    } = useContext(AppContext)
 
    //lấy info song
-   const infoSongData = useQuery({
-      queryKey: ['infoSong', currentSongId],
-      queryFn: () => getInfoSong({ id: currentSongId }),
-      enabled: Boolean(currentSongId)
-   })
-
-   const infoSong = infoSongData.data?.data.data
+   const { infoSong, infoSongData } = useInfoSong()
 
    //lấy link bài hát
    const songData = useQuery({
@@ -696,6 +693,7 @@ export default function PlayerControl() {
                   />
                </svg>
             </button>
+            {timer !== null && <Timer />}
          </div>
       )
    }

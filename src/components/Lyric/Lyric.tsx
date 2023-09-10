@@ -13,21 +13,18 @@ import 'swiper/css/bundle'
 import Loading from '../Loading/Loading'
 import ItemLyric from '../ItemLyric/ItemLyric'
 import Link from 'next/link'
+import useInfoSong from '@/hooks/useInfoSong'
 export default function Lyric() {
    const { isShowLyric, setIsShowLyric, currentSongId } = useContext(AppContext)
    const [isFullScreen, setIsFullScreen] = useState<boolean>(false)
    const [openSetting, setOpenSetting] = useState<boolean>(false)
    const [isChecked, setIsChecked] = useState<boolean>(false)
    const [textSize, setTextSize] = useState<number>(1)
-   const infoSongData = useQuery({
-      queryKey: ['infoSong', currentSongId],
-      queryFn: () => getInfoSong({ id: currentSongId }),
-      enabled: Boolean(currentSongId)
-   })
+   const { infoSong } = useInfoSong()
 
-   const thumbnailM = infoSongData.data?.data.data.thumbnailM
-   const name = infoSongData.data?.data.data.title
-   const artists = infoSongData.data?.data.data.artists
+   const thumbnailM = infoSong?.thumbnailM
+   const name = infoSong?.title
+   const artists = infoSong?.artists
    // Toggle full screen
    const toggleShowScreen = () => {
       if (!document.fullscreenElement) {
