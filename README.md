@@ -9,16 +9,18 @@
 -  Upload Avatar
 -  Đổi mật khẩu
 -  Pause/play/next/prev/random/repeat nhạc
--  Thêm album/bài hát/nghệ sĩ yêu thích vào thư viện
+-  Thêm album/bài hát/nghệ sĩ/MV yêu thích vào thư viện
 -  Thay đổi theme
 -  Tìm kiếm bài hát/album/nghệ sĩ
 -  Xem lời bài hát
 -  Xem lịch sử phát nhạc
 -  Xem thông tin nghệ sĩ
+-  Hẹn giờ dừng phát nhạc
+-  Xem MV bài hát
 
 ## Công nghệ sử dụng
 
 -  Language: TypeScript, NextJS App Router
--  UI / CSS Library: Tailwindcss/Headless UI
--  State Management: React Query cho async state và React Context cho state thường
+-  UI / CSS Library: TailwindCSS, Headless UI
+-  State Management: React Query, React Context
 -  Form Management: React Hook Form, Yup
