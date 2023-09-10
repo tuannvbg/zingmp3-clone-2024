@@ -194,7 +194,7 @@ export default function MyMusicSong({ profile = false }: { profile?: boolean }) 
                                     </button>
                                  </Tooltip>
                               )}
-                              {item.hasLyric && (
+                              {item.hasLyric && item.isWorldWide && (
                                  <Tooltip content={'Phát cùng lời bài hát'}>
                                     <button className='p-2 hover:bg-white hover:bg-opacity-10 rounded-full'>
                                        <svg

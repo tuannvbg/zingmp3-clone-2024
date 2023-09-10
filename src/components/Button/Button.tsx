@@ -7,7 +7,7 @@ interface Props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLB
 }
 export default function Button({ children, isLoading, className, ...rest }: Props) {
    return (
-      <button {...rest} className={`disabled:cursor-not-allowed ${className}`}>
+      <button {...rest} className={`disabled:!cursor-not-allowed ${className}`}>
          {isLoading ? (
             <div className='mx-auto h-6 w-6 animate-spin rounded-full border-4 border-gray-300 border-b-transparent border-t-transparent'></div>
          ) : (

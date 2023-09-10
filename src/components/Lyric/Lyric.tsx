@@ -215,23 +215,30 @@ export default function Lyric() {
          </header>
 
          <div className='flex z-10 absolute left-0 right-0 bottom-[90px] top-[76px] items-center p-10 gap-x-24'>
-            <div className='hidden min-[900px]:block w-[30%] aspect-square relative overflow-hidden rounded-lg'>
-               <Image
-                  alt={name as string}
-                  src={thumbnailM as string}
-                  fill
-                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                  className='w-full h-full object-cover'
-               />
-            </div>
-            <ul
-               className={`w-full min-[900px]:w-[70%] h-[calc(100vh-166px)] overflow-auto transition-all duration-500 ${
-                  textSize === 1 ? 'text-3xl' : textSize === 2 ? 'text-[35px]' : 'text-[40px]'
-               } leading-loose font-semibold`}
-            >
-               {isLoading && <Loading />}
-               {lyrics ? lyrics.map((lyric, index) => <ItemLyric key={index} lyric={lyric} />) : 'KHÔNG CÓ LỜI BÀI HÁT'}
-            </ul>
+            {isLoading ? (
+               <Loading />
+            ) : (
+               <>
+                  <div className='hidden min-[900px]:block w-[30%] aspect-square relative overflow-hidden rounded-lg'>
+                     <Image
+                        alt={name as string}
+                        src={thumbnailM as string}
+                        fill
+                        sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                        className='w-full h-full object-cover'
+                     />
+                  </div>
+                  <ul
+                     className={`w-full min-[900px]:w-[70%] h-[calc(100vh-166px)] overflow-auto transition-all duration-500 ${
+                        textSize === 1 ? 'text-3xl' : textSize === 2 ? 'text-[35px]' : 'text-[40px]'
+                     } leading-loose font-semibold`}
+                  >
+                     {lyrics
+                        ? lyrics.map((lyric, index) => <ItemLyric key={index} lyric={lyric} />)
+                        : 'KHÔNG CÓ LỜI BÀI HÁT'}
+                  </ul>
+               </>
+            )}
          </div>
       </div>
    )

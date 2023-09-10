@@ -11,7 +11,7 @@ import Link from 'next/link'
 import React, { useContext, useEffect } from 'react'
 
 export default function Video({ params }: { params: { id: string } }) {
-   const { setCurrentIdVideo, audio } = useContext(AppContext)
+   const { setCurrentIdVideo, audio, setAudio, setIsPlaying } = useContext(AppContext)
    const { library, handleAddLibrary } = useAddLibrary() //thêm vào thư viện
    const { data } = useQuery({
       queryKey: ['video', params.id],
@@ -22,6 +22,7 @@ export default function Video({ params }: { params: { id: string } }) {
       if (videoData?.encodeId) {
          setCurrentIdVideo(videoData.encodeId)
          audio?.pause()
+         setIsPlaying(false)
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [videoData?.encodeId])

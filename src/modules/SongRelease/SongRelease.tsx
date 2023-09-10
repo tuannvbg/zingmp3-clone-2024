@@ -3,23 +3,30 @@ import Loading from '@/components/Loading/Loading'
 import Modal from '@/components/Modal/Modal'
 import Tooltip from '@/components/Tooltip/Tooltip'
 import { AppContext } from '@/contexts/app.context'
+import useAddLibrary from '@/hooks/useAddLibrary'
 import useGetHome from '@/hooks/useGetHome'
 import usePlayMusic from '@/hooks/usePlayMusic'
+import { SongItem } from '@/types/playlist.type'
 import { ReleaseType } from '@/types/release.type'
 import { formatDateDifference, timeFormatter } from '@/utils/utils'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 export default function SongRelease() {
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
-   const { currentSongId, isLoadingSong, isPlaying, setAtAlbum } = useContext(AppContext)
+   const { currentSongId, isLoadingSong, isPlaying, setAtAlbum, setIsShowLyric, setRecentSong, setPlayList, playList } =
+      useContext(AppContext)
    const [tabRelease, setTabRelease] = useState<'all' | 'vPop' | 'others'>('all')
    const { data } = useGetHome()
-
+   const { handleAddLibrary, library } = useAddLibrary()
    const { handleClickSong } = usePlayMusic()
 
    const releaseList: ReleaseType = data?.data.data.items[2].items //mới phát hành
+   useEffect(() => {
+      setPlayList(releaseList[tabRelease] as SongItem[])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [tabRelease])
    if (!releaseList) return <Loading />
    return (
       <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-20 md:pb-16'}`}>
@@ -69,7 +76,7 @@ export default function SongRelease() {
                <div className='whitespace-nowrap'>THỜI GIAN</div>
             </div>
             <ul>
-               {releaseList[tabRelease].map((item) => (
+               {playList?.map((item) => (
                   <li
                      key={item.encodeId}
                      className={`flex group hover:bg-white hover:bg-opacity-10 select-none ${
@@ -96,6 +103,17 @@ export default function SongRelease() {
                               if (item.isWorldWide) {
                                  setAtAlbum(true)
                                  handleClickSong(item.encodeId)
+                                 setRecentSong((prev) => {
+                                    if (prev.length >= 20) {
+                                       return prev.includes(item as any)
+                                          ? ([item, ...prev.filter((i) => i !== item)] as any)
+                                          : [item, ...prev.filter((_, index) => index !== prev.length - 1)]
+                                    } else {
+                                       return prev.includes(item as any)
+                                          ? [item, ...prev.filter((i) => i !== item)]
+                                          : [item, ...prev]
+                                    }
+                                 })
                               } else {
                                  setIsOpenModal(true)
                               }
@@ -205,9 +223,15 @@ export default function SongRelease() {
                      <div>
                         <div className='hidden sm:block'>
                            <div className='hidden group-hover:flex items-center gap-x-3'>
-                              {item.hasLyric && (
+                              {item.hasLyric && item.isWorldWide && item.isWorldWide && (
                                  <Tooltip content={'Phát cùng lời bài hát'}>
-                                    <button className='p-2 hover:bg-white hover:bg-opacity-10 rounded-full'>
+                                    <button
+                                       onClick={() => {
+                                          handleClickSong(item.encodeId)
+                                          setIsShowLyric(true)
+                                       }}
+                                       className='p-2 hover:bg-white hover:bg-opacity-10 rounded-full'
+                                    >
                                        <svg
                                           xmlns='http://www.w3.org/2000/svg'
                                           fill='none'
@@ -225,22 +249,40 @@ export default function SongRelease() {
                                     </button>
                                  </Tooltip>
                               )}
-                              <Tooltip content={'Thêm vào thư viện'}>
-                                 <button className='p-2 hover:bg-white hover:bg-opacity-10 rounded-full'>
-                                    <svg
-                                       xmlns='http://www.w3.org/2000/svg'
-                                       fill='none'
-                                       viewBox='0 0 24 24'
-                                       strokeWidth={1.5}
-                                       stroke='currentColor'
-                                       className='w-[18px] text-white h-[18px]'
-                                    >
-                                       <path
-                                          strokeLinecap='round'
-                                          strokeLinejoin='round'
-                                          d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z'
-                                       />
-                                    </svg>
+                              <Tooltip
+                                 content={library.includes(item.encodeId) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}
+                              >
+                                 <button
+                                    onClick={(e) => handleAddLibrary(e, item.encodeId, null, item as SongItem)}
+                                    className={`hover:bg-white hover:bg-opacity-10 text-white rounded-full p-1.5 ${
+                                       library.includes(item.encodeId) && 'text-tprimary'
+                                    }`}
+                                 >
+                                    {library.includes(item.encodeId) ? (
+                                       <svg
+                                          xmlns='http://www.w3.org/2000/svg'
+                                          viewBox='0 0 24 24'
+                                          fill='currentColor'
+                                          className='w-5 h-5'
+                                       >
+                                          <path d='M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z' />
+                                       </svg>
+                                    ) : (
+                                       <svg
+                                          xmlns='http://www.w3.org/2000/svg'
+                                          fill='none'
+                                          viewBox='0 0 24 24'
+                                          strokeWidth={2}
+                                          stroke='currentColor'
+                                          className='w-5 h-5'
+                                       >
+                                          <path
+                                             strokeLinecap='round'
+                                             strokeLinejoin='round'
+                                             d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z'
+                                          />
+                                       </svg>
+                                    )}
                                  </button>
                               </Tooltip>
                               <Tooltip content={'Khác'}>

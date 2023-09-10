@@ -11,7 +11,7 @@ import useAddLibrary from '@/hooks/useAddLibrary'
 import { SongItem } from '@/types/playlist.type'
 
 export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: boolean }) {
-   const { currentSongId, isLoadingSong, isPlaying, setAtAlbum, setRecentSong } = useContext(AppContext)
+   const { currentSongId, isLoadingSong, isPlaying, setAtAlbum, setRecentSong, setIsShowLyric } = useContext(AppContext)
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
    const { handleClickSong } = usePlayMusic()
    const { handleAddLibrary, library } = useAddLibrary()
@@ -226,9 +226,15 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                               </Link>
                            </Tooltip>
                         )}
-                        {item.hasLyric && (
+                        {item.hasLyric && item.isWorldWide && (
                            <Tooltip content={'Phát cùng lời bài hát'}>
-                              <button className='p-2 hover:bg-white hover:bg-opacity-10 rounded-full'>
+                              <button
+                                 onClick={() => {
+                                    handleClickSong(item.encodeId)
+                                    setIsShowLyric(true)
+                                 }}
+                                 className='p-2 hover:bg-white hover:bg-opacity-10 rounded-full'
+                              >
                                  <svg
                                     xmlns='http://www.w3.org/2000/svg'
                                     fill='none'

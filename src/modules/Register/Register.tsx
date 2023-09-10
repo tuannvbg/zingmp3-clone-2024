@@ -39,9 +39,9 @@ export default function Register() {
          //đây là cái data chứa thông tin người dùng trả về khi đăng ký thành công
          onSuccess: (data) => {
             setIsAuthenticated(true)
+            router.push('/mymusic/song')
             setProfile(data.data.data.user)
             toast.success('Đăng ký thành công')
-            router.push('/mymusic/song')
          },
          onError: (error) => {
             //nếu có lỗi trả về từ axios thì sẽ lấy ra message lỗi từ axios gắn vào setError của react-hook-form để hiển thị ra ngoài input
