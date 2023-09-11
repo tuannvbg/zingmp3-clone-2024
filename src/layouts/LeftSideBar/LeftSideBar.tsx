@@ -129,7 +129,7 @@ export default function LeftSideBar() {
    const [showSideBar, setShowSideBar] = useState<boolean>(false)
    return (
       <>
-         <div
+         <aside
             className={`w-full ${
                showSideBar ? 'max-w-[240px]' : 'max-w-[70px]'
             } transition-all duration-300 xl:max-w-[240px] fixed left-0 top-0 ${
@@ -346,7 +346,7 @@ export default function LeftSideBar() {
                   </svg>
                )}
             </button>
-         </div>
+         </aside>
 
          {/* mobile */}
          <ul className='fixed min-[900px]:hidden left-0 right-0 text-xs bottom-0 border-t border-t-gray-800 h-[55px] flex items-center bg-secondary z-[1000]'>
