@@ -229,7 +229,7 @@ export default function Lyric() {
                      />
                   </div>
                   <ul
-                     className={`w-full min-[900px]:w-[70%] h-[calc(100vh-166px)] overflow-auto transition-all duration-500 ${
+                     className={`w-full min-[900px]:w-[70%] h-[calc(100vh-200px)] overflow-auto transition-all duration-500 ${
                         textSize === 1 ? 'text-3xl' : textSize === 2 ? 'text-[35px]' : 'text-[40px]'
                      } leading-loose font-semibold`}
                   >

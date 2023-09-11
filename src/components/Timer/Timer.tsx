@@ -47,7 +47,7 @@ export default function Timer() {
 
    return (
       <div className='bg-tprimary flex items-center py-2 pl-4 pr-3 rounded-t-lg absolute left-1/2 -translate-x-1/2 top-0 -translate-y-full text-xs'>
-         <span className='font-medium'>Nhạc sẽ dừng sau:</span>
+         <span className='font-medium whitespace-nowrap'>Nhạc sẽ dừng sau:</span>
          <span className='font-bold ml-1'>{formatTime(timer as number)}</span>
          <Tooltip content='Xoá hẹn giờ'>
             <button onClick={() => setShowModalClose(true)} className='ml-2'>
