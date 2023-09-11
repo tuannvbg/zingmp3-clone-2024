@@ -18,7 +18,7 @@ export default function Top100() {
    const top100List = data?.data.data
    if (!top100List) return <Loading />
    return (
-      <div className={`mt-[70px] px-14 ${currentSongId ? 'pb-28' : 'pb-10'}`}>
+      <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-20 md:pb-16'}`}>
          <div className='flex justify-center pt-[30px]'>
             <svg width={625} height={166} viewBox='0 0 625 166'>
                <defs>
