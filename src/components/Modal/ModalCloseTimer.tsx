@@ -45,7 +45,7 @@ export default function ModalCloseTimer({ isOpen, setIsOpen }: Props) {
                            Xóa Hẹn Giờ
                         </Dialog.Title>
                         <p>Bạn có chắc chắn muốn xóa hẹn giờ?</p>
-                        <div className='flex text-xs items-center justify-end gap-x-4'>
+                        <div className='flex text-xs items-center justify-end gap-x-4 mt-2'>
                            <button
                               onClick={closeModal}
                               className='border py-1.5 px-3.5 hover:bg-opacity-20 rounded-full border-gray-400 bg-white bg-opacity-10'
