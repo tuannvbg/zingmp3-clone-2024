@@ -239,7 +239,8 @@ export default function PlayerControl() {
          >
             {/* Detail song */}
             <div className={`min-[900px]:w-[30%] w-[70%] items-center gap-x-3 ${isShowLyric ? 'hidden' : 'flex'}`}>
-               <Image
+               {/* eslint-disable-next-line @next/next/no-img-element */}
+               <img
                   alt={infoSong.title}
                   width={64}
                   height={64}

@@ -24,10 +24,10 @@ export default function MvArtistItem({ item }: { item: Item }) {
                }}
                className='aspect-video w-full relative group overflow-hidden rounded-lg'
             >
-               <Image
+               {/* eslint-disable-next-line @next/next/no-img-element */}
+               <img
                   src={item.thumbnailM}
                   alt={item.title as string}
-                  fill
                   className='w-full h-full object-cover group-hover:scale-110 transition-all duration-500'
                />
                {currentIdVideo === item.encodeId ? (
@@ -61,7 +61,8 @@ export default function MvArtistItem({ item }: { item: Item }) {
             </button>
             {item.artists && (
                <div className='mt-4 flex items-center gap-x-3'>
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                      src={item.artists[0].thumbnail}
                      alt={item.artists[0].name}
                      width={40}

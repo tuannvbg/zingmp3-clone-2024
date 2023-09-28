@@ -11,8 +11,6 @@ import usePlayMusic from '@/hooks/usePlayMusic'
 import { Artist, Item } from '@/types/artist.type'
 import { SongItem } from '@/types/playlist.type'
 import { formatNumberWithK } from '@/utils/utils'
-import { StaticImport } from 'next/dist/shared/lib/get-img-props'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import React, { useContext, useEffect } from 'react'
@@ -47,7 +45,8 @@ export default function SearchAll() {
             {top.objectType === 'artist' && (
                <div className='p-2.5 rounded-md bg-white bg-opacity-5 flex items-center gap-x-4 hover:bg-opacity-10'>
                   <Link href={artists[0].link} className='relative group overflow-hidden rounded-full cursor-pointer'>
-                     <Image
+                     {/* eslint-disable-next-line @next/next/no-img-element */}
+                     <img
                         src={artists[0].thumbnail}
                         alt={artists[0].name}
                         width={84}
@@ -89,7 +88,8 @@ export default function SearchAll() {
                      href={top.link}
                      className='relative group w-[84px] h-[84px] overflow-hidden flex-shrink-0 rounded cursor-pointer'
                   >
-                     <Image
+                     {/* eslint-disable-next-line @next/next/no-img-element */}
+                     <img
                         src={top.thumbnail}
                         alt={top.name}
                         width={84}
@@ -226,7 +226,8 @@ export default function SearchAll() {
                               }}
                               className='relative cursor-pointer overflow-hidden w-[84px] flex-shrink-0 h-[84px] rounded'
                            >
-                              <Image
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
                                  src={item.thumbnail}
                                  alt={item.title}
                                  width={84}
@@ -235,7 +236,8 @@ export default function SearchAll() {
                               />
                               {!isLoadingSong && isPlaying && currentSongId === item.encodeId ? (
                                  <div className='absolute inset-0 flex items-center justify-center z-20'>
-                                    <Image
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img
                                        src={
                                           'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'
                                        }
@@ -271,7 +273,8 @@ export default function SearchAll() {
                               )}
                               {isLoadingSong && currentSongId === item.encodeId && (
                                  <div className='absolute inset-0 flex items-center justify-center z-20'>
-                                    <Image
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img
                                        src={'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'}
                                        width={20}
                                        height={20}
@@ -475,7 +478,7 @@ export default function SearchAll() {
                         (artist: {
                            id: React.Key | null | undefined
                            link: string | UrlObject
-                           thumbnail: string | StaticImport
+                           thumbnail: string
                            name:
                               | string
                               | number
@@ -492,11 +495,10 @@ export default function SearchAll() {
                                  href={artist.link}
                                  className='relative group aspect-square overflow-hidden rounded-full cursor-pointer'
                               >
-                                 <Image
+                                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                                 <img
                                     src={artist.thumbnail}
                                     alt={artist.name as string}
-                                    fill
-                                    sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                                     className='w-full h-full object-cover transition-all duration-500 group-hover:scale-110'
                                  />
                                  <div className='absolute hidden group-hover:block inset-0 bg-black bg-opacity-40 z-10' />

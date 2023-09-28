@@ -3,7 +3,6 @@ import React, { useContext, useState } from 'react'
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css/bundle'
-import Image from 'next/image'
 import { AppContext } from '@/contexts/app.context'
 import { useRouter } from 'next/navigation'
 import Loading from '@/components/Loading/Loading'
@@ -103,11 +102,9 @@ export default function Home() {
                         onClick={() => handleClickBanner(banner)}
                         className='relative pt-[57.3%] cursor-pointer rounded-lg overflow-hidden slider-item '
                      >
-                        <Image
-                           priority
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                            src={banner.banner}
-                           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                           fill
                            alt={''}
                            className='w-full absolute top-0 left-0 right-0 h-full object-cover'
                         />
@@ -120,11 +117,10 @@ export default function Home() {
                         onClick={() => handleClickBanner(banner)}
                         className='relative pt-[57.3%] cursor-pointer rounded-lg overflow-hidden slider-item '
                      >
-                        <Image
-                           priority
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                            src={banner.banner}
                            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                           fill
                            alt={''}
                            className='w-full absolute top-0 left-0 right-0 h-full object-cover'
                         />
@@ -185,7 +181,8 @@ export default function Home() {
             </Link>
             <Link className='flex flex-col gap-y-1 items-center' href={'/the-loai-video/Viet-Nam/IWZ9Z08I.html'}>
                <div className='w-11 h-11 rounded-2xl block overflow-hidden'>
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                      src={'https://zjs.zmdcdn.me/zmp3-desktop/releases/v1.0.13/static/media/my-history.374cb625.svg'}
                      alt={'Gần đây'}
                      width={44}
@@ -364,7 +361,8 @@ export default function Home() {
                         onClick={() => handleClickSong(item.encodeId)}
                         className='relative cursor-pointer overflow-hidden group flex-shrink-0 h-[120px] w-[120px] rounded'
                      >
-                        <Image
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                            src={item.thumbnailM}
                            width={120}
                            height={120}
@@ -374,7 +372,8 @@ export default function Home() {
                         />
                         {!isLoadingSong && isPlaying && currentSongId === item.encodeId ? (
                            <div className='absolute inset-0 flex items-center justify-center z-20'>
-                              <Image
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
                                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                                  src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'}
                                  width={32}
@@ -409,7 +408,8 @@ export default function Home() {
                         )}
                         {isLoadingSong && currentSongId === item.encodeId && (
                            <div className='absolute inset-0 flex items-center justify-center z-20'>
-                              <Image
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
                                  src={'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'}
                                  width={20}
                                  height={20}
@@ -472,9 +472,9 @@ export default function Home() {
          <div className='mt-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:gap-x-7'>
             {weekChartList?.map((item) => (
                <Link key={item.link} href={item.link} className='relative pt-[29%] rounded-md overflow-hidden'>
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                      src={item.cover}
-                     fill
                      alt=''
                      sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                      className='absolute top-0 left-0 right-0 object-cover hover:scale-110 transition-all duration-500'
@@ -567,9 +567,8 @@ export default function Home() {
                   <div className='text-center'>
                      <div onClick={() => toast.warning('Chức năng này chưa hoàn thiện')} className='relative'>
                         <div className='relative cursor-pointer group aspect-square rounded-full overflow-hidden border-[3px] border-pink-500'>
-                           <Image
-                              fill
-                              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                           {/* eslint-disable-next-line @next/next/no-img-element */}
+                           <img
                               src={item.thumbnail}
                               className='w-full h-full object-cover group-hover:scale-110 transition-all duration-500'
                               alt={item.title}
@@ -594,14 +593,16 @@ export default function Home() {
                               </span>
                            </div>
                         </div>
-                        <Image
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                            src={item.host.thumbnail}
                            alt={item.host.name}
                            width={48}
                            height={48}
                            className='w-12 h-12 border-2 border-black rounded-full object-cover absolute bottom-0 right-0 translate-y-[-40%]'
                         />
-                        <Image
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                            src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/live-tag.svg'}
                            width={32}
                            height={16}

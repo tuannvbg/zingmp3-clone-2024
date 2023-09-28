@@ -32,7 +32,8 @@ export default function Video({ params }: { params: { id: string } }) {
             <>
                <div className='flex items-center justify-between mb-6'>
                   <div className='flex items-center gap-x-3'>
-                     <Image
+                     {/* eslint-disable-next-line @next/next/no-img-element */}
+                     <img
                         src={videoData.artists[0].thumbnail}
                         width={50}
                         height={50}
@@ -144,7 +145,8 @@ export default function Video({ params }: { params: { id: string } }) {
                                  className='flex-shrink-0 relative w-[120px] h-[70px] group overflow-hidden rounded-md'
                                  href={item.link}
                               >
-                                 <Image
+                                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                                 <img
                                     src={item.thumbnail}
                                     alt={item.title}
                                     width={120}

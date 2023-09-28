@@ -220,7 +220,8 @@ export default function Profile() {
 
                <div className='w-full md:w-[40%] lg:w-[30%]'>
                   <div className='flex flex-col gap-y-3 items-center md:border-l-[1px] md:border-l-gray-200'>
-                     <Image
+                     {/* eslint-disable-next-line @next/next/no-img-element */}
+                     <img
                         src={
                            previewImage ||
                            (profileData?.avatar

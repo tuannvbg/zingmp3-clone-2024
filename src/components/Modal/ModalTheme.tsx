@@ -196,12 +196,11 @@ export default function ModalTheme({ isOpen, setIsOpen }: Props) {
                                        isActive === item.title && 'border border-tprimary'
                                     }`}
                                  >
-                                    <Image
-                                       fill
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img
                                        className='absolute top-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-500'
                                        alt={item.title}
                                        src={item.img}
-                                       sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                                     />
                                     <div className='absolute inset-0 z-10 bg-black bg-opacity-40 hidden group-hover:block' />
                                     <div className='absolute inset-0 z-20 flex-col items-center justify-center gap-2 hidden group-hover:flex'>
@@ -250,12 +249,11 @@ export default function ModalTheme({ isOpen, setIsOpen }: Props) {
                                        isActive === item.title && 'border border-tprimary'
                                     }`}
                                  >
-                                    <Image
-                                       fill
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img
                                        className='absolute top-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-500'
                                        alt={item.title}
                                        src={item.img}
-                                       sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                                     />
                                     <div className='absolute inset-0 z-20 bg-black bg-opacity-40 hidden group-hover:block' />
                                     <div className='absolute inset-0 z-30 flex-col items-center justify-center gap-2 hidden group-hover:flex'>

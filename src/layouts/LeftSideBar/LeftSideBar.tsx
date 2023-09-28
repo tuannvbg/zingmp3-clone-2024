@@ -138,14 +138,16 @@ export default function LeftSideBar() {
          >
             <div className={`py-4 xl:pl-7 ${showSideBar && 'pl-7'}`}>
                <Link href={'/'} className='inline-block'>
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                      width={120}
                      height={34}
                      className={`w-[120px] h-[34px] object-cover logo ${!showSideBar && 'hidden'} xl:block`}
                      src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/backgrounds/logo-dark.svg'}
                      alt='logo'
                   />
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                      width={50}
                      height={45}
                      className={`w-[50px] mx-[10px] block xl:hidden h-[45px] object-cover ${showSideBar && 'hidden'}`}
@@ -172,13 +174,18 @@ export default function LeftSideBar() {
                         {link.icon}
                         <span className={`font-medium xl:block ${!showSideBar && 'hidden'}`}>{link.title}</span>
                         {link.title === 'Radio' && (
-                           <Image
-                              src={'https://zjs.zmdcdn.me/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg'}
-                              alt=''
-                              width={34}
-                              height={16}
-                              className={`w-[34px] h-4 object-cover xl:block ${!showSideBar && 'hidden'}`}
-                           />
+                           <>
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
+                                 src={
+                                    'https://zjs.zmdcdn.me/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg'
+                                 }
+                                 alt=''
+                                 width={34}
+                                 height={16}
+                                 className={`w-[34px] h-4 object-cover xl:block ${!showSideBar && 'hidden'}`}
+                              />
+                           </>
                         )}
                      </Link>
                   </li>
@@ -283,7 +290,8 @@ export default function LeftSideBar() {
                                     pathname === link.url ? 'pl-[17px]' : 'text-grayDa hover:text-white'
                                  }`}
                               >
-                                 <Image
+                                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                                 <img
                                     src={link.image as string}
                                     alt={link.title}
                                     width={24}

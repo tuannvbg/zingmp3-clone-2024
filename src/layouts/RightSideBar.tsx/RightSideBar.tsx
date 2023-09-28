@@ -4,7 +4,6 @@ import { toast } from 'react-toastify'
 import { AppContext } from '@/contexts/app.context'
 import useAddLibrary from '@/hooks/useAddLibrary'
 import usePlayMusic from '@/hooks/usePlayMusic'
-import Image from 'next/image'
 import Link from 'next/link'
 import React, { useContext, useState, Fragment } from 'react'
 import ModalStopMusic from '@/components/Modal/ModalStopMusic'
@@ -146,7 +145,8 @@ export default function RightSideBar() {
                                     }}
                                     className='relative cursor-pointer overflow-hidden w-10 flex-shrink-0 h-10 rounded'
                                  >
-                                    <Image
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img
                                        src={item.thumbnail}
                                        alt={item.title}
                                        width={40}
@@ -155,7 +155,8 @@ export default function RightSideBar() {
                                     />
                                     {!isLoadingSong && isPlaying && currentSongId === item.encodeId ? (
                                        <div className='absolute inset-0 flex items-center justify-center z-20'>
-                                          <Image
+                                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                                          <img
                                              src={
                                                 'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'
                                              }
@@ -191,7 +192,8 @@ export default function RightSideBar() {
                                     )}
                                     {isLoadingSong && currentSongId === item.encodeId && (
                                        <div className='absolute inset-0 flex items-center justify-center z-20'>
-                                          <Image
+                                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                                          <img
                                              src={'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'}
                                              width={20}
                                              height={20}
@@ -299,7 +301,8 @@ export default function RightSideBar() {
                </ul>
             ) : (
                <div className='text-center text-secondary'>
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                      src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/empty-mv-dark.png'}
                      alt=''
                      width={120}
@@ -326,7 +329,8 @@ export default function RightSideBar() {
                            }}
                            className='relative cursor-pointer overflow-hidden w-10 flex-shrink-0 h-10 rounded'
                         >
-                           <Image
+                           {/* eslint-disable-next-line @next/next/no-img-element */}
+                           <img
                               src={item.thumbnail}
                               alt={item.title}
                               width={40}
@@ -335,7 +339,8 @@ export default function RightSideBar() {
                            />
                            {!isLoadingSong && isPlaying && currentSongId === item.encodeId ? (
                               <div className='absolute inset-0 flex items-center justify-center z-20'>
-                                 <Image
+                                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                                 <img
                                     src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'}
                                     width={20}
                                     height={20}
@@ -369,7 +374,8 @@ export default function RightSideBar() {
                            )}
                            {isLoadingSong && currentSongId === item.encodeId && (
                               <div className='absolute inset-0 flex items-center justify-center z-20'>
-                                 <Image
+                                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                                 <img
                                     src={'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'}
                                     width={20}
                                     height={20}
@@ -459,7 +465,8 @@ export default function RightSideBar() {
             </ul>
          ) : (
             <div className='text-center text-secondary'>
-               <Image
+               {/* eslint-disable-next-line @next/next/no-img-element */}
+               <img
                   src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/empty-mv-dark.png'}
                   alt=''
                   width={120}

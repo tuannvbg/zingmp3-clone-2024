@@ -25,11 +25,10 @@ export default function HomeList({
                   <div key={item?.encodeId}>
                      <div onClick={() => router.push(item?.link)} className='relative block group cursor-pointer'>
                         <div className='relative aspect-square overflow-hidden rounded-md'>
-                           <Image
+                           {/* eslint-disable-next-line @next/next/no-img-element */}
+                           <img
                               src={item?.thumbnailM}
                               alt={item?.title}
-                              fill
-                              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                               className='w-full h-full object-cover group-hover:scale-110 transition-all duration-500'
                            />
                         </div>
@@ -157,11 +156,10 @@ export default function HomeList({
                      <div key={item?.encodeId}>
                         <div onClick={() => router.push(item?.link)} className='relative block group cursor-pointer'>
                            <div className='relative aspect-square overflow-hidden rounded-md'>
-                              <Image
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
                                  src={item?.thumbnailM}
                                  alt={item?.title}
-                                 fill
-                                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                                  className='w-full h-full object-cover group-hover:scale-110 transition-all duration-500'
                               />
                            </div>
@@ -287,11 +285,10 @@ export default function HomeList({
                      <div key={item?.encodeId}>
                         <div onClick={() => router.push(item?.link)} className='relative block group cursor-pointer'>
                            <div className='relative aspect-square overflow-hidden rounded-md'>
-                              <Image
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
                                  src={item?.thumbnailM}
                                  alt={item?.title}
-                                 fill
-                                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                                  className='w-full h-full object-cover group-hover:scale-110 transition-all duration-500'
                               />
                            </div>
@@ -417,11 +414,10 @@ export default function HomeList({
                      <div key={item?.encodeId}>
                         <div onClick={() => router.push(item?.link)} className='relative block group cursor-pointer'>
                            <div className='relative aspect-square overflow-hidden rounded-md'>
-                              <Image
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
                                  src={item?.thumbnailM}
                                  alt={item?.title}
-                                 fill
-                                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                                  className='w-full h-full object-cover group-hover:scale-110 transition-all duration-500'
                               />
                            </div>
@@ -547,11 +543,10 @@ export default function HomeList({
                      <div key={item?.encodeId}>
                         <div onClick={() => router.push(item?.link)} className='relative block group cursor-pointer'>
                            <div className='relative aspect-square overflow-hidden rounded-md'>
-                              <Image
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
                                  src={item?.thumbnailM}
                                  alt={item?.title}
-                                 fill
-                                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                                  className='w-full h-full object-cover group-hover:scale-110 transition-all duration-500'
                               />
                            </div>

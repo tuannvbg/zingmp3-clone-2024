@@ -140,12 +140,10 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
                      isPlaying && atAlbum ? 'rotate-center-start rounded-full' : 'rotate-center-end rounded-lg'
                   }`}
                >
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                      src={playlist.thumbnailM}
-                     fill
-                     sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                      alt={playlist.title}
-                     priority
                      className='w-full h-full object-cover group-hover:scale-110 transition-all duration-500'
                   />
                   {!isLoadingSong && (
@@ -158,13 +156,16 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
                      >
                         <span className='border border-white rounded-full p-2'>
                            {currentSongId && isPlaying && atAlbum ? (
-                              <Image
-                                 src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'}
-                                 width={32}
-                                 height={32}
-                                 className='w-8 h-8 p-1 object-cover'
-                                 alt=''
-                              />
+                              <>
+                                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                                 <img
+                                    src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'}
+                                    width={32}
+                                    height={32}
+                                    className='w-8 h-8 p-1 object-cover'
+                                    alt=''
+                                 />
+                              </>
                            ) : (
                               <svg
                                  xmlns='http://www.w3.org/2000/svg'
@@ -184,7 +185,8 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
                   )}
                   {isLoadingSong && currentSongId && (
                      <div className='absolute inset-0 flex items-center justify-center z-20'>
-                        <Image
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                            src={'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'}
                            width={32}
                            height={32}
@@ -412,7 +414,8 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
                                  }}
                                  className='relative cursor-pointer overflow-hidden w-10 flex-shrink-0 h-10 rounded'
                               >
-                                 <Image
+                                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                                 <img
                                     src={item.thumbnail}
                                     alt={item.title}
                                     width={40}
@@ -421,7 +424,8 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
                                  />
                                  {!isLoadingSong && isPlaying && currentSongId === item.encodeId ? (
                                     <div className='absolute inset-0 flex items-center justify-center z-20'>
-                                       <Image
+                                       {/* eslint-disable-next-line @next/next/no-img-element */}
+                                       <img
                                           src={
                                              'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'
                                           }
@@ -457,7 +461,8 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
                                  )}
                                  {isLoadingSong && currentSongId === item.encodeId && (
                                     <div className='absolute inset-0 flex items-center justify-center z-20'>
-                                       <Image
+                                       {/* eslint-disable-next-line @next/next/no-img-element */}
+                                       <img
                                           src={'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'}
                                           width={20}
                                           height={20}

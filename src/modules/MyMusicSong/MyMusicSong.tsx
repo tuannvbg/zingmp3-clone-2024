@@ -20,7 +20,8 @@ export default function MyMusicSong({ profile = false }: { profile?: boolean }) 
             <SongMusicItem playlist={songsLibrary} mymusic />
          ) : (
             <div className='text-center'>
-               <Image
+               {/* eslint-disable-next-line @next/next/no-img-element */}
+               <img
                   src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/empty-mv-dark.png'}
                   alt=''
                   width={120}

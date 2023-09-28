@@ -10,7 +10,6 @@ import { Artist, Item } from '@/types/artist.type'
 import { HomeListType } from '@/types/homelist.type'
 import { formatNumberWithDot, formatNumberWithK } from '@/utils/utils'
 import { useQuery } from '@tanstack/react-query'
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useContext, useEffect, useState } from 'react'
@@ -43,7 +42,8 @@ export default function Artist() {
    return (
       <div className={`${currentSongId ? 'pb-40 md:pb-32' : 'pb-24 md:pb-20'}`}>
          <div className='relative h-[410px]'>
-            <Image src={artistData.cover} alt={artistData.name} fill priority className='w-full h-full object-cover' />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={artistData.cover} alt={artistData.name} className='w-full h-full object-cover' />
             <div
                style={{
                   backgroundImage: 'linear-gradient(180deg,#00000080 0%, #ffffff00 35%, #ffffff00 65%, #00000080 100%)'
@@ -187,11 +187,10 @@ export default function Artist() {
                                  href={artist.link}
                                  className='relative group aspect-square overflow-hidden rounded-full cursor-pointer'
                               >
-                                 <Image
+                                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                                 <img
                                     src={artist.thumbnail}
                                     alt={artist.name as string}
-                                    fill
-                                    sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                                     className='w-full h-full object-cover transition-all duration-500 group-hover:scale-110'
                                  />
                                  <div className='absolute hidden group-hover:block inset-0 bg-black bg-opacity-40 z-10' />
@@ -270,9 +269,9 @@ export default function Artist() {
                   <h2 className='text-xl mt-12 mb-5 font-bold'>Về {artistData.name}</h2>
                   <div className='grid grid-cols-1 sm:grid-cols-2 gap-7'>
                      <div className='h-[297px] relative'>
-                        <Image
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                            src={artistData.thumbnailM}
-                           fill
                            alt={artistData.name}
                            style={{
                               objectPosition: '50% 20%'

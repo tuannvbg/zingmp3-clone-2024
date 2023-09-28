@@ -3,7 +3,6 @@ import { AppContext } from '@/contexts/app.context'
 import useFollow from '@/hooks/useFollow'
 import { Artist } from '@/types/artist.type'
 import { formatNumberWithK } from '@/utils/utils'
-import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useContext } from 'react'
@@ -23,7 +22,7 @@ export default function SearchArtist() {
                   (artist: {
                      id: React.Key | null | undefined
                      link: string | UrlObject
-                     thumbnail: string | StaticImport
+                     thumbnail: string
                      name:
                         | string
                         | number
@@ -40,11 +39,10 @@ export default function SearchArtist() {
                            href={artist.link}
                            className='relative group aspect-square overflow-hidden rounded-full cursor-pointer'
                         >
-                           <Image
+                           {/* eslint-disable-next-line @next/next/no-img-element */}
+                           <img
                               src={artist.thumbnail}
                               alt={artist.name as string}
-                              fill
-                              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                               className='w-full h-full object-cover transition-all duration-500 group-hover:scale-110'
                            />
                            <div className='absolute hidden group-hover:block inset-0 bg-black bg-opacity-40 z-10' />

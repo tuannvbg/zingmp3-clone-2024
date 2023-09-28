@@ -22,9 +22,8 @@ export default function Radio() {
                   <div className='text-center'>
                      <div onClick={() => toast.warning('Chức năng này chưa hoàn thiện')} className='relative'>
                         <div className='relative cursor-pointer group aspect-square rounded-full overflow-hidden border-[3px] border-pink-500'>
-                           <Image
-                              fill
-                              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                           {/* eslint-disable-next-line @next/next/no-img-element */}
+                           <img
                               src={item.thumbnail}
                               className='w-full h-full object-cover group-hover:scale-110 transition-all duration-500'
                               alt={item.title}
@@ -49,14 +48,16 @@ export default function Radio() {
                               </span>
                            </div>
                         </div>
-                        <Image
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                            src={item.host.thumbnail}
                            alt={item.host.name}
                            width={48}
                            height={48}
                            className='w-12 h-12 border-2 border-black rounded-full object-cover absolute bottom-0 right-0 translate-y-[-40%]'
                         />
-                        <Image
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                            src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/live-tag.svg'}
                            width={32}
                            height={16}

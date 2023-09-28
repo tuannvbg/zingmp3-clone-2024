@@ -74,7 +74,8 @@ export default function Lyric() {
                   {imgBgViewFull?.map((img, index) => (
                      <SwiperSlide key={index}>
                         <li className='relative h-full w-full'>
-                           <Image src={img} className='w-full h-full object-cover' fill alt='' />
+                           {/* eslint-disable-next-line @next/next/no-img-element */}
+                           <img src={img} className='w-full h-full object-cover' alt='' />
                         </li>
                      </SwiperSlide>
                   ))}
@@ -83,7 +84,8 @@ export default function Lyric() {
          )}
          <header className='flex items-center justify-between min-[900px]:justify-end h-[76px] px-5'>
             <div className='flex relative z-20 items-center min-[900px]:hidden gap-x-3'>
-               <Image
+               {/* eslint-disable-next-line @next/next/no-img-element */}
+               <img
                   alt={name as string}
                   src={thumbnailM as string}
                   width={50}
@@ -220,13 +222,8 @@ export default function Lyric() {
             ) : (
                <>
                   <div className='hidden min-[900px]:block w-[30%] aspect-square relative overflow-hidden rounded-lg'>
-                     <Image
-                        alt={name as string}
-                        src={thumbnailM as string}
-                        fill
-                        sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                        className='w-full h-full object-cover'
-                     />
+                     {/* eslint-disable-next-line @next/next/no-img-element */}
+                     <img alt={name as string} src={thumbnailM as string} className='w-full h-full object-cover' />
                   </div>
                   <ul
                      className={`w-full min-[900px]:w-[70%] h-[calc(100vh-200px)] overflow-auto transition-all duration-500 ${

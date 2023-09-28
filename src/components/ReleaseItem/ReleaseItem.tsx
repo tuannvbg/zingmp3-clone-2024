@@ -36,16 +36,12 @@ export default function ReleaseItem({ item }: { item: All | Other }) {
             }}
             className='relative cursor-pointer overflow-hidden w-[60px] h-[60px] flex-shrink-0 rounded'
          >
-            <Image
-               src={item.thumbnail}
-               width={60}
-               height={60}
-               alt={item.title}
-               className='w-full h-full object-cover'
-            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={item.thumbnail} width={60} height={60} alt={item.title} className='w-full h-full object-cover' />
             {!isLoadingSong && isPlaying && currentSongId === item.encodeId ? (
                <div className='absolute inset-0 flex items-center justify-center z-20'>
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                      src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'}
                      width={20}
                      height={20}
@@ -79,7 +75,8 @@ export default function ReleaseItem({ item }: { item: All | Other }) {
             )}
             {isLoadingSong && currentSongId === item.encodeId && (
                <div className='absolute inset-0 flex items-center justify-center z-20'>
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                      src={'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'}
                      width={20}
                      height={20}

@@ -18,7 +18,8 @@ export default function MyMusicPlaylist({ profile }: { profile?: boolean }) {
             <HomeList all title list={playlistLibrary as HomeListType[]} />
          ) : (
             <div className='text-center'>
-               <Image
+               {/* eslint-disable-next-line @next/next/no-img-element */}
+               <img
                   src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/empty-mv-dark.png'}
                   alt=''
                   width={120}

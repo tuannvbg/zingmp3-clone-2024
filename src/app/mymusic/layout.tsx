@@ -46,7 +46,8 @@ export default function MyMusicLayout({ children }: { children: React.ReactNode 
       <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-36 md:pb-28' : 'pb-20 md:pb-16'}`}>
          <div className='pt-7 flex flex-col gap-y-3 items-center'>
             <div className='w-40 h-40 rounded-full overflow-hidden border-4 border-tprimary'>
-               <Image
+               {/* eslint-disable-next-line @next/next/no-img-element */}
+               <img
                   alt='avatar'
                   width={160}
                   height={160}

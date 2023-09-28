@@ -19,11 +19,10 @@ export default function ArtistList({ artistList }: { artistList: Artist[] }) {
                   href={artist.link}
                   className='relative group aspect-square overflow-hidden rounded-full cursor-pointer'
                >
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                      src={artist.thumbnail}
                      alt={artist.name}
-                     fill
-                     sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                      className='w-full h-full object-cover transition-all duration-500 group-hover:scale-110'
                   />
                   <div className='absolute hidden group-hover:block inset-0 bg-black bg-opacity-40 z-10' />

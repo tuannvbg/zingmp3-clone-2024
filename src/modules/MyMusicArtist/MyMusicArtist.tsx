@@ -17,7 +17,8 @@ export default function MyMusicArtist() {
             <ArtistList artistList={artistLibrary} />
          ) : (
             <div className='text-center'>
-               <Image
+               {/* eslint-disable-next-line @next/next/no-img-element */}
+               <img
                   src={'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/empty-mv-dark.png'}
                   alt=''
                   width={120}

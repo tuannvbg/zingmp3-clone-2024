@@ -213,7 +213,8 @@ export default function Header() {
 
                      {isSubmitting && (
                         <div className='pr-2'>
-                           <Image
+                           {/* eslint-disable-next-line @next/next/no-img-element */}
+                           <img
                               src={'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'}
                               width={20}
                               height={20}
@@ -420,7 +421,8 @@ export default function Header() {
                   onClick={() => setOpen((prev) => !prev)}
                   className='w-10 h-10 rounded-full relative flex items-center overflow-hidden justify-center group'
                >
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                      src={
                         profile?.avatar
                            ? `https://api-ecom.duthanhduoc.com/images/${profile?.avatar}`

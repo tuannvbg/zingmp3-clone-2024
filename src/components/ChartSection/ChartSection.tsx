@@ -174,7 +174,8 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                                  }}
                                  className='relative cursor-pointer overflow-hidden w-[60px] flex-shrink-0 h-[60px] rounded'
                               >
-                                 <Image
+                                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                                 <img
                                     src={item.thumbnail}
                                     alt={item.title}
                                     width={60}
@@ -183,7 +184,8 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                                  />
                                  {!isLoadingSong && isPlaying && currentSongId === item.encodeId ? (
                                     <div className='absolute inset-0 flex items-center justify-center z-20'>
-                                       <Image
+                                       {/* eslint-disable-next-line @next/next/no-img-element */}
+                                       <img
                                           src={
                                              'https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif'
                                           }
@@ -219,7 +221,8 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                                  )}
                                  {isLoadingSong && currentSongId === item.encodeId && (
                                     <div className='absolute inset-0 flex items-center justify-center z-20'>
-                                       <Image
+                                       {/* eslint-disable-next-line @next/next/no-img-element */}
+                                       <img
                                           src={'https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif'}
                                           width={20}
                                           height={20}
@@ -304,7 +307,8 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                      >
                         <div className='flex items-center gap-x-2 w-full'>
                            <div className='relative cursor-pointer overflow-hidden w-[40px] flex-shrink-0 h-[40px] rounded'>
-                              <Image
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
                                  src={rank.find((item) => item.encodeId === selected)?.thumbnail as string}
                                  alt={rank.find((item) => item.encodeId === selected)?.title as string}
                                  width={40}

@@ -50,7 +50,8 @@ export default function ModalSetting({ isOpen, setIsOpen }: Props) {
                            Thời gian phát nhạc đã kết thúc, bạn có muốn tiếp tục phát bài hát này?
                         </p>
                         <div className='px-[50px]'>
-                           <Image
+                           {/* eslint-disable-next-line @next/next/no-img-element */}
+                           <img
                               src={infoSong?.thumbnailM as string}
                               alt={infoSong?.title as string}
                               className='w-full h-full aspect-square rounded-lg object-cover'

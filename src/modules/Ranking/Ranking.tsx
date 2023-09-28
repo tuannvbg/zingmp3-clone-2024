@@ -29,9 +29,8 @@ export default function Ranking() {
    return (
       <div className={`mt-[70px] ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>
          <div className='relative w-full pt-[20%]'>
-            <Image
-               fill
-               priority
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
                alt='banner'
                className='w-full h-full top-0 left-0 right-0 object-cover'
                src={data?.data.data.banner as string}

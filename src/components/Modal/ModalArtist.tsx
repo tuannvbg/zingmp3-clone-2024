@@ -43,7 +43,8 @@ export default function ModalArtist({ isOpen, setIsOpen, thumbnail, name, biogra
                      leaveTo='opacity-0 scale-95'
                   >
                      <Dialog.Panel className='transform relative overflow-hidden rounded-lg bg-tertiary w-[480px] p-6 text-center align-middle shadow-xl transition-all'>
-                        <Image
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                            src={thumbnail}
                            alt={name}
                            width={110}
