@@ -610,7 +610,7 @@ export default function Home() {
                            className='w-8 h-4 mx-auto -translate-y-1/2'
                         />
                      </div>
-                     <h3 className='text-base font-bold'>{item.host.name.replace('Radio', '').trim()}</h3>
+                     <h3 className='text-base font-bold'>{item.host.name?.replace('Radio', '').trim()}</h3>
                      <span className='text-secondary text-xs'>{item.activeUsers} đang nghe</span>
                   </div>
                </SwiperSlide>

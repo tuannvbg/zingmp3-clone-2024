@@ -5,6 +5,7 @@ import Tooltip from '@/components/Tooltip/Tooltip'
 import { AppContext } from '@/contexts/app.context'
 import useAddLibrary from '@/hooks/useAddLibrary'
 import useInfoSong from '@/hooks/useInfoSong'
+import { SongItem } from '@/types/playlist.type'
 import { timeFormatter } from '@/utils/utils'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
@@ -276,7 +277,7 @@ export default function PlayerControl() {
                </div>
                <Tooltip content={library.includes(infoSong.encodeId) ? 'Xoá khỏi thư viện' : 'Thêm vào thư viện'}>
                   <button
-                     onClick={(e) => handleAddLibrary(e, infoSong.encodeId)}
+                     onClick={(e) => handleAddLibrary(e, infoSong.encodeId, null, infoSong as unknown as any)}
                      className={`hover:bg-white hover:bg-opacity-10 rounded-full p-1.5 ${
                         library.includes(infoSong.encodeId) && 'text-tprimary'
                      }`}
