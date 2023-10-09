@@ -8,6 +8,7 @@ import { AppContext } from '@/contexts/app.context'
 import useAddLibrary from '@/hooks/useAddLibrary'
 import useFollow from '@/hooks/useFollow'
 import usePlayMusic from '@/hooks/usePlayMusic'
+import useRecentSong from '@/hooks/useRecentSong'
 import { Artist, Item } from '@/types/artist.type'
 import { SongItem } from '@/types/playlist.type'
 import { formatNumberWithK } from '@/utils/utils'
@@ -17,13 +18,14 @@ import React, { useContext, useEffect } from 'react'
 import { UrlObject } from 'url'
 
 export default function SearchAll() {
-   const { searchData, currentSongId, isLoadingSong, setRecentSong, isPlaying, playList, setPlayList } =
-      useContext(AppContext)
+   const { searchData, currentSongId, isLoadingSong, isPlaying, playList, setPlayList } = useContext(AppContext)
    const searchParams = useSearchParams()
    const keyword = searchParams.get('q')
    const { follows, handleClickFollow } = useFollow()
    const { handleClickSong } = usePlayMusic()
    const { handleAddLibrary, library } = useAddLibrary()
+   const { handleHistory } = useRecentSong()
+
    const artists = searchData.artists
    const songs = searchData.songs
    useEffect(() => {
@@ -212,17 +214,7 @@ export default function SearchAll() {
                            <div
                               onClick={() => {
                                  handleClickSong(item.encodeId)
-                                 setRecentSong((prev) => {
-                                    if (prev.length >= 20) {
-                                       return prev.includes(item)
-                                          ? [item, ...prev.filter((i) => i !== item)]
-                                          : [item, ...prev.filter((_, index) => index !== prev.length - 1)]
-                                    } else {
-                                       return prev.includes(item)
-                                          ? [item, ...prev.filter((i) => i !== item)]
-                                          : [item, ...prev]
-                                    }
-                                 })
+                                 handleHistory(item)
                               }}
                               className='relative cursor-pointer overflow-hidden w-[84px] flex-shrink-0 h-[84px] rounded'
                            >

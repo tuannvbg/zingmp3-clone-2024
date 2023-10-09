@@ -8,6 +8,8 @@ import useAddLibrary from '@/hooks/useAddLibrary'
 import useClickOutSide from '@/hooks/useClickOutSide'
 import useGetPlaylist from '@/hooks/useGetPlaylist'
 import usePlayMusic from '@/hooks/usePlayMusic'
+import useRecentSong from '@/hooks/useRecentSong'
+import { SongItem } from '@/types/playlist.type'
 import { formatDateFromTimestamp, formatNumberWithK, secondsToHoursMinutes, timeFormatter } from '@/utils/utils'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,7 +20,7 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
    const { nodeRef } = useClickOutSide(() => setOpenSortSong(false)) //tắt bảng sắp xếp bài hát
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
    const { library, handleAddLibrary } = useAddLibrary() //thêm vào thư viện
-
+   const { handleHistory } = useRecentSong()
    const {
       setIsPlaying,
       isPlaying,
@@ -29,9 +31,7 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
       setPlayList,
       atAlbum,
       setAlbumInfo,
-      setRecentSong,
-      setIsShowLyric,
-      setCurrentSongId
+      setIsShowLyric
    } = useContext(AppContext)
 
    //get api playlist
@@ -47,34 +47,17 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
    }, [songs])
 
    const { handleClickSong } = usePlayMusic()
-
    //click vào banner
    const handleClickSongBanner = () => {
       const itemOne = playlist?.song.items[0]
       if (!currentSongId && itemOne) {
          handleClickSong(itemOne.encodeId)
-         setRecentSong((prev) => {
-            if (prev.length >= 20) {
-               return prev.includes(itemOne)
-                  ? [itemOne, ...prev.filter((i) => i !== itemOne)]
-                  : [itemOne, ...prev.filter((_, index) => index !== prev.length - 1)]
-            } else {
-               return prev.includes(itemOne) ? [itemOne, ...prev.filter((i) => i !== itemOne)] : [itemOne, ...prev]
-            }
-         })
+         handleHistory(itemOne)
          setAtAlbum(true) //nếu ở album thì cho next prev
       } else if (!atAlbum && itemOne) {
          handleClickSong(itemOne.encodeId)
          setAtAlbum(true) //nếu ở album thì cho next prev
-         setRecentSong((prev) => {
-            if (prev.length >= 20) {
-               return prev.includes(itemOne)
-                  ? [itemOne, ...prev.filter((i) => i !== itemOne)]
-                  : [itemOne, ...prev.filter((_, index) => index !== prev.length - 1)]
-            } else {
-               return prev.includes(itemOne) ? [itemOne, ...prev.filter((i) => i !== itemOne)] : [itemOne, ...prev]
-            }
-         })
+         handleHistory(itemOne)
       } else {
          setIsPlaying((prev) => !prev)
       }
@@ -397,17 +380,7 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
                                     if (item.isWorldWide) {
                                        setAtAlbum(true)
                                        handleClickSong(item.encodeId)
-                                       setRecentSong((prev) => {
-                                          if (prev.length >= 20) {
-                                             return prev.includes(item)
-                                                ? [item, ...prev.filter((i) => i !== item)]
-                                                : [item, ...prev.filter((_, index) => index !== prev.length - 1)]
-                                          } else {
-                                             return prev.includes(item)
-                                                ? [item, ...prev.filter((i) => i !== item)]
-                                                : [item, ...prev]
-                                          }
-                                       })
+                                       handleHistory(item)
                                     } else {
                                        setIsOpenModal(true)
                                     }

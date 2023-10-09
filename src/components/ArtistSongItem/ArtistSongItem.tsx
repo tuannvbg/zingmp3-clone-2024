@@ -7,13 +7,14 @@ import Modal from '../Modal/Modal'
 import Link from 'next/link'
 import Tooltip from '../Tooltip/Tooltip'
 import { timeFormatter } from '@/utils/utils'
-import Image from 'next/image'
+import useRecentSong from '@/hooks/useRecentSong'
 
 export default function ArtistSongItem({ item }: { item: SongItem }) {
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
-   const { currentSongId, isLoadingSong, setIsShowLyric, setRecentSong, isPlaying, setAtAlbum } = useContext(AppContext)
+   const { currentSongId, isLoadingSong, setIsShowLyric, isPlaying, setAtAlbum } = useContext(AppContext)
    const { handleClickSong } = usePlayMusic()
    const { handleAddLibrary, library } = useAddLibrary()
+   const { handleHistory } = useRecentSong()
    return (
       <li
          key={item.encodeId}
@@ -27,15 +28,7 @@ export default function ArtistSongItem({ item }: { item: SongItem }) {
                   if (item.isWorldWide) {
                      setAtAlbum(true)
                      handleClickSong(item.encodeId)
-                     setRecentSong((prev) => {
-                        if (prev.length >= 20) {
-                           return prev.includes(item)
-                              ? [item, ...prev.filter((i) => i !== item)]
-                              : [item, ...prev.filter((_, index) => index !== prev.length - 1)]
-                        } else {
-                           return prev.includes(item) ? [item, ...prev.filter((i) => i !== item)] : [item, ...prev]
-                        }
-                     })
+                     handleHistory(item)
                   } else {
                      setIsOpenModal(true)
                   }

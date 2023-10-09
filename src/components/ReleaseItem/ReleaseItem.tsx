@@ -6,11 +6,15 @@ import { formatDateDifference } from '@/utils/utils'
 import Link from 'next/link'
 import Image from 'next/image'
 import { All, Other } from '@/types/release.type'
+import useRecentSong from '@/hooks/useRecentSong'
+import { SongItem } from '@/types/playlist.type'
 
 export default function ReleaseItem({ item }: { item: All | Other }) {
-   const { currentSongId, isLoadingSong, isPlaying, setRecentSong } = useContext(AppContext)
+   const { currentSongId, isLoadingSong, isPlaying } = useContext(AppContext)
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
    const { handleClickSong } = usePlayMusic()
+   const { handleHistory } = useRecentSong()
+
    return (
       <div
          className={`flex hover:bg-white hover:bg-opacity-10 group rounded-md items-center gap-x-2 p-2.5 ${
@@ -20,15 +24,7 @@ export default function ReleaseItem({ item }: { item: All | Other }) {
          <div
             onClick={() => {
                if (item.isWorldWide) {
-                  setRecentSong((prev) => {
-                     if (prev.length >= 20) {
-                        return prev.includes(item as any)
-                           ? [item, ...prev.filter((i) => i !== item)]
-                           : [item, ...(prev.filter((_, index) => index !== prev.length - 1) as any)]
-                     } else {
-                        return prev.includes(item as any) ? [item, ...prev.filter((i) => i !== item)] : [item, ...prev]
-                     }
-                  })
+                  handleHistory(item as SongItem)
                   handleClickSong(item.encodeId)
                } else {
                   setIsOpenModal(true)

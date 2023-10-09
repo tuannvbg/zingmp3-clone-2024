@@ -9,12 +9,15 @@ import Modal from '../Modal/Modal'
 import usePlayMusic from '@/hooks/usePlayMusic'
 import useAddLibrary from '@/hooks/useAddLibrary'
 import { SongItem } from '@/types/playlist.type'
+import useRecentSong from '@/hooks/useRecentSong'
 
 export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: boolean }) {
-   const { currentSongId, isLoadingSong, isPlaying, setAtAlbum, setRecentSong, setIsShowLyric } = useContext(AppContext)
+   const { currentSongId, isLoadingSong, isPlaying, setAtAlbum, setIsShowLyric } = useContext(AppContext)
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
    const { handleClickSong } = usePlayMusic()
    const { handleAddLibrary, library } = useAddLibrary()
+   const { handleHistory } = useRecentSong()
+
    return (
       <>
          <ul>
@@ -81,17 +84,7 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                            if (item.isWorldWide) {
                               setAtAlbum(true)
                               handleClickSong(item.encodeId)
-                              setRecentSong((prev) => {
-                                 if (prev.length >= 20) {
-                                    return prev.includes(item as any)
-                                       ? ([item, ...prev.filter((i) => i !== (item as any))] as any)
-                                       : [item, ...prev.filter((_, index) => index !== prev.length - 1)]
-                                 } else {
-                                    return prev.includes(item as any)
-                                       ? [item, ...prev.filter((i) => i !== (item as any))]
-                                       : [item, ...prev]
-                                 }
-                              })
+                              handleHistory(item as unknown as SongItem)
                            } else {
                               setIsOpenModal(true)
                            }

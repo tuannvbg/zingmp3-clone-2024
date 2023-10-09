@@ -8,6 +8,7 @@ import Link from 'next/link'
 import React, { useContext, useState, Fragment } from 'react'
 import ModalStopMusic from '@/components/Modal/ModalStopMusic'
 import ModalCloseTimer from '@/components/Modal/ModalCloseTimer'
+import useRecentSong from '@/hooks/useRecentSong'
 
 export default function RightSideBar() {
    const [openModal, setOpenModal] = useState<boolean>(false)
@@ -25,7 +26,7 @@ export default function RightSideBar() {
       setOpenSideBarRight,
       recentSong,
       albumInfo,
-      setRecentSong,
+
       audio,
       setAudio,
       timer
@@ -33,6 +34,7 @@ export default function RightSideBar() {
    const { library, handleAddLibrary } = useAddLibrary()
    const [status, setStatus] = useState<'list' | 'recent'>('list')
    const { handleClickSong } = usePlayMusic()
+   const { handleHistory } = useRecentSong()
 
    //xoá danh sách phát
    const handleDeletePlaylist = () => {
@@ -131,17 +133,7 @@ export default function RightSideBar() {
                                     onClick={() => {
                                        setAtAlbum(true)
                                        handleClickSong(item.encodeId)
-                                       setRecentSong((prev) => {
-                                          if (prev.length >= 20) {
-                                             return prev.includes(item)
-                                                ? [item, ...prev.filter((i) => i !== item)]
-                                                : [item, ...prev.filter((_, index) => index !== prev.length - 1)]
-                                          } else {
-                                             return prev.includes(item)
-                                                ? [item, ...prev.filter((i) => i !== item)]
-                                                : [item, ...prev]
-                                          }
-                                       })
+                                       handleHistory(item)
                                     }}
                                     className='relative cursor-pointer overflow-hidden w-10 flex-shrink-0 h-10 rounded'
                                  >

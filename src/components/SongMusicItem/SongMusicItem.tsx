@@ -8,12 +8,15 @@ import Image from 'next/image'
 import { AppContext } from '@/contexts/app.context'
 import useAddLibrary from '@/hooks/useAddLibrary'
 import usePlayMusic from '@/hooks/usePlayMusic'
+import useRecentSong from '@/hooks/useRecentSong'
 
 export default function SongMusicItem({ mymusic, playlist }: { mymusic?: boolean; playlist: SongItem[] | [] }) {
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false) //tắt mở modal
-   const { currentSongId, isLoadingSong, isPlaying, setAtAlbum, setIsShowLyric, setRecentSong } = useContext(AppContext)
+   const { currentSongId, isLoadingSong, isPlaying, setAtAlbum, setIsShowLyric } = useContext(AppContext)
    const { handleAddLibrary, library } = useAddLibrary()
    const { handleClickSong } = usePlayMusic()
+   const { handleHistory } = useRecentSong()
+
    return (
       <>
          <div className='flex text-secondary text-xs items-center border-b border-b-gray-800 p-2.5'>
@@ -49,17 +52,7 @@ export default function SongMusicItem({ mymusic, playlist }: { mymusic?: boolean
                            if (item.isWorldWide) {
                               setAtAlbum(mymusic ? false : true)
                               handleClickSong(item.encodeId)
-                              setRecentSong((prev) => {
-                                 if (prev.length >= 20) {
-                                    return prev.includes(item as any)
-                                       ? ([item, ...prev.filter((i) => i !== item)] as any)
-                                       : [item, ...prev.filter((_, index) => index !== prev.length - 1)]
-                                 } else {
-                                    return prev.includes(item as any)
-                                       ? [item, ...prev.filter((i) => i !== item)]
-                                       : [item, ...prev]
-                                 }
-                              })
+                              handleHistory(item)
                            } else {
                               setIsOpenModal(true)
                            }
