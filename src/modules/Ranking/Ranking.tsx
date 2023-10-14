@@ -28,14 +28,8 @@ export default function Ranking() {
    if (!playList) return <Loading />
    return (
       <div className={`mt-[70px] ${currentSongId ? 'pb-36 md:pb-28' : 'pb-14 md:pb-10'}`}>
-         <div className='relative w-full pt-[20%]'>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-               alt='banner'
-               className='w-full h-full top-0 left-0 right-0 object-cover'
-               src={data?.data.data.banner as string}
-            />
-         </div>
+         {/* eslint-disable-next-line @next/next/no-img-element */}
+         <img alt='banner' className='w-full aspect-[5/1] h-full object-cover' src={data?.data.data.banner as string} />
          <div className='px-3 sm:px-8 lg:px-14'>
             <div className='pt-[30px] flex items-center gap-x-3 pb-5'>
                <h1 className='text-3xl sm:text-[40px] font-bold'>BXH Nhạc Mới</h1>
