@@ -18,9 +18,4 @@
 -  Hẹn giờ dừng phát nhạc
 -  Xem MV bài hát
 
-## Công nghệ sử dụng
-
--  Language: TypeScript, NextJS App Router
--  UI / CSS Library: TailwindCSS, Headless UI
--  State Management: React Query, React Context
--  Form Management: React Hook Form, Yup
+## Công nghệ sử dụng: TypeScript, NextJS App Router, TailwindCSS
