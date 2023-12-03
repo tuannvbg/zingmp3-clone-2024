@@ -215,7 +215,7 @@ export default function RightSideBar() {
                                        {item.artists?.map((artist, index) => {
                                           return index === item.artists.length - 1 ? (
                                              <Link
-                                                href={artist.link}
+                                                href={artist?.link}
                                                 key={artist.id}
                                                 className='isHover cursor-pointer hover:underline'
                                              >
@@ -223,7 +223,7 @@ export default function RightSideBar() {
                                              </Link>
                                           ) : (
                                              <Link
-                                                href={artist.link}
+                                                href={artist?.link}
                                                 key={artist.id}
                                                 className='isHover cursor-pointer hover:underline'
                                              >
@@ -281,7 +281,7 @@ export default function RightSideBar() {
                                  <span className='font-bold'>Tiếp theo</span>
                                  <span className='text-secondary'>
                                     Từ playlist{' '}
-                                    <Link href={albumInfo.link} className='text-tprimary font-semibold'>
+                                    <Link href={albumInfo?.link} className='text-tprimary font-semibold'>
                                        {albumInfo.title}
                                     </Link>
                                  </span>
@@ -394,7 +394,7 @@ export default function RightSideBar() {
                               {item.artists?.map((artist, index) => {
                                  return index === item.artists.length - 1 ? (
                                     <Link
-                                       href={artist.link}
+                                       href={artist?.link}
                                        key={artist.id}
                                        className='isHover cursor-pointer hover:underline'
                                     >
@@ -402,7 +402,7 @@ export default function RightSideBar() {
                                     </Link>
                                  ) : (
                                     <Link
-                                       href={artist.link}
+                                       href={artist?.link}
                                        key={artist.id}
                                        className='isHover cursor-pointer hover:underline'
                                     >

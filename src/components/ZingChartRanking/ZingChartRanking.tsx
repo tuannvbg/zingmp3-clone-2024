@@ -12,7 +12,7 @@ export default function ZingChartRanking({ weekChartCountry, title }: Props) {
    return (
       <div className='bg-white bg-opacity-5 rounded-xl py-5 px-2.5'>
          <div className='flex items-center gap-x-1 mb-2.5 pl-10'>
-            <Link href={weekChartCountry.link as string} className='text-2xl font-bold isHover cursor-pointer'>
+            <Link href={weekChartCountry?.link as string} className='text-2xl font-bold isHover cursor-pointer'>
                {title}
             </Link>
             <div className='w-7 h-7 rounded-full bg-tprimary flex items-center justify-center'>
@@ -27,7 +27,7 @@ export default function ZingChartRanking({ weekChartCountry, title }: Props) {
          <Charts isRanking list={weekChartCountry?.items.slice(0, 5) as unknown as Item[]} />
          <div className='text-center mt-5'>
             <Link
-               href={weekChartCountry.link as string}
+               href={weekChartCountry?.link as string}
                className='border border-white rounded-full px-5 py-2 hover:bg-white hover:bg-opacity-10 font-medium'
             >
                Xem tất cả

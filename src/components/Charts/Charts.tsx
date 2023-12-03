@@ -171,12 +171,12 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                         <div className='text-xs text-secondary max-w-[160px] sm:max-w-[250px] truncate'>
                            {item.artists?.map((artist, index) => {
                               return index === item.artists.length - 1 ? (
-                                 <Link href={artist.link} key={artist.id} className=' isHover hover:underline'>
+                                 <Link href={artist?.link} key={artist.id} className=' isHover hover:underline'>
                                     {artist.name}
                                  </Link>
                               ) : (
                                  <>
-                                    <Link href={artist.link} key={artist.id} className='isHover hover:underline'>
+                                    <Link href={artist?.link} key={artist.id} className='isHover hover:underline'>
                                        {artist.name}
                                     </Link>
                                     ,{' '}
@@ -189,7 +189,7 @@ export default function Charts({ list, isRanking }: { list: Item[]; isRanking?: 
                   <div className='flex-1 hidden md:block w-0 self-center basis-auto mr-2'>
                      {item.album && (
                         <Link
-                           href={item.album.link}
+                           href={item.album?.link}
                            className='isHover block max-w-[250px] truncate hover:underline capitalize'
                         >
                            {item.album.title}

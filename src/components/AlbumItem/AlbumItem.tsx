@@ -65,7 +65,7 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
 
    useEffect(() => {
       if (playlist) {
-         setAlbumInfo({ title: playlist.title, link: playlist.link })
+         setAlbumInfo({ title: playlist.title, link: playlist?.link })
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [params.id, playlist])
@@ -184,11 +184,11 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
                <div className='text-secondary text-xs my-1'>
                   {playlist.artists?.map((artist, index) => {
                      return index === playlist.artists.length - 1 ? (
-                        <Link href={artist.link} key={artist.id} className='isHover cursor-pointer hover:underline'>
+                        <Link href={artist?.link} key={artist.id} className='isHover cursor-pointer hover:underline'>
                            {artist.name}
                         </Link>
                      ) : (
-                        <Link href={artist.link} key={artist.id} className='isHover cursor-pointer hover:underline'>
+                        <Link href={artist?.link} key={artist.id} className='isHover cursor-pointer hover:underline'>
                            {`${artist.name}, `}
                         </Link>
                      )
@@ -470,7 +470,7 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
                                     {item.artists?.map((artist, index) => {
                                        return index === item.artists.length - 1 ? (
                                           <Link
-                                             href={artist.link}
+                                             href={artist?.link}
                                              key={artist.id}
                                              className='isHover cursor-pointer hover:underline'
                                           >
@@ -479,7 +479,7 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
                                        ) : (
                                           <>
                                              <Link
-                                                href={artist.link}
+                                                href={artist?.link}
                                                 key={artist.id}
                                                 className='isHover cursor-pointer hover:underline'
                                              >
@@ -495,7 +495,7 @@ export default function AlbumItem({ params }: { params: { id: string } }) {
                            <div className='flex-1 sm:block hidden w-0 self-center basis-auto mr-2'>
                               {item.album && (
                                  <Link
-                                    href={item.album.link}
+                                    href={item.album?.link}
                                     className='isHover cursor-pointer block max-w-[120px] lg:max-w-[200px] truncate hover:underline capitalize'
                                  >
                                     {item.album.title}

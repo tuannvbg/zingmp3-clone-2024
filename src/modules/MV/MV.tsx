@@ -48,7 +48,7 @@ export default function MV({ params }: { params: { id: string } }) {
                         categories.map((item) => (
                            <li key={item.id}>
                               <Link
-                                 href={item.link}
+                                 href={item?.link}
                                  onClick={() => setCategoryMv(item.title)}
                                  className='p-2 block rounded-md hover:bg-white hover:bg-opacity-10'
                               >

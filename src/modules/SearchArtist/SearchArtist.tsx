@@ -36,7 +36,7 @@ export default function SearchArtist() {
                   }) => (
                      <div key={artist.id} className='flex flex-col text-center'>
                         <Link
-                           href={artist.link}
+                           href={artist?.link}
                            className='relative group aspect-square overflow-hidden rounded-full cursor-pointer'
                         >
                            {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -64,7 +64,7 @@ export default function SearchArtist() {
                            </div>
                         </Link>
                         <Link
-                           href={artist.link}
+                           href={artist?.link}
                            className='isHover cursor-pointer hover:underline font-medium mt-3 mb-1'
                         >
                            {artist.name}

@@ -45,7 +45,7 @@ export default function MVLayout({ children }: { children: React.ReactNode }) {
                         isActive === item.active ? 'border-b-2 py-3 border-tprimary' : 'py-3.5'
                      }`}
                      key={item.title}
-                     href={item.url}
+                     href={item?.url}
                   >
                      {item.title}
                   </Link>

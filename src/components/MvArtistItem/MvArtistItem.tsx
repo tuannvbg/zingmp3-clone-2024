@@ -19,7 +19,7 @@ export default function MvArtistItem({ item }: { item: Item }) {
                   if (item.streamingStatus === 2) {
                      setIsOpenModal(true)
                   } else {
-                     router.push(item.link)
+                     router.push(item?.link)
                   }
                }}
                className='aspect-video w-full relative group overflow-hidden rounded-lg'
@@ -70,14 +70,14 @@ export default function MvArtistItem({ item }: { item: Item }) {
                      className='w-10 h-10 object-cover rounded-full'
                   />
                   <div className='flex flex-col'>
-                     <Link href={item.link} className='font-medium isHover'>
+                     <Link href={item?.link} className='font-medium isHover'>
                         {item.title}
                      </Link>
                      <div className='text-secondary text-xs my-1'>
                         {item.artists.map((artist, index) => {
                            return index === (item.artists || []).length - 1 ? (
                               <Link
-                                 href={artist.link}
+                                 href={artist?.link}
                                  key={artist.id}
                                  className='isHover cursor-pointer hover:underline'
                               >
@@ -85,7 +85,7 @@ export default function MvArtistItem({ item }: { item: Item }) {
                               </Link>
                            ) : (
                               <Link
-                                 href={artist.link}
+                                 href={artist?.link}
                                  key={artist.id}
                                  className='isHover cursor-pointer hover:underline'
                               >

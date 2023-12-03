@@ -116,7 +116,7 @@ export default function ArtistSongItem({ item }: { item: SongItem }) {
                   {item.artists?.map((artist, index) => {
                      return index === item.artists.length - 1 ? (
                         <Link
-                           href={artist.link}
+                           href={artist?.link}
                            key={artist.id}
                            className='text-secondary isHover cursor-pointer hover:underline'
                         >
@@ -125,7 +125,7 @@ export default function ArtistSongItem({ item }: { item: SongItem }) {
                      ) : (
                         <>
                            <Link
-                              href={artist.link}
+                              href={artist?.link}
                               key={artist.id}
                               className='text-secondary isHover cursor-pointer hover:underline'
                            >

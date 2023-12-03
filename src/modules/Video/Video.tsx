@@ -6,12 +6,11 @@ import Tooltip from '@/components/Tooltip/Tooltip'
 import { AppContext } from '@/contexts/app.context'
 import useAddLibrary from '@/hooks/useAddLibrary'
 import { useQuery } from '@tanstack/react-query'
-import Image from 'next/image'
 import Link from 'next/link'
 import React, { useContext, useEffect } from 'react'
 
 export default function Video({ params }: { params: { id: string } }) {
-   const { setCurrentIdVideo, audio, setAudio, setIsPlaying } = useContext(AppContext)
+   const { setCurrentIdVideo, audio, setIsPlaying } = useContext(AppContext)
    const { library, handleAddLibrary } = useAddLibrary() //thêm vào thư viện
    const { data } = useQuery({
       queryKey: ['video', params.id],
@@ -46,7 +45,7 @@ export default function Video({ params }: { params: { id: string } }) {
                            {videoData.artists?.map((artist, index) => {
                               return index === videoData.artists.length - 1 ? (
                                  <Link
-                                    href={artist.link}
+                                    href={artist?.link}
                                     key={artist.id}
                                     className='isHover cursor-pointer hover:underline'
                                  >
@@ -54,7 +53,7 @@ export default function Video({ params }: { params: { id: string } }) {
                                  </Link>
                               ) : (
                                  <Link
-                                    href={artist.link}
+                                    href={artist?.link}
                                     key={artist.id}
                                     className='isHover cursor-pointer hover:underline'
                                  >
@@ -143,7 +142,7 @@ export default function Video({ params }: { params: { id: string } }) {
                            <li className='flex items-center gap-x-3' key={item.encodeId}>
                               <Link
                                  className='flex-shrink-0 relative w-[120px] h-[70px] group overflow-hidden rounded-md'
-                                 href={item.link}
+                                 href={item?.link}
                               >
                                  {/* eslint-disable-next-line @next/next/no-img-element */}
                                  <img
@@ -177,7 +176,7 @@ export default function Video({ params }: { params: { id: string } }) {
                                     {item.artists?.map((artist, index) => {
                                        return index === item.artists.length - 1 ? (
                                           <Link
-                                             href={artist.link}
+                                             href={artist?.link}
                                              key={artist.id}
                                              className='isHover cursor-pointer hover:underline'
                                           >
@@ -185,7 +184,7 @@ export default function Video({ params }: { params: { id: string } }) {
                                           </Link>
                                        ) : (
                                           <Link
-                                             href={artist.link}
+                                             href={artist?.link}
                                              key={artist.id}
                                              className='isHover cursor-pointer hover:underline'
                                           >

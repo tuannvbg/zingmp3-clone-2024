@@ -30,7 +30,7 @@ export const getSong = async (params: { id: string }) => {
       const res = await http.get<SongType>('/song', {
          params
       })
-      return res.data.err === 0 ? res.data.data : res.data.url
+      return res.data.err === 0 ? res.data.data : res.data?.url
    } catch (error) {
       console.log(error)
    }

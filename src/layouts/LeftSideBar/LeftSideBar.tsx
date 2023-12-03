@@ -162,13 +162,15 @@ export default function LeftSideBar() {
                {links.slice(0, 3).map((link) => (
                   <li
                      title={link.title}
-                     className={`${pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'}`}
+                     className={`${
+                        pathname === link?.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'
+                     }`}
                      key={link.title}
                   >
                      <Link
-                        href={link.url}
+                        href={link?.url}
                         className={`flex items-center gap-x-2.5 py-3 pl-5 pr-5 ${
-                           pathname === link.url ? 'pl-[17px]' : 'text-grayDa hover:text-white'
+                           pathname === link?.url ? 'pl-[17px]' : 'text-grayDa hover:text-white'
                         }`}
                      >
                         {link.icon}
@@ -232,14 +234,14 @@ export default function LeftSideBar() {
                      <li
                         title={link.title}
                         className={`${
-                           pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'
+                           pathname === link?.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-20'
                         }`}
                         key={link.title}
                      >
                         <Link
-                           href={link.url}
+                           href={link?.url}
                            className={`flex items-center gap-x-2.5 py-3 pl-5 pr-5 ${
-                              pathname === link.url ? 'pl-[17px]' : 'text-grayDa hover:text-white'
+                              pathname === link?.url ? 'pl-[17px]' : 'text-grayDa hover:text-white'
                            }`}
                         >
                            {link.icon}
@@ -280,14 +282,14 @@ export default function LeftSideBar() {
                            <li
                               title={link.title}
                               className={`${
-                                 pathname === link.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-10'
+                                 pathname === link?.url && 'border-l-[3px] border-l-tprimary bg-white bg-opacity-10'
                               }`}
                               key={link.title}
                            >
                               <Link
-                                 href={link.url}
+                                 href={link?.url}
                                  className={`flex items-center gap-x-2.5 py-3 pl-5 pr-5 ${
-                                    pathname === link.url ? 'pl-[17px]' : 'text-grayDa hover:text-white'
+                                    pathname === link?.url ? 'pl-[17px]' : 'text-grayDa hover:text-white'
                                  }`}
                               >
                                  {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -361,9 +363,9 @@ export default function LeftSideBar() {
             {links.slice(0, 3).map((link) => (
                <li key={link.title} className='flex-1'>
                   <Link
-                     href={link.url}
+                     href={link?.url}
                      className={`flex flex-col items-center justify-center w-full  ${
-                        pathname === link.url ? 'text-tprimary' : 'text-grayDa'
+                        pathname === link?.url ? 'text-tprimary' : 'text-grayDa'
                      }`}
                   >
                      {link.icon}

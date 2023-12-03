@@ -71,7 +71,7 @@ export default function MyMusicLayout({ children }: { children: React.ReactNode 
                               ? 'bg-white bg-opacity-30 rounded-full'
                               : 'text-grayDa isHover transition-all'
                         }`}
-                        href={item.url}
+                        href={item?.url}
                      >
                         {item.title}
                      </Link>
@@ -87,7 +87,7 @@ export default function MyMusicLayout({ children }: { children: React.ReactNode 
                               ? 'bg-white bg-opacity-30 rounded-full'
                               : 'text-grayDa isHover transition-all'
                         }`}
-                        href={item.url}
+                        href={item?.url}
                      >
                         {item.title}
                      </Link>
@@ -103,7 +103,7 @@ export default function MyMusicLayout({ children }: { children: React.ReactNode 
                               ? 'bg-white bg-opacity-30 rounded-full'
                               : 'text-grayDa isHover transition-all'
                         }`}
-                        href={item.url}
+                        href={item?.url}
                      >
                         {item.title}
                      </Link>

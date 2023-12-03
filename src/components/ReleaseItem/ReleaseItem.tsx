@@ -104,12 +104,12 @@ export default function ReleaseItem({ item }: { item: All | Other }) {
             <div className='text-xs text-secondary'>
                {item.artists?.map((artist, index) => {
                   return index === item.artists.length - 1 ? (
-                     <Link href={artist.link} key={artist.id} className='isHover cursor-pointer hover:underline'>
+                     <Link href={artist?.link} key={artist.id} className='isHover cursor-pointer hover:underline'>
                         {artist.name}
                      </Link>
                   ) : (
                      <>
-                        <Link href={artist.link} key={artist.id} className='isHover cursor-pointer hover:underline'>
+                        <Link href={artist?.link} key={artist.id} className='isHover cursor-pointer hover:underline'>
                            {artist.name}
                         </Link>
                         ,{' '}

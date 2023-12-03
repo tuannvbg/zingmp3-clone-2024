@@ -122,7 +122,7 @@ export default function SearchSongItem({ songs }: { songs: any }) {
                            {item.artists?.map((artist, index) => {
                               return index === item.artists.length - 1 ? (
                                  <Link
-                                    href={artist.link}
+                                    href={artist?.link}
                                     key={artist.id}
                                     className='text-secondary isHover cursor-pointer hover:underline'
                                  >
@@ -131,7 +131,7 @@ export default function SearchSongItem({ songs }: { songs: any }) {
                               ) : (
                                  <>
                                     <Link
-                                       href={artist.link}
+                                       href={artist?.link}
                                        key={artist.id}
                                        className='text-secondary isHover cursor-pointer hover:underline'
                                     >
@@ -147,7 +147,7 @@ export default function SearchSongItem({ songs }: { songs: any }) {
                   <div className='hidden sm:block flex-1 w-0 self-center basis-auto mr-2'>
                      {item.album && (
                         <Link
-                           href={item.album.link}
+                           href={item.album?.link}
                            className='isHover cursor-pointer block max-w-[200px] truncate hover:underline capitalize'
                         >
                            {item.album.title}

@@ -254,7 +254,7 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                                     {item.artists?.map((artist, index) => {
                                        return index === item.artists.length - 1 ? (
                                           <Link
-                                             href={artist.link}
+                                             href={artist?.link}
                                              key={artist.id}
                                              className='isHover cursor-pointer hover:underline'
                                           >
@@ -263,7 +263,7 @@ export default function ChartSection({ zingchartPage }: { zingchartPage?: boolea
                                        ) : (
                                           <>
                                              <Link
-                                                href={artist.link}
+                                                href={artist?.link}
                                                 key={artist.id}
                                                 className='isHover cursor-pointer hover:underline'
                                              >

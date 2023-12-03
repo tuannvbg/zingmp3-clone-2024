@@ -257,7 +257,7 @@ export default function PlayerControl() {
                      {infoSong.artists?.map((artist, index) => {
                         return index === infoSong.artists.length - 1 ? (
                            <Link
-                              href={artist.link}
+                              href={artist?.link}
                               key={artist.id}
                               className='text-secondary isHover cursor-pointer hover:underline'
                            >
@@ -265,7 +265,7 @@ export default function PlayerControl() {
                            </Link>
                         ) : (
                            <Link
-                              href={artist.link}
+                              href={artist?.link}
                               key={artist.id}
                               className='text-secondary isHover cursor-pointer hover:underline'
                            >

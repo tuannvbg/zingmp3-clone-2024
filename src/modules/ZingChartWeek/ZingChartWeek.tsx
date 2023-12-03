@@ -25,13 +25,13 @@ export default function ZingChartWeek({ params }: { params: { id: string } }) {
    useEffect(() => {
       if (
          zingChartWeeks &&
-         params.id === zingChartWeeks.vn.link.split('/')[zingChartWeeks.vn.link.split('/').length - 1]
+         params.id === zingChartWeeks.vn?.link.split('/')[zingChartWeeks.vn?.link.split('/').length - 1]
       ) {
          setPlayList(zingChartWeeks?.vn.items as SongItem[])
          setWeek(zingChartWeeks?.vn)
       } else if (
          zingChartWeeks &&
-         params.id === zingChartWeeks.us.link.split('/')[zingChartWeeks.us.link.split('/').length - 1]
+         params.id === zingChartWeeks.us?.link.split('/')[zingChartWeeks.us?.link.split('/').length - 1]
       ) {
          setPlayList(zingChartWeeks?.us.items as SongItem[])
          setWeek(zingChartWeeks?.us)
@@ -57,7 +57,7 @@ export default function ZingChartWeek({ params }: { params: { id: string } }) {
          </div>
          <div className='flex text-xl font-bold sm:text-2xl sm:font-extrabold items-center flex-wrap gap-x-10'>
             <Link
-               href={zingChartWeeks.vn.link}
+               href={zingChartWeeks.vn?.link}
                className={`py-3.5 ${
                   playList === (zingChartWeeks.vn.items as SongItem[]) && 'border-b-[3px] border-b-tprimary'
                }`}
@@ -65,7 +65,7 @@ export default function ZingChartWeek({ params }: { params: { id: string } }) {
                VIỆT NAM
             </Link>
             <Link
-               href={zingChartWeeks.us.link}
+               href={zingChartWeeks.us?.link}
                className={`py-3.5 ${
                   playList === (zingChartWeeks.us.items as SongItem[]) && 'border-b-[3px] border-b-tprimary'
                }`}
@@ -73,7 +73,7 @@ export default function ZingChartWeek({ params }: { params: { id: string } }) {
                US-UK
             </Link>
             <Link
-               href={zingChartWeeks.korea.link}
+               href={zingChartWeeks.korea?.link}
                className={`py-3.5 ${
                   playList === (zingChartWeeks.korea.items as SongItem[]) && 'border-b-[3px] border-b-tprimary'
                }`}

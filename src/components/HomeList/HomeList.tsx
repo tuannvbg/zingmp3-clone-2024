@@ -120,7 +120,7 @@ export default function HomeList({
                               {item?.artists?.map((artist, index) => {
                                  return index === item?.artists.length - 1 ? (
                                     <Link
-                                       href={artist.link}
+                                       href={artist?.link}
                                        key={artist.id}
                                        className='isHover cursor-pointer hover:underline'
                                     >
@@ -129,7 +129,7 @@ export default function HomeList({
                                  ) : (
                                     <>
                                        <Link
-                                          href={artist.link}
+                                          href={artist?.link}
                                           key={artist.id}
                                           className='isHover cursor-pointer hover:underline'
                                        >
@@ -152,7 +152,7 @@ export default function HomeList({
          ) : (
             <>
                <div className='hidden xl:grid grid-cols-5 gap-x-5 2xl:gap-x-7 select-none'>
-                  {list.slice(0, 5).map((item) => (
+                  {list?.slice(0, 5).map((item) => (
                      <div key={item?.encodeId}>
                         <div onClick={() => router.push(item?.link)} className='relative block group cursor-pointer'>
                            <div className='relative aspect-square overflow-hidden rounded-md'>
@@ -251,7 +251,7 @@ export default function HomeList({
                                  {item?.artists?.map((artist, index) => {
                                     return index === item?.artists.length - 1 ? (
                                        <Link
-                                          href={artist.link}
+                                          href={artist?.link}
                                           key={artist.id}
                                           className='isHover cursor-pointer hover:underline'
                                        >
@@ -260,7 +260,7 @@ export default function HomeList({
                                     ) : (
                                        <>
                                           <Link
-                                             href={artist.link}
+                                             href={artist?.link}
                                              key={artist.id}
                                              className='isHover cursor-pointer hover:underline'
                                           >
@@ -281,7 +281,7 @@ export default function HomeList({
                   ))}
                </div>
                <div className='hidden lg:grid xl:hidden grid-cols-4 gap-x-7 select-none'>
-                  {list.slice(0, 4).map((item) => (
+                  {list?.slice(0, 4).map((item) => (
                      <div key={item?.encodeId}>
                         <div onClick={() => router.push(item?.link)} className='relative block group cursor-pointer'>
                            <div className='relative aspect-square overflow-hidden rounded-md'>
@@ -380,7 +380,7 @@ export default function HomeList({
                                  {item?.artists?.map((artist, index) => {
                                     return index === item?.artists.length - 1 ? (
                                        <Link
-                                          href={artist.link}
+                                          href={artist?.link}
                                           key={artist.id}
                                           className='isHover cursor-pointer hover:underline'
                                        >
@@ -389,7 +389,7 @@ export default function HomeList({
                                     ) : (
                                        <>
                                           <Link
-                                             href={artist.link}
+                                             href={artist?.link}
                                              key={artist.id}
                                              className='isHover cursor-pointer hover:underline'
                                           >
@@ -410,7 +410,7 @@ export default function HomeList({
                   ))}
                </div>
                <div className='hidden sm:grid lg:hidden grid-cols-3 gap-x-5 select-none'>
-                  {list.slice(0, 3).map((item) => (
+                  {list?.slice(0, 3).map((item) => (
                      <div key={item?.encodeId}>
                         <div onClick={() => router.push(item?.link)} className='relative block group cursor-pointer'>
                            <div className='relative aspect-square overflow-hidden rounded-md'>
@@ -509,7 +509,7 @@ export default function HomeList({
                                  {item?.artists?.map((artist, index) => {
                                     return index === item?.artists.length - 1 ? (
                                        <Link
-                                          href={artist.link}
+                                          href={artist?.link}
                                           key={artist.id}
                                           className='isHover cursor-pointer hover:underline'
                                        >
@@ -518,7 +518,7 @@ export default function HomeList({
                                     ) : (
                                        <>
                                           <Link
-                                             href={artist.link}
+                                             href={artist?.link}
                                              key={artist.id}
                                              className='isHover cursor-pointer hover:underline'
                                           >
@@ -539,7 +539,7 @@ export default function HomeList({
                   ))}
                </div>
                <div className='grid sm:hidden grid-cols-2 gap-x-3 select-none'>
-                  {list.slice(0, 2).map((item) => (
+                  {list?.slice(0, 2).map((item) => (
                      <div key={item?.encodeId}>
                         <div onClick={() => router.push(item?.link)} className='relative block group cursor-pointer'>
                            <div className='relative aspect-square overflow-hidden rounded-md'>
@@ -638,7 +638,7 @@ export default function HomeList({
                                  {item?.artists?.map((artist, index) => {
                                     return index === item?.artists.length - 1 ? (
                                        <Link
-                                          href={artist.link}
+                                          href={artist?.link}
                                           key={artist.id}
                                           className='isHover cursor-pointer hover:underline'
                                        >
@@ -647,7 +647,7 @@ export default function HomeList({
                                     ) : (
                                        <>
                                           <Link
-                                             href={artist.link}
+                                             href={artist?.link}
                                              key={artist.id}
                                              className='isHover cursor-pointer hover:underline'
                                           >

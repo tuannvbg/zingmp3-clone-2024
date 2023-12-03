@@ -40,22 +40,22 @@ export default function Home() {
          setIsPlaying(true)
          setAtAlbum(false)
       } else {
-         router.push(banner.link)
+         router.push(banner?.link)
       }
    }
 
-   const bannerList: BannerListType[] = data?.data.data.items[0].items //banner
-   const releaseList: ReleaseType = data?.data.data.items[2].items //mới phát hành
-   const chillList: HomeListType[] = data?.data.data.items[3].items //chill
-   const loveLifeList: HomeListType[] = data?.data.data.items[4].items //1 chút yêu đời
-   const remixList: HomeListType[] = data?.data.data.items[5].items //Remix là Dance luôn
-   const moodList: HomeListType[] = data?.data.data.items[6].items //Tâm trạng tan chậm
-   const artistList: HomeListType[] = data?.data.data.items[7].items //Nghệ sĩ thịnh hành
-   const rankingList: RankingType[] = data?.data.data.items[8].items //BXH Nhạc Mới
-   const weekChartList: WeekChartType[] = data?.data.data.items[10].items //weekChartList
-   const top100List: HomeListType[] = data?.data.data.items[11].items //top 100
-   const albumHotList: HomeListType[] = data?.data.data.items[13].items //album hot
-   const radioList: RadioType[] = data?.data.data.items[14].items //radio nổi bật
+   const bannerList: BannerListType[] = data?.data.data.items[0]?.items //banner
+   const releaseList: ReleaseType = data?.data.data.items[2]?.items //mới phát hành
+   const chillList: HomeListType[] = data?.data.data.items[3]?.items //chill
+   const loveLifeList: HomeListType[] = data?.data.data.items[4]?.items //1 chút yêu đời
+   const remixList: HomeListType[] = data?.data.data.items[5]?.items //Remix là Dance luôn
+   const moodList: HomeListType[] = data?.data.data.items[6]?.items //Tâm trạng tan chậm
+   const artistList: HomeListType[] = data?.data.data.items[7]?.items //Nghệ sĩ thịnh hành
+   const rankingList: RankingType[] = data?.data.data.items[8]?.items //BXH Nhạc Mới
+   const weekChartList: WeekChartType[] = data?.data.data.items[10]?.items //weekChartList
+   const top100List: HomeListType[] = data?.data.data.items[11]?.items //top 100
+   const albumHotList: HomeListType[] = data?.data.data.items[13]?.items //album hot
+   const radioList: RadioType[] = data?.data.data.items[14]?.items //radio nổi bật
 
    if (!bannerList) return <Loading />
    return (
@@ -226,7 +226,7 @@ export default function Home() {
 
             <div className='flex justify-end w-full sm:w-auto'>
                <Link
-                  href={data?.data.data.items[2].link as string}
+                  href={(data?.data.data.items[2]?.link as string) || '/'}
                   className='uppercase text-secondary text-xs flex items-center gap-x-1 isHover'
                >
                   tất cả
@@ -261,9 +261,9 @@ export default function Home() {
 
          {/* CHILL */}
          <div className='flex items-center justify-between mt-12 mb-5'>
-            <h2 className='text-xl font-bold'>{data?.data.data.items[3].title}</h2>
+            <h2 className='text-xl font-bold'>{data?.data.data.items[3]?.title}</h2>
             <Link
-               href={data?.data.data.items[3].link as string}
+               href={(data?.data.data.items[3]?.link as string) || '/'}
                className='uppercase text-xs text-secondary flex items-center gap-x-1 isHover'
             >
                tất cả
@@ -301,7 +301,7 @@ export default function Home() {
          <div className='flex items-center justify-between mt-12 mb-5'>
             <h2 className='text-xl font-bold'>{data?.data.data.items[8].title}</h2>
             <Link
-               href={data?.data.data.items[8].link as string}
+               href={(data?.data.data.items[8]?.link as string) || '/'}
                className='uppercase isHover text-xs text-secondary flex items-center gap-x-1'
             >
                tất cả
@@ -436,7 +436,7 @@ export default function Home() {
                               {item.artists?.map((artist, index) => {
                                  return index === item.artists.length - 1 ? (
                                     <Link
-                                       href={artist.link}
+                                       href={artist?.link || '/'}
                                        key={artist.id}
                                        className='text-secondary isHover cursor-pointer hover:underline'
                                     >
@@ -444,7 +444,7 @@ export default function Home() {
                                     </Link>
                                  ) : (
                                     <Link
-                                       href={artist.link}
+                                       href={artist?.link || '/'}
                                        key={artist.id}
                                        className='text-secondary isHover cursor-pointer hover:underline'
                                     >
@@ -458,7 +458,7 @@ export default function Home() {
                            <span className='text-[40px] translate-y-2.5 text-transparent text-stroke font-black'>
                               #{index + 1}
                            </span>
-                           <span className='text-secondary'>{item.album.releaseDate}</span>
+                           <span className='text-secondary'>{item.album?.releaseDate}</span>
                         </div>
                      </div>
                   </div>
@@ -471,7 +471,7 @@ export default function Home() {
          {/* weekChartList */}
          <div className='mt-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:gap-x-7'>
             {weekChartList?.map((item) => (
-               <Link key={item.link} href={item.link} className='relative pt-[29%] rounded-md overflow-hidden'>
+               <Link key={item?.link} href={item?.link || '/'} className='relative pt-[29%] rounded-md overflow-hidden'>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                      src={item.cover}
@@ -485,9 +485,9 @@ export default function Home() {
 
          {/* top 100 */}
          <div className='flex items-center justify-between mt-12 mb-5'>
-            <h2 className='text-xl font-bold'>{data?.data.data.items[11].title}</h2>
+            <h2 className='text-xl font-bold'>{data?.data.data.items[11]?.title}</h2>
             <Link
-               href={data?.data.data.items[11].link as string}
+               href={(data?.data.data.items[11]?.link as string) || '/'}
                className='uppercase text-xs text-secondary flex items-center gap-x-1 isHover'
             >
                tất cả
@@ -506,12 +506,12 @@ export default function Home() {
          <HomeList list={top100List} title />
 
          {/* album hot */}
-         <h2 className='text-xl font-bold mt-12 mb-5'>{data?.data.data.items[13].title}</h2>
+         <h2 className='text-xl font-bold mt-12 mb-5'>{data?.data.data.items[13]?.title}</h2>
          <HomeList list={albumHotList} title />
 
          {/* Radio Nổi Bật */}
          <div className='flex items-center justify-between mt-12 mb-5'>
-            <h2 className='text-xl font-bold'>{data?.data.data.items[14].title}</h2>
+            <h2 className='text-xl font-bold'>{data?.data.data.items[14]?.title}</h2>
             <Link href={'/radio'} className='uppercase text-xs text-secondary flex items-center gap-x-1 isHover'>
                tất cả
                <svg
@@ -562,7 +562,7 @@ export default function Home() {
                }
             }}
          >
-            {radioList.map((item) => (
+            {radioList?.map((item) => (
                <SwiperSlide key={item.id}>
                   <div className='text-center'>
                      <div onClick={() => toast.warning('Chức năng này chưa hoàn thiện')} className='relative'>

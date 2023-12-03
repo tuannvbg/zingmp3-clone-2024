@@ -46,7 +46,7 @@ export default function SearchAll() {
          <div className='grid sm:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-x-7'>
             {top.objectType === 'artist' && (
                <div className='p-2.5 rounded-md bg-white bg-opacity-5 flex items-center gap-x-4 hover:bg-opacity-10'>
-                  <Link href={artists[0].link} className='relative group overflow-hidden rounded-full cursor-pointer'>
+                  <Link href={artists[0]?.link} className='relative group overflow-hidden rounded-full cursor-pointer'>
                      {/* eslint-disable-next-line @next/next/no-img-element */}
                      <img
                         src={artists[0].thumbnail}
@@ -74,7 +74,7 @@ export default function SearchAll() {
                   <div className='flex flex-col gap-y-1.5'>
                      <span className='text-secondary text-xs'>Nghệ sĩ</span>
 
-                     <Link href={artists[0].link} className='font-bold isHover cursor-pointer hover:underline'>
+                     <Link href={artists[0]?.link} className='font-bold isHover cursor-pointer hover:underline'>
                         {artists[0].name}
                      </Link>
 
@@ -87,7 +87,7 @@ export default function SearchAll() {
             {top.objectType === 'playlist' && (
                <div className='p-2.5 rounded-md group bg-white bg-opacity-5 flex items-center gap-x-4 hover:bg-opacity-10'>
                   <Link
-                     href={top.link}
+                     href={top?.link}
                      className='relative group w-[84px] h-[84px] overflow-hidden flex-shrink-0 rounded cursor-pointer'
                   >
                      {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -140,7 +140,7 @@ export default function SearchAll() {
                            ) => {
                               return index === top.artists.length - 1 ? (
                                  <Link
-                                    href={artist.link}
+                                    href={artist?.link}
                                     key={artist.id}
                                     className='text-secondary isHover cursor-pointer hover:underline'
                                  >
@@ -149,7 +149,7 @@ export default function SearchAll() {
                               ) : (
                                  <>
                                     <Link
-                                       href={artist.link}
+                                       href={artist?.link}
                                        key={artist.id}
                                        className='text-secondary isHover cursor-pointer hover:underline'
                                     >
@@ -295,7 +295,7 @@ export default function SearchAll() {
                                  {item.artists?.map((artist, index) => {
                                     return index === item.artists.length - 1 ? (
                                        <Link
-                                          href={artist.link}
+                                          href={artist?.link}
                                           key={artist.id}
                                           className='text-secondary isHover cursor-pointer hover:underline'
                                        >
@@ -304,7 +304,7 @@ export default function SearchAll() {
                                     ) : (
                                        <>
                                           <Link
-                                             href={artist.link}
+                                             href={artist?.link}
                                              key={artist.id}
                                              className='text-secondary isHover cursor-pointer hover:underline'
                                           >
@@ -484,7 +484,7 @@ export default function SearchAll() {
                         }) => (
                            <div key={artist.id} className='flex flex-col text-center'>
                               <Link
-                                 href={artist.link}
+                                 href={artist?.link}
                                  className='relative group aspect-square overflow-hidden rounded-full cursor-pointer'
                               >
                                  {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -512,7 +512,7 @@ export default function SearchAll() {
                                  </div>
                               </Link>
                               <Link
-                                 href={artist.link}
+                                 href={artist?.link}
                                  className='isHover cursor-pointer hover:underline font-medium mt-3 mb-1'
                               >
                                  {artist.name}

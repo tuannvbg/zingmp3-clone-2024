@@ -98,7 +98,7 @@ export default function Lyric() {
                      {artists?.map((artist, index) => {
                         return index === artists.length - 1 ? (
                            <Link
-                              href={artist.link}
+                              href={artist?.link}
                               key={artist.id}
                               className='text-secondary isHover cursor-pointer hover:underline'
                            >
@@ -106,7 +106,7 @@ export default function Lyric() {
                            </Link>
                         ) : (
                            <Link
-                              href={artist.link}
+                              href={artist?.link}
                               key={artist.id}
                               className='text-secondary isHover cursor-pointer hover:underline'
                            >
