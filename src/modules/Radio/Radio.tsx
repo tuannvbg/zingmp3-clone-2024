@@ -3,19 +3,18 @@ import Loading from '@/components/Loading/Loading'
 import { AppContext } from '@/contexts/app.context'
 import useGetHome from '@/hooks/useGetHome'
 import { RadioType } from '@/types/radio.type'
-import Link from 'next/link'
 import React, { useContext } from 'react'
 import { toast } from 'react-toastify'
-import Image from 'next/image'
 
 export default function Radio() {
    const { currentSongId } = useContext(AppContext)
    const { data } = useGetHome()
-   const radioList: RadioType[] = data?.data.data.items[14].items //radio nổi bật
+   const radioList: RadioType[] = data?.data.data.items[9]?.items //radio nổi bật
+
    if (!radioList) return <Loading />
    return (
       <div className={`mt-[70px] px-3 sm:px-8 lg:px-14 ${currentSongId ? 'pb-32 md:pb-28' : 'pb-14 md:pb-10'}`}>
-         <h1 className='text-[40px] font-bold py-7'>{data?.data.data.items[14].title}</h1>
+         <h1 className='text-[40px] font-bold py-7'>{data?.data.data.items[9].title}</h1>
          <ul className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 lg:gap-7'>
             {radioList.map((item) => (
                <li key={item.id}>
