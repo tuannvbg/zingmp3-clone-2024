@@ -466,7 +466,7 @@ export default function Home() {
                                              key={artist.id}
                                              className='text-secondary isHover cursor-pointer hover:underline'
                                           >
-                                             {artist.name}
+                                             {artist?.name}
                                           </Link>
                                        ) : (
                                           <Link
@@ -474,7 +474,7 @@ export default function Home() {
                                              key={artist.id}
                                              className='text-secondary isHover cursor-pointer hover:underline'
                                           >
-                                             {`${artist.name}, `}
+                                             {`${artist?.name}, `}
                                           </Link>
                                        )
                                     })}
@@ -612,7 +612,7 @@ export default function Home() {
                               <div className='relative cursor-pointer group aspect-square rounded-full overflow-hidden border-[3px] border-pink-500'>
                                  {/* eslint-disable-next-line @next/next/no-img-element */}
                                  <img
-                                    src={item.thumbnail}
+                                    src={item?.thumbnail}
                                     className='w-full h-full object-cover group-hover:scale-110 transition-all duration-500'
                                     alt={item.title}
                                  />
@@ -638,8 +638,8 @@ export default function Home() {
                               </div>
                               {/* eslint-disable-next-line @next/next/no-img-element */}
                               <img
-                                 src={item.host.thumbnail}
-                                 alt={item.host.name}
+                                 src={item.host?.thumbnail}
+                                 alt={item.host?.name}
                                  width={48}
                                  height={48}
                                  className='w-12 h-12 border-2 border-black rounded-full object-cover absolute bottom-0 right-0 translate-y-[-40%]'
@@ -653,7 +653,7 @@ export default function Home() {
                                  className='w-8 h-4 mx-auto -translate-y-1/2'
                               />
                            </div>
-                           <h3 className='text-base font-bold'>{item.host.name?.replace('Radio', '').trim()}</h3>
+                           <h3 className='text-base font-bold'>{item.host?.name?.replace('Radio', '').trim()}</h3>
                            <span className='text-secondary text-xs'>{item.activeUsers} đang nghe</span>
                         </div>
                      </SwiperSlide>
